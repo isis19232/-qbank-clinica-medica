@@ -1,0 +1,1090 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QBank Clínica Médica</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0052A3;
+      --primary-dark: #003D7A;
+      --success: #10B981;
+      --accent: #FBBF24;
+      --bg: #FFFFFF;
+      --bg-secondary: #F8FAFC;
+      --bg-tertiary: #EEF2F7;
+      --text: #1E293B;
+      --text-secondary: #64748B;
+      --border: #CBD5E1;
+      --subtle: #E2E8F0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --primary: #3B82F6;
+        --primary-dark: #1E40AF;
+        --success: #10B981;
+        --accent: #FBBF24;
+        --bg: #0F172A;
+        --bg-secondary: #1E293B;
+        --bg-tertiary: #334155;
+        --text: #F1F5F9;
+        --text-secondary: #94A3B8;
+        --border: #475569;
+        --subtle: #1E293B;
+      }
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 {
+      font-family: 'IBM Plex Serif', serif;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      cursor: pointer;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav button {
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      cursor: pointer;
+      transition: color 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+
+    nav button:hover {
+      color: var(--primary);
+    }
+
+    .btn-primary {
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Views */
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-large {
+      padding: 1rem 2rem;
+      font-size: 1rem;
+      border-radius: 8px;
+      border: none;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .btn-large.primary {
+      background: var(--primary);
+      color: white;
+    }
+
+    .btn-large.primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 82, 163, 0.2);
+    }
+
+    .btn-large.secondary {
+      background: var(--bg-secondary);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+    }
+
+    .btn-large.secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Features */
+    .features {
+      padding: 4rem 0;
+      background: var(--bg-secondary);
+    }
+
+    .features h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(0, 82, 163, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+      font-size: 1.25rem;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* Stats */
+    .stats {
+      padding: 4rem 0;
+    }
+
+    .stats h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    /* App Section */
+    .app-view {
+      padding: 2rem 0;
+    }
+
+    .app-title {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      margin-bottom: 2rem;
+      text-align: center;
+    }
+
+    .tab-buttons {
+      display: flex;
+      gap: 1rem;
+      margin-bottom: 2rem;
+      border-bottom: 1px solid var(--border);
+      flex-wrap: wrap;
+    }
+
+    .tab-btn {
+      padding: 1rem;
+      background: none;
+      border: none;
+      border-bottom: 2px solid transparent;
+      color: var(--text-secondary);
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .tab-btn.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+    }
+
+    .tab-content {
+      display: none;
+    }
+
+    .tab-content.active {
+      display: block;
+    }
+
+    /* QBank App Styles */
+    .qbank-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+
+    .qbank-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding-bottom: 1rem;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .filter-group {
+      margin-bottom: 1.5rem;
+    }
+
+    .filter-label {
+      display: block;
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+
+    select {
+      width: 100%;
+      padding: 0.75rem;
+      background: var(--bg-secondary);
+      color: var(--text);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 0.95rem;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .question-list {
+      display: grid;
+      gap: 1rem;
+    }
+
+    .question-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      cursor: pointer;
+      transition: all 0.2s;
+    }
+
+    .question-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 2px 8px rgba(0, 82, 163, 0.1);
+    }
+
+    .question-code {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.85rem;
+      color: var(--primary);
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+    }
+
+    .question-topic {
+      font-size: 0.85rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.75rem;
+    }
+
+    .question-text {
+      font-size: 0.95rem;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .solve-btn {
+      background: var(--primary);
+      color: white;
+      border: none;
+      padding: 0.5rem 1rem;
+      border-radius: 4px;
+      cursor: pointer;
+      font-weight: 500;
+      transition: all 0.2s;
+    }
+
+    .solve-btn:hover {
+      background: var(--primary-dark);
+    }
+
+    /* Solve View */
+    .solve-content {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .question-progress {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+    }
+
+    .progress-bar {
+      height: 4px;
+      background: var(--bg-tertiary);
+      border-radius: 2px;
+      overflow: hidden;
+      margin-bottom: 1.5rem;
+    }
+
+    .progress-fill {
+      height: 100%;
+      background: var(--primary);
+      transition: width 0.3s ease;
+    }
+
+    .question-stem {
+      font-size: 1rem;
+      line-height: 1.7;
+      margin-bottom: 1.5rem;
+      padding: 1.5rem;
+      background: var(--bg-secondary);
+      border-radius: 8px;
+      border-left: 4px solid var(--primary);
+    }
+
+    .question-prompt {
+      font-weight: 600;
+      color: var(--primary);
+      margin-bottom: 1.5rem;
+      font-size: 1rem;
+    }
+
+    .alternatives {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      margin-bottom: 1.5rem;
+    }
+
+    .alt-btn {
+      padding: 1rem;
+      background: var(--bg-secondary);
+      border: 2px solid var(--border);
+      color: var(--text);
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+      font-size: 0.95rem;
+    }
+
+    .alt-btn:hover:not(.answered) {
+      border-color: var(--primary);
+      background: var(--bg);
+    }
+
+    .alt-btn.selected:not(.answered) {
+      border-color: var(--primary);
+      background: var(--primary);
+      color: white;
+    }
+
+    .alt-btn.correct {
+      border-color: var(--success);
+      background: var(--success);
+      color: white;
+    }
+
+    .alt-btn.wrong {
+      border-color: #EF4444;
+      background: #EF4444;
+      color: white;
+    }
+
+    .explanation {
+      background: var(--bg-tertiary);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: 4px;
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .action-buttons .btn-primary {
+      flex: 1;
+      min-width: 150px;
+    }
+
+    .stats-view {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
+    }
+
+    .stats-summary {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      gap: 1rem;
+      margin-bottom: 2rem;
+    }
+
+    .summary-card {
+      background: var(--bg-secondary);
+      padding: 1.5rem;
+      border-radius: 8px;
+      text-align: center;
+    }
+
+    .summary-value {
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .summary-label {
+      font-size: 0.9rem;
+      color: var(--text-secondary);
+      margin-top: 0.5rem;
+    }
+
+    .specialty-stat {
+      background: var(--bg-secondary);
+      border-left: 4px solid var(--primary);
+      padding: 1.5rem;
+      border-radius: 4px;
+      margin-bottom: 1rem;
+    }
+
+    .specialty-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 1rem;
+      font-weight: 600;
+    }
+
+    .specialty-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .specialty-progress {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--success));
+      transition: width 0.3s ease;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      margin-top: 4rem;
+      text-align: center;
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .hero {
+        padding: 2rem 0 1.5rem;
+      }
+
+      .features, .stats {
+        padding: 2rem 0;
+      }
+
+      .action-buttons {
+        flex-direction: column;
+      }
+
+      .action-buttons .btn-primary {
+        width: 100%;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <div class="logo" onclick="switchView('home')">
+          <div class="logo-mark">CM</div>
+          QBank
+        </div>
+        <nav>
+          <button onclick="switchView('home')">Home</button>
+          <button onclick="switchView('app')">App</button>
+        </nav>
+        <button class="btn-primary" onclick="switchView('app')">Abrir App</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Home View -->
+  <div id="home" class="view active">
+    <!-- Hero -->
+    <section class="hero">
+      <div class="container">
+        <h1>QBank Clínica Médica</h1>
+        <p class="hero-subtitle">100 questões de clínica médica de alta qualidade, seguindo o padrão de provas de residência médica</p>
+        <div class="hero-cta">
+          <button class="btn-large primary" onclick="switchView('app')">Acessar App →</button>
+          <button class="btn-large secondary" onclick="document.getElementById('features').scrollIntoView({behavior:'smooth'})">Ver Questões</button>
+        </div>
+      </div>
+    </section>
+
+    <!-- Features -->
+    <section class="features" id="features">
+      <div class="container">
+        <h2>Por que usar QBank?</h2>
+        <div class="features-grid">
+          <div class="feature-card">
+            <div class="feature-icon">📚</div>
+            <h3>75 Questões Clínicas</h3>
+            <p>Banco expandido com questões modernas, baseadas em protocolos atuais e padrão de prova de residência.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📱</div>
+            <h3>Sem Instalação</h3>
+            <p>Acesse direto no navegador. Funciona perfeitamente no iPad, iPhone e computador.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">💾</div>
+            <h3>Dados Locais</h3>
+            <p>Seu progresso é salvo automaticamente. Funciona offline após o primeiro acesso.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">📊</div>
+            <h3>Estatísticas Detalhadas</h3>
+            <p>Acompanhe seu desempenho por especialidade e identifique áreas para melhora.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">🎯</div>
+            <h3>Filtros por Especialidade</h3>
+            <p>Organize seu estudo por especialidade: Cardiologia, Pneumologia, Neurologia, e mais.</p>
+          </div>
+          <div class="feature-card">
+            <div class="feature-icon">⌨️</div>
+            <h3>Atalhos do Teclado</h3>
+            <p>A-D para selecionar, Enter para confirmar, setas para navegar. Estude de forma fluida e rápida.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Stats -->
+    <section class="stats">
+      <div class="container">
+        <h2>75 Questões Distribuídas</h2>
+        <div class="stats-grid">
+          <div class="stat-card">
+            <div class="stat-number">75</div>
+            <div class="stat-label">Questões Totais</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">9</div>
+            <div class="stat-label">Especialidades</div>
+          </div>
+          <div class="stat-card">
+            <div class="stat-number">50%</div>
+            <div class="stat-label">Dificuldade HARD</div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </div>
+
+  <!-- App View -->
+  <div id="app" class="view">
+    <div class="container app-view">
+      <h2 class="app-title">QBank - Resolver Questões</h2>
+
+      <div class="tab-buttons">
+        <button class="tab-btn active" onclick="switchTab('questions')">📋 Questões</button>
+        <button class="tab-btn" onclick="switchTab('solve')">✏️ Resolver</button>
+        <button class="tab-btn" onclick="switchTab('stats')">📊 Estatísticas</button>
+      </div>
+
+      <!-- Questions Tab -->
+      <div id="questions" class="tab-content active">
+        <div class="filter-group">
+          <label class="filter-label">Filtrar por Especialidade</label>
+          <select id="specialty-filter" onchange="filterQuestions()">
+            <option value="">Todas as Especialidades</option>
+          </select>
+        </div>
+        <div id="questions-list" class="question-list"></div>
+      </div>
+
+      <!-- Solve Tab -->
+      <div id="solve" class="tab-content">
+        <div id="solve-container"></div>
+      </div>
+
+      <!-- Stats Tab -->
+      <div id="stats" class="tab-content">
+        <div class="stats-view">
+          <div class="stats-summary">
+            <div class="summary-card">
+              <div class="summary-value" id="stat-total">75</div>
+              <div class="summary-label">Total de Questões</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-value" id="stat-answered">0</div>
+              <div class="summary-label">Respondidas</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-value" id="stat-correct">0</div>
+              <div class="summary-label">Acertos</div>
+            </div>
+            <div class="summary-card">
+              <div class="summary-value" id="stat-accuracy">-</div>
+              <div class="summary-label">Taxa de Acerto</div>
+            </div>
+          </div>
+          <div id="stats-by-specialty"></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 QBank Clínica Médica. Desenvolvido para médicos residentes brasileiros.</p>
+    </div>
+  </footer>
+
+  <script>
+    // ============ QUESTÕES (75) ============
+    const QUESTIONS = [
+      [{"id":"CM-CARDIO-0001","code":"CM-CARDIO-0001","stem":"Homem 62 anos, hipertenso há 15 anos, tabagista ativo, apresenta dor torácica opressiva típica há 45 minutos irradiada para braço esquerdo e mandíbula, sudorese profusa. Frequência cardíaca 98 bpm, PA 140/85 mmHg. ECG mostra supradesnivelamento de ST em II, III e aVF. Troponina ultra-sensível: 2,8 ng/mL. Qual é o tratamento de reperfusão indicado?","prompt":"Qual é a terapia de reperfusão mais apropriada?","difficulty":"HARD","specialty":"Cardiologia","topic":"Síndrome Coronariana Aguda","alternatives":[{"label":"A","text":"Angioplastia primária com tempo porta-balão <90 minutos","isCorrect":true},{"label":"B","text":"Fibrinólise com tenecteplase seguida de angiografia em 3-24 horas"},{"label":"C","text":"Apenas dupla antiagregação (AAS + clopidogrel)"},{"label":"D","text":"Anticoagulação com heparina e espera de estabilização"}],"explanation":"STEMI inferior com apresentação precoce. Angioplastia primária é padrão ouro quando disponível em <90 min, com melhor desfecho que fibrinólise. Reduz mortalidade em 25% comparado à fibrinólise."},{"id":"CM-CARDIO-0002","code":"CM-CARDIO-0002","stem":"Mulher 55 anos com história de 2 anos de dispneia progressiva, edema bimaleolar, pressão venosa jugular elevada e hepatomegalia. Apresenta FA com RV irregular em torno de 110 bpm, PA 160/100 mmHg, estertores bibasais. Ecocardiograma: FE 28%, aumento de câmaras e dilatação atrial. BNP: 850 pg/mL. Qual é a melhor abordagem terapêutica inicial?","prompt":"Qual é o tratamento farmacológico inicial mais apropriado?","difficulty":"HARD","specialty":"Cardiologia","topic":"Insuficiência Cardíaca Descompensada","alternatives":[{"label":"A","text":"IECA/ARB + betabloqueador + diurético + digoxina","isCorrect":true},{"label":"B","text":"Apenas digoxina e diurético para controle de frequência"},{"label":"C","text":"Só diurético e esperar melhora com repouso"},{"label":"D","text":"Betabloqueador isolado sem terapia neurohormonal"}],"explanation":"IC sistólica com FA. Terapia tripla: IECA (reduz mortalidade), betabloqueador (controla FC e melhora síntomas), diurético (alívio de congestão). Digoxina adjuvante para controle de FC. Considere ivabradina se FC inadequada."},{"id":"CM-PNEUMO-0001","code":"CM-PNEUMO-0001","stem":"Homem 68 anos, ex-tabagista (40 maços-ano), procura ambulatório com dispneia aos esforços progressiva há 3 anos, tosse crônica produtiva. Tem 2 exacerbações/ano tratadas ambulatorialmente. FC 82 bpm, FR 20, SatO2 92% em repouso. Espirometria: VEF1 42% previsto, VEF1/CVF 0,65. Scores: mMRC 2, CAT 18, 1 exacerbação moderada/ano. Qual é a classificação GOLD e tratamento inicial?","prompt":"Qual é a classificação GOLD e terapia inicial indicada?","difficulty":"HARD","specialty":"Pneumologia","topic":"DPOC","alternatives":[{"label":"A","text":"GOLD D; LAMA + LABA","isCorrect":true},{"label":"B","text":"GOLD C; LAMA isolado"},{"label":"C","text":"GOLD E; LAMA + LABA + corticoide inalado"},{"label":"D","text":"GOLD B; SABA conforme necessário"}],"explanation":"GOLD D: VEF1 <30% com exacerbações. LAMA + LABA é tratamento duplo de base. Só adicionar corticoide inalado se exacerbações frequentes com componente eosinofílico. Não há indicação de tripla terapia neste caso."},{"id":"CM-NEURO-0001","code":"CM-NEURO-0001","stem":"Mulher 72 anos com perda súbita de força e sensibilidade em MIE há 4 horas, afasia de Broca, sem cefaleia ou febre. Última refeição: 3h. PA 158/92, FC 78 bpm. Glicemia 115 mg/dL. TC crânio sem sangue. NIHSS 8. Qual é a conduta mais apropriada?","prompt":"Qual é o tratamento mais apropriado neste momento?","difficulty":"HARD","specialty":"Neurologia","topic":"Acidente Vascular Encefálico Isquêmico","alternatives":[{"label":"A","text":"Trombolítico IV (alteplase) + antiagregante + anticoagulação","isCorrect":true},{"label":"B","text":"Apenas antiagregante e observação"},{"label":"C","text":"Anticoagulação e esperar 48h para RM"},{"label":"D","text":"Fibrinólise contra-indicada por idade"}],"explanation":"AVE isquêmico em janela terapêutica (<4.5h). Alteplase EV reduz incapacidade em ~11%. Idade não é contra-indicação. NIHSS moderado favorece tratamento. Considere trombectomia se oclusão de grande vaso."},{"id":"CM-ENDO-0001","code":"CM-ENDO-0001","stem":"Mulher 38 anos com amenorreia 8 meses, galactorreia e cefaleia occipital intermitente. Prolactina 92 ng/mL, TSH normal, T4 livre normal. RM hipófise: lesão 13×11 mm na sela com erosão óssea. Campo visual: redução temporal bilateral. Qual é a conduta mais apropriada?","prompt":"Qual é a melhor abordagem terapêutica?","difficulty":"HARD","specialty":"Endocrinologia","topic":"Adenoma Hipofisário","alternatives":[{"label":"A","text":"Cirurgia transesfenoidal por efeito de massa e risco visual","isCorrect":true},{"label":"B","text":"Bromocriptina 15 mg/dia com seguimento clínico anual"},{"label":"C","text":"Apenas radioterapia sem cirurgia"},{"label":"D","text":"Observação com RM em 6 meses"}],"explanation":"Macroadenoma (>10mm) com sinais de efeito de massa (erosão óssea, déficit campal). Indica cirurgia. Agonista dopamina é primeira linha para microprolactinomas. Cirurgia reduz risco de cegueira irreversível."},{"id":"CM-INFECTO-0001","code":"CM-INFECTO-0001","stem":"Homem 45 anos com febre 39°C há 7 dias, calafrios noturnos, perda ponderal 4kg. Esplenomegalia +2cm, hepatomegalia +1cm. Hemograma: WBC 4200, Hb 10.5, Plt 92.000. Hemocultura positiva para Streptococcus bovis. Ecocardiograma: vegetação em válvula mitral. Qual é o regime antibiótico mais apropriado?","prompt":"Qual é o esquema antimicrobiano mais adequado?","difficulty":"HARD","specialty":"Infectologia","topic":"Endocardite Infecciosa","alternatives":[{"label":"A","text":"Penicilina G cristalina + gentamicina IV","isCorrect":true},{"label":"B","text":"Ceftriaxona isolada por 4 semanas"},{"label":"C","text":"Vancomicina + rifampicina"},{"label":"D","text":"Fluoroquinolona como monoterapia"}],"explanation":"Endocardite por S. bovis (sensível). Penicilina G + gentamicina sinérgica por 4-6 semanas. Requer avaliação cirúrgica se vegetation >10mm ou insuficiência aguda. S. bovis associado a neoplasia colônica (colonoscopia pós-tratamento)."},{"id":"CM-NEFRO-0001","code":"CM-NEFRO-0001","stem":"Homem 58 anos com HAS refratária (PA 180/110), edema facial e de membros, dispneia. Urina: proteinúria 5g/24h, hematúria, cilindros. Creatinina 3.2 mg/dL (baseline 1.0), BUN 45 mg/dL, K 6.2 mEq/L, albumina 2.8 g/dL. RM encéfalo: edema cerebral. Qual é a principal hipótese diagnóstica?","prompt":"Qual é o diagnóstico mais provável?","difficulty":"HARD","specialty":"Nefrologia","topic":"Hipertensão Maligna e IRA","alternatives":[{"label":"A","text":"Nefroesclerose aguda / Emergência hipertensiva","isCorrect":true},{"label":"B","text":"Glomerulonefrite pós-infecciosa"},{"label":"C","text":"Síndrome nefrótica em diabetes"},{"label":"D","text":"Insuficiência renal crônica descompensada"}],"explanation":"Tríade clássica: HAS severa + IRA rápida + proteinúria/hematúria + cilindros. Edema cerebral sugere encefalopatia hipertensiva. Necessário redução controlada de PA (não abrupta) e biopsia renal se curso atípico. Prognóstico melhorou com tratamentos anti-hipertensivos modernos."},{"id":"CM-GASTRO-0001","code":"CM-GASTRO-0001","stem":"Mulher 62 anos com queixa de plenitude pós-prandial precoce, vômitos ocasionais, perda ponderal 3kg em 2 meses. Endoscopia: úlcera gástrica 2.5cm com bordas infiltradas, sem sangramento ativo. Biópsia: adenocarcinoma gástrico difuso. Tomografia: sem metástases à distância. Qual é a próxima conduta?","prompt":"Qual é o próximo passo mais apropriado?","difficulty":"HARD","specialty":"Gastroenterologia","topic":"Câncer Gástrico","alternatives":[{"label":"A","text":"Estadiamento completo com endosonografia + TC torax/abdome + PET-CT, depois gastrectomia","isCorrect":true},{"label":"B","text":"Imediatamente quimioterapia neo-adjuvante"},{"label":"C","text":"Apenas gastrectomia sem estadiamento adicional"},{"label":"D","text":"Observação com endoscopia seriada"}],"explanation":"Câncer gástrico requer estadiamento completo. Endosonografia avalia profundidade/linfonodos regionais. Neoadjuvância seguida de cirurgia melhora sobrevida em tumores ressecáveis. Tipo difuso (signet-ring) tem pior prognóstico."},{"id":"CM-HEMATOL-0001","code":"CM-HEMATOL-0001","stem":"Homem 42 anos procura emergência com petéquias generalizadas, epistaxe, gengivas inchadas. Hemograma: WBC 2100, Hb 8.2, Plt 8000/mm³, promielócitos anormais 45%. Coagulação: PT 18s, KPTT 50s, fibrinogênio 85 mg/dL, D-dímero >500. Diagnosticado com LPA. Qual é o tratamento inicial mais apropriado?","prompt":"Qual é a terapia inicial mais apropriada para LPA?","difficulty":"HARD","specialty":"Hematologia","topic":"Leucemia Promielocítica","alternatives":[{"label":"A","text":"ATRA + arsênico trivalente com transfusão prudente e fator fresco congelado","isCorrect":true},{"label":"B","text":"Quimioterapia citotóxica intensiva imediata"},{"label":"C","text":"Apenas transfusões de plaquetas para manter >20000"},{"label":"D","text":"Espera por diferenciação espontânea"}],"explanation":"LPA é emergência com coagulopatia consumptiva. ATRA + arsênico é cura em 80-90% com baixa toxicidade. Transfusões devem ser PRUDENTES (risco de hemorragia/trombose). Síndrome de diferenciação ocorre 1-4 semanas após ATRA."},{"id":"CM-CARDIO-0003","code":"CM-CARDIO-0003","stem":"Mulher 48 anos apresenta palpitações, tontura e dispneia há 30 minutos. ECG: FC 180 bpm, complexo QRS estreito, PR retrógrado após QRS. Pressão arterial 110/70 mmHg, estado geral bom. Qual é a manobra/tratamento inicial mais apropriado?","prompt":"Qual é a primeira linha de tratamento?","difficulty":"MEDIUM","specialty":"Cardiologia","topic":"Arritmias Cardíacas","alternatives":[{"label":"A","text":"Manobra de Valsalva ou masagem carotídea","isCorrect":true},{"label":"B","text":"Adenosina IV 6mg bolus rápido"},{"label":"C","text":"Amiodarona IV 300mg"},{"label":"D","text":"Cardioversão sincronizada imediata"}],"explanation":"SVT hemodinamicamente estável. Manobras vagais (Valsalva, masagem carotídea) são primeira linha. Se não funcionarem, adenosina IV é próxima opção. Cardioversão reservada para instabilidade hemodinâmica."},{"id":"CM-PNEUMO-0002","code":"CM-PNEUMO-0002","stem":"Homem 56 anos com tosse seca, dispneia progressiva e febre baixa há 3 semanas. Nega viagens recentes. Radiografia de tórax: opacidades em vidro fosco bilateral, padrão retículo-nodular. TC de alta resolução confirma achados difusos. LDH elevado, albumina baixa. Broncoscopia com lavado: negatividade para germes, células com Pneumocystis jirovecii, CD4 esperado baixo. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico mais provável?","difficulty":"HARD","specialty":"Pneumologia","topic":"Pneumocistose","alternatives":[{"label":"A","text":"Pneumonia por Pneumocystis jirovecii em imunocomprometido","isCorrect":true},{"label":"B","text":"Tuberculose pulmonar miliar"},{"label":"C","text":"Pneumonia viral atípica"},{"label":"D","text":"Fibrose pulmonar idiopática aguda"}],"explanation":"PCP: padrão vidro fosco, LDH elevado, achado de trofozoítos/cistos. Comum em HIV CD4 <200. Tratamento: TMP-SMX ou pentamidina inalada. Profilaxia indicada se CD4 <200."},{"id":"CM-NEURO-0002","code":"CM-NEURO-0002","stem":"Homem 68 anos apresenta tremor essencial progressivo de repouso à direita, rigidez em roda dentada, bradicinesia de MID, marcha em bloco. Cognição preservada. Qual é o diagnóstico presuntivo e primeira linha terapêutica?","prompt":"Qual é o diagnóstico e tratamento inicial?","difficulty":"MEDIUM","specialty":"Neurologia","topic":"Doença de Parkinson","alternatives":[{"label":"A","text":"Doença de Parkinson; Levodopa + inibidor de descarboxilase","isCorrect":true},{"label":"B","text":"Tremor essencial; Propranolol"},{"label":"C","text":"Atrofia multissistêmica; Fludrocortisona"},{"label":"D","text":"Parkinsonismo vascular; Apenas fisioterapia"}],"explanation":"Parkinson: tríade tremor repouso + rigidez + bradicinesia. Levodopa + carbidopa é padrão ouro. Agonistas dopaminérgicos alternativa em doentes jovens (<60) para minimizar discinesias. Cognição preservada afasta demência Lewy."},{"id":"CM-ENDO-0002","code":"CM-ENDO-0002","stem":"Mulher 34 anos com diabetes gestacional diagnosticada há 6 semanas. Glicemia de jejum 118 mg/dL, 2h após sobrecarga 160 mg/dL. Sem comorbidades. Qual é a primeira conduta?","prompt":"Qual é a abordagem inicial mais apropriada?","difficulty":"MEDIUM","specialty":"Endocrinologia","topic":"Diabetes Gestacional","alternatives":[{"label":"A","text":"Dieta e exercício com monitorização de glicemia, medicação se não controlado","isCorrect":true},{"label":"B","text":"Metformina imediata em todos os casos"},{"label":"C","text":"Insulina subcutânea desde o diagnóstico"},{"label":"D","text":"Apenas monitorização sem intervenção"}],"explanation":"Diabetes gestacional: dieta e exercício controlam 80% dos casos. Medicação (metformina ou insulina) se hiperglicemia persistir. Monitorização de glicemia capilar pré-prandial e 2h pós-prandial. Risco aumentado de diabetes tipo 2 pós-parto."},{"id":"CM-GASTRO-0002","code":"CM-GASTRO-0002","stem":"Homem 55 anos alcoolista (40 doses/semana) com cirrose compensada há 2 anos. Apresenta hematemese leve, melena. Endoscopia: varizes esofágicas com sinais vermelhos. Qual é o tratamento mais apropriado?","prompt":"Qual é a conduta terapêutica inicial?","difficulty":"HARD","specialty":"Gastroenterologia","topic":"Varizes Esofágicas","alternatives":[{"label":"A","text":"Ligadura elástica de varizes + terlipressina + antibiótico profilático","isCorrect":true},{"label":"B","text":"Apenas esclerose endoscópica"},{"label":"C","text":"Propranolol oral para profilaxia secundária"},{"label":"D","text":"Observação sem intervenção urgente"}],"explanation":"Varizes com sangramento: ligadura é primeira linha (melhor que esclerose). Terlipressina reduz morbimortalidade. Ceftriaxona profilática reduz infecções bacterianas. Reposição volêmica cuidadosa (risco de ascite/encefalopatia)."},{"id":"CM-INFECTO-0002","code":"CM-INFECTO-0002","stem":"Homem 32 anos com febre 38.5°C, cefaleia occipital severa, fotofobia, rigidez de nuca. LCR: 92 células (92% linfócitos), proteína 55 mg/dL, glicose 58 mg/dL (glicemia 96), Gram negativo. Qual é o principal diagnóstico diferencial?","prompt":"Qual é a etiologia mais provável?","difficulty":"HARD","specialty":"Infectologia","topic":"Meningite Viral","alternatives":[{"label":"A","text":"Meningite viral (enterovírus/HSV-2) vs Meningite tuberculosa","isCorrect":true},{"label":"B","text":"Meningite bacteriana por Neisseria meningitidis"},{"label":"C","text":"Meningite fúngica por Cryptococcus"},{"label":"D","text":"Meningite por Mycobacterium tuberculosis apenas"}],"explanation":"Perfil linfocitário com proteína moderada e glicose levemente baixa sugere viral vs tuberculosa. Gram negativo afasta bacteriana piogênica. Culturas negativas sugerem viral. Tratamento cobre ambas (aciclovir + INH/RIF) até excluir TB."},{"id":"CM-NEFRO-0002","code":"CM-NEFRO-0002","stem":"Mulher 42 anos com DM2 há 8 anos (HbA1c 8.5%), refere fadiga progressiva, anemia leve, creatinina 2.8 mg/dL (eGFR 22 mL/min). Proteinúria 2.1g/24h, ureia 62 mg/dL, K 5.8, P 4.2. Qual é a conduta medicamentosa mais apropriada?","prompt":"Qual é o tratamento farmacológico inicial mais apropriado?","difficulty":"MEDIUM","specialty":"Nefrologia","topic":"Doença Renal Crônica em Diabetes","alternatives":[{"label":"A","text":"Mantém IECA/ARB, adiciona finerenone, semaglutida (GLP-1) e pode considerar SGLT2i","isCorrect":true},{"label":"B","text":"Apenas diuréticos de alça para controle de volume"},{"label":"C","text":"Insulina para controlar HbA1c agressivamente"},{"label":"D","text":"Preparação para diálise imediata"}],"explanation":"DRC estágio 3b-4 diabética. IECA/ARB reduz proteinúria e progressão. Finerenone (antagonista mineralocorticoide) reduz morte renal 34%. GLP-1 (semaglutida) reduz morte cardiovascular. SGLT2i contraindicado por eGFR <20. Controle adequado de PA e glicemia essencial."},{"id":"CM-CARDIO-0004","code":"CM-CARDIO-0004","stem":"Homem 58 anos com epistaxe recorrente, manchas roxas, adenomegalia. Hemograma: WBC 85.000, Hb 8.5, Plt 25.000, blastos 88%. Qual é o diagnóstico e risco imediato?","prompt":"Qual é o diagnóstico e complicação mais temida?","difficulty":"HARD","specialty":"Hematologia","topic":"Leucemia Aguda","alternatives":[{"label":"A","text":"Leucemia aguda com risco de síndrome de lise tumoral e leucostase","isCorrect":true},{"label":"B","text":"Linfoma com apenas envolvimento medular"},{"label":"C","text":"Mielodisplasia de baixo risco"},{"label":"D","text":"Infecção viral com reação linfomonocitária"}],"explanation":"Leucemia aguda: >20% blastos. WBC 85.000 alto risco de leucostase (dispneia, confusão). Risco de síndrome lise: hiperkalemia, hiperfosfatemia, hiperuricemia, hipocalcemia. Necessário fluidos agressivos, alopurinol/febuxostat, urato oxidase, monitorização cardíaca."},{"id":"CM-PNEUMO-0003","code":"CM-PNEUMO-0003","stem":"Mulher 72 anos com nódulo pulmonar 1.2cm descoberto em TC de rotina, sem sintomas. Fumante 50 maços-ano, cessou há 5 anos. Nódulo bem delimitado, sem calcificação, ligeira captação em PET-CT. Qual é a próxima conduta?","prompt":"Qual é o próximo passo mais apropriado?","difficulty":"HARD","specialty":"Pneumologia","topic":"Nódulo Pulmonar","alternatives":[{"label":"A","text":"Biópsia percutânea ou broncoscopia com biopsia","isCorrect":true},{"label":"B","text":"Seguimento com TC em 3 meses"},{"label":"C","text":"Cirurgia ressectiva exploratória"},{"label":"D","text":"Apenas observação por ser achado incidental"}],"explanation":"Nódulo >1cm em fumador com captação PET sugere risco aumentado de malignidade. Biópsia diagnóstica indicada. PET-CT auxiliar mas não substitui confirmação histológica. Cirurgia sem diagnóstico é overtreatment."},{"id":"CM-NEURO-0003","code":"CM-NEURO-0003","stem":"Homem 45 anos com cefaleia tipo pressão occipital bilateral há 2 semanas, PA 165/105 mmHg, discreto edema de papila bilateral. Sem déficits focais. RNM encéfalo com edema subcortical. Líquor: proteína normal, glicose normal, células normais. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico mais provável?","difficulty":"HARD","specialty":"Neurologia","topic":"Síndrome de Encefalopatia Posterior Reversível","alternatives":[{"label":"A","text":"Síndrome de Encefalopatia Posterior Reversível (PRES)","isCorrect":true},{"label":"B","text":"Meningite asséptica"},{"label":"C","text":"Tumor cerebral"},{"label":"D","text":"Trombose venosa cerebral"}],"explanation":"PRES: cefaleia + HAS + edema subcortical região posterior (RNM) + ausência de achados no LCR. Associada a HAS, eclâmpsia, imunossupressores, citotóxicos. Reversível se tratada promptamente. Redução controlada de PA é essencial."},{"id":"CM-ENDO-0003","code":"CM-ENDO-0003","stem":"Homem 52 anos com fadiga, ganho ponderal, redução de libido, impotência. Testosterona 185 ng/dL (normal 300-1000), LH normal, FSH normal. Qual é o diagnóstico e próxima investigação?","prompt":"Qual é o diagnóstico e investigação necessária?","difficulty":"MEDIUM","specialty":"Endocrinologia","topic":"Hipogonadismo","alternatives":[{"label":"A","text":"Hipogonadismo hipogonadotrófico; RM hipófise para avaliar estrutura","isCorrect":true},{"label":"B","text":"Hipogonadismo hipergonadotrófico; biópsia testicular"},{"label":"C","text":"Apenas deficiência de vitamina D"},{"label":"D","text":"Envelhecimento normal sem necessidade de investigação"}],"explanation":"Testosterona baixa com LH/FSH normais = hipogonadismo central. Necessário RM hipófise para descartar tumor/compressão. Pode ser secundário a obesidade, medicações, apneia, hiperprolactinemia. Reposição de testosterona se confirmado e sintomático."},{"id":"CM-GASTRO-0003","code":"CM-GASTRO-0003","stem":"Mulher 68 anos com anemia microcítica (Hb 9.2, VCM 68), ferritina baixa, historia de constipação alternada com diarreia há 6 meses, perda ponderal 2kg. Qual é a próxima investigação mais apropriada?","prompt":"Qual é o próximo passo diagnóstico?","difficulty":"MEDIUM","specialty":"Gastroenterologia","topic":"Anemia por Deficiência de Ferro","alternatives":[{"label":"A","text":"Colonoscopia e endoscopia alta para descartar lesão maligna/sangrante","isCorrect":true},{"label":"B","text":"Apenas suplementação de ferro oral"},{"label":"C","text":"Teste para celiquia com dosagem de tTG-IgA"},{"label":"D","text":"Fecograma para avaliar parasitas"}],"explanation":"Anemia microcítica ferropriva em mulher >50 anos requer colonoscopia para descartar câncer/pólipo/sangramento GI. Endoscopia alta complementar. Alteração hábito intestinal é red flag. Celiquia segundo de menos comum."},{"id":"CM-INFECTO-0003","code":"CM-INFECTO-0003","stem":"Mulher 28 anos com febre 39.5°C, rash petequial em tronco/extremidades, rigidez de nuca, confusão mental. PA 90/50, FC 128, lactato 4.2. Hemograma: WBC 18.000, Plt 52.000. Qual é a conduta inicial mais crítica?","prompt":"Qual é a ação inicial mais urgente?","difficulty":"HARD","specialty":"Infectologia","topic":"Meningococcemia/Choque Séptico","alternatives":[{"label":"A","text":"Antibiótico empiricamente (ceftriaxona 2g IV 6/6h) + fluido + vasopressores","isCorrect":true},{"label":"B","text":"Punção lombar imediata para LCR"},{"label":"C","text":"TC crânio antes de qualquer intervenção"},{"label":"D","text":"Apenas observação com hemocultura"}],"explanation":"Choque séptico meningocócico: antibióticos antes da LCR. Não retardar por imagem. Ceftriaxona 2g IV 6/6h, fluido agressivo, vasopressores. Mortalidade ~50% sem tratamento pronto. Dexametasona 10mg IV reduz sequelas neurológicas."},{"id":"CM-NEFRO-0003","code":"CM-NEFRO-0003","stem":"Homem 35 anos com presença de sangue na urina, fadiga e cefaleia. Creatinina 2.8, urina: proteína 3g/24h, RBC 100/campo, cilindros. PA 160/100. Qual é a hipótese diagnóstica e investigação inicial?","prompt":"Qual é a provável causa e qual deve ser a próxima investigação?","difficulty":"HARD","specialty":"Nefrologia","topic":"Glomerulonefrite Rapidamente Progressiva","alternatives":[{"label":"A","text":"GNRP; dosagem de ANCA, FAN, anti-GBM","isCorrect":true},{"label":"B","text":"Apenas IRA pré-renal, reposição volêmica"},{"label":"C","text":"Infecção urinária complicada"},{"label":"D","text":"Trauma renal com sangramento"}],"explanation":"Hematúria + proteinúria + cilindros + IRA rápida = GNRP. Investigar ANCA (vasculite associada), FAN (LES), anti-GBM (anti-membrana basal). Biópsia renal urgente se suspeita. Corticoides + imunossupressão pode salvar função renal."},{"id":"CM-CARDIO-0005","code":"CM-CARDIO-0005","stem":"Mulher 62 anos com história de palpitações paroxísticas, dyspneia aos esforços. Apresenta FA com RV 92 bpm em repouso. Ecocardiograma: FE 62%, aumento leve do átrio esquerdo. Sem doença estrutural. Qual é o melhor controle de frequência?","prompt":"Qual é a estratégia mais apropriada de controle de frequência?","difficulty":"MEDIUM","specialty":"Cardiologia","topic":"Fibrilação Atrial Paroxística","alternatives":[{"label":"A","text":"Betabloqueador como primeira linha + anticoagulação","isCorrect":true},{"label":"B","text":"Verapamil e propafenona"},{"label":"C","text":"Digoxina isolada"},{"label":"D","text":"Apenas anticoagulação sem controle de FC"}],"explanation":"FA paroxística sem cardiopatia estrutural. Betabloqueador (metoprolol, atenolol) ou não-dihidropiridina (verapamil, diltiazem). Anticoagulação por CHA₂DS₂-VASc ≥1 ponto em mulher. Considere ablação se sintomas refratários."},{"id":"CM-PNEUMO-0004","code":"CM-PNEUMO-0004","stem":"Homem 42 anos com dispneia aguda, dor torácica pleurítica, hemoptise. Radiografia: infiltrado triangular periférico. TC angio: defeito de enchimento em artéria pulmonar segmentar. D-dímero elevado. Qual é o diagnóstico e tratamento inicial?","prompt":"Qual é o diagnóstico e tratamento?","difficulty":"HARD","specialty":"Pneumologia","topic":"Tromboembolia Pulmonar","alternatives":[{"label":"A","text":"TEP intermediária; anticoagulação com enoxaparina + varfarina ou DOAC","isCorrect":true},{"label":"B","text":"Apenas suporte com oxigênio"},{"label":"C","text":"Fibrinólise sistemática"},{"label":"D","text":"Filtro de cava sem anticoagulação"}],"explanation":"TEP segmentar sem choque (pressão arterial normal). Anticoagulação é padrão ouro. Fibrinólise reservada para TEP massiva com choque. Duração: 3 meses se provável primeira não provocada, 6+ meses se tromboembolia recorrente."},{"id":"CM-CARDIO-0006","code":"CM-CARDIO-0006","stem":"Homem 55 anos com HAS não controlada (160/105), ganho ponderal 8kg/ano, sedentário, come muito sal. Colesterol total 280, LDL 180, HDL 35, triglicerídeos 180. Qual é a abordagem mais apropriada?","prompt":"Qual é o tratamento inicial mais apropriado?","difficulty":"MEDIUM","specialty":"Cardiologia","topic":"Dislipidemia e Hipertensão","alternatives":[{"label":"A","text":"Modificação estilo de vida + estatina de alta intensidade + antihipertensivo","isCorrect":true},{"label":"B","text":"Apenas acompanhamento sem medicação"},{"label":"C","text":"Fibrato isolado"},{"label":"D","text":"Cirurgia bariátrica imediata"}],"explanation":"Síndrome metabólica com HAS e dislipidemia. Estatina reduz eventos cardíacos 30%. IECA/ARB além de HAS tem proteção cardiovascular. Perda 5-10% peso melhora todos os fatores. Triglicerídeos altos sugerem resistência insulínica."},{"id":"CM-REUMATOLOGIA-0001","code":"CM-REUM-0001","stem":"Mulher 45 anos com artralgia simétrica em mãos/pés há 3 meses, rigidez matinal 2 horas, edema articular. FR 1:320, anti-CCP 145. VHS 52, PCR 8.5. Radiografia mãos: sem erosões ainda. Qual é o diagnóstico e tratamento inicial?","prompt":"Qual é a melhor conduta inicial?","difficulty":"HARD","specialty":"Reumatologia","topic":"Artrite Reumatoide","alternatives":[{"label":"A","text":"Diagnóstico de AR; DMARD (metotrexato) + corticoide de transição + AINE","isCorrect":true},{"label":"B","text":"Apenas AINE e observação"},{"label":"C","text":"Apenas corticoide a longo prazo"},{"label":"D","text":"Expectativa de remissão espontânea"}],"explanation":"AR anti-CCP positivo é pior prognóstico. DMARD começar em até 3 meses reduz progressão de erosões 70%. Remissão precoce melhora desfecho a longo prazo. Biológicos se inadequada resposta aos DMARDs convencionais."},{"id":"CM-CARDIO-0007","code":"CM-CARDIO-0007","stem":"Homem 70 anos com presíncope, sincope exertiva rápida, sopro sistólico 4/6 em ápex. Ecocardiograma: área valvar mitral 0.8 cm², PSAP 52 mmHg, FE preservada. Qual é a indicação?","prompt":"Qual é a melhor conduta?","difficulty":"HARD","specialty":"Cardiologia","topic":"Estenose Mitral","alternatives":[{"label":"A","text":"Valvuloplastia percutânea ou cirurgia por sintomas graves + área <1.5 cm²","isCorrect":true},{"label":"B","text":"Apenas diurético e betabloqueador"},{"label":"C","text":"Anticoagulação sem intervenção"},{"label":"D","text":"Observação sem sintomas"}],"explanation":"Estenose mitral sintomática com área <1cm² é indicação para intervenção. Valvuloplastia se válvula adequada (sem calcificação, regurgitação importante). Cirurgia se valvuloplastia contraindicada ou falhou. Anticoagulação se FA presente."},{"id":"CM-GASTRO-0004","code":"CM-GASTRO-0004","stem":"Mulher 45 anos com dor abdominal súbita tipo cólica, náusea, vômito. Abdome distendido, ausência de ruídos hidroaéreos. Radiografia simples: níveis hidroaéreos horizontais, alças dilatadas. Sem história cirúrgica prévia. Qual é o diagnóstico mais provável?","prompt":"Qual é o diagnóstico e próxima investigação?","difficulty":"HARD","specialty":"Gastroenterologia","topic":"Obstrução Intestinal","alternatives":[{"label":"A","text":"Obstrução de intestino delgado por brida/aderência; TC abdome","isCorrect":true},{"label":"B","text":"Apendicite aguda"},{"label":"C","text":"Cólica biliar"},{"label":"D","text":"Isquemia mesentérica"}],"explanation":"Obstrução mecânica de intestino delgado sem cirurgia prévia: considerar brida congênita, tumor, ou hérnia interna. TC com contraste oral/IV avalia localização obstrução e viabilidade. Maioria casos não complicados resolvem com repouso, SNG, e fluidos."},{"id":"CM-REUMATOLOGIA-0002","code":"CM-REUM-0002","stem":"Mulher 52 anos com febre irregular, magreza, fadiga. Apresenta erupção malar fotossensível, artralgia mãos/pés, úlcera oral indolor. FAN 1:640 (padrão homogêneo), anti-dsDNA >200, C3 60 (baixo), C4 12 (baixo). Qual é o diagnóstico?","prompt":"Qual é o diagnóstico?","difficulty":"HARD","specialty":"Reumatologia","topic":"Lúpus Eritematoso Sistêmico","alternatives":[{"label":"A","text":"LES com atividade leve-moderada; considerar luprite e glomerulonefrite"},{"label":"B","text":"Apenas fotossensibilidade cutânea"},{"label":"C","text":"Síndrome seca primária"},{"label":"D","text":"Dermatite alérgica"}],"explanation":"LES: critérios diagnósticos presentes (malar, úlcera, artrite, FAN+, anti-dsDNA+, C3/C4 baixos). Necessário avaliar proteinúria, creatinina para nefrite. Começar prednisona + hidroxicloroquina + DMARD. Monitorização trimestral."},{"id":"CM-PNEUMO-0005","code":"CM-PNEUMO-0005","stem":"Homem 38 anos com tosse subaguda há 4 semanas, dispneia aos esforços, febre vespertina ocasional. Radiografia: infiltrado apical direito. Teste da tuberculina: 18mm. Cultura escarro: Mycobacterium tuberculosis. VIH status desconhecido. Qual é o tratamento inicial?","prompt":"Qual é a abordagem terapêutica inicial?","difficulty":"HARD","specialty":"Pneumologia","topic":"Tuberculose Pulmonar","alternatives":[{"label":"A","text":"Quadriplacebo (RIPE) por 2 meses + IP por 4 meses; testar HIV e começar ART se positivo","isCorrect":true},{"label":"B","text":"Apenas isoniazida isolada"},{"label":"C","text":"Pneumotórax terapêutico"},{"label":"D","text":"Apenas repouso hospitalar"}],"explanation":"TB ativa: quadriplacebo por fase intensiva. Vigilância de hepatotoxicidade (RIPE causa). Teste HIV urgente (risco aumentado de TB-HIV com má prognóstico). ART se CD4 <50. Notificação compulsória. Contatos avaliados."},{"id":"CM-NEURO-0004","code":"CM-NEURO-0004","stem":"Mulher 38 anos com cefaleia tipo enxaqueca há 2 meses, visão borrada ocasional, náusea. Fundoscopia: papiledema bilateral, MRI: lesão ocupando espaço no lobo frontal com edema. Qual é o próximo passo?","prompt":"Qual é a próxima investigação e conduta?","difficulty":"HARD","specialty":"Neurologia","topic":"Tumor Intracraniano","alternatives":[{"label":"A","text":"Ressonância com gadolínio para melhor caracterização; neurocirurgia se viável","isCorrect":true},{"label":"B","text":"Apenas traçado eletroencefalográfico"},{"label":"C","text":"Punção lombar imediata"},{"label":"D","text":"Observação sem intervenção"}],"explanation":"Lesão expansiva com papiledema é emergência neurológica. RM com gadolínio diferencia tipo (primário vs metastático). Edema significante pode requerer osmóticos (manitol) e corticoides antes cirurgia. Biópsia/ressecção para diagnóstico e tratamento."},{"id":"CM-ENDOCRINOLOGIA-0004","code":"CM-ENDO-0004","stem":"Homem 35 anos com tremor de mãos, irritabilidade, perda ponderal 6kg, intolerância ao calor, diarreia. TSH <0.01 (suprimido), T4 livre 35 (elevado), T3 livre 12 (elevado). Anticorpos anti-TPO negativo, TRAb positivo. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico e tratamento inicial?","difficulty":"MEDIUM","specialty":"Endocrinologia","topic":"Tireotoxicose","alternatives":[{"label":"A","text":"Doença de Graves; PTU ou metimazol + propranolol","isCorrect":true},{"label":"B","text":"Tireoidite de Hashimoto"},{"label":"C","text":"Tiroidismo por iodo"},{"label":"D","text":"Apenas deficiência de iodo"}],"explanation":"Graves: TRAb+ (diferencia de tiroidite). PTU preferível no 1º trimestre (menor risco teratogênico). Propranolol controla sintomas adrenérgicos. Resposta 6-12 meses, 50% remissão após descontinuação. Oftalmologia se exoftalmos."},{"id":"CM-INFECTO-0004","code":"CM-INFECTO-0004","stem":"Homem 28 anos com dor abdominal, diarreia com sangue, febre 38.5°C. História de viagem ao Egito há 3 meses. Hemograma: eosinofilia 18%. Coprocultura e parasitológico negativos. Biópsia colônica: ovos de Schistosoma mansoni. Qual é o tratamento?","prompt":"Qual é o tratamento mais apropriado?","difficulty":"MEDIUM","specialty":"Infectologia","topic":"Esquistossomose","alternatives":[{"label":"A","text":"Praziquantel 40 mg/kg VO em 2-3 doses","isCorrect":true},{"label":"B","text":"Apenas azatioprina"},{"label":"C","text":"Antiespasmódicos e observação"},{"label":"D","text":"Antibióticos para infecção bacteriana"}],"explanation":"Esquistossomose mansônica: praziquantel é padrão ouro. Mata vermes adultos mas não ovos. Eosinofilia reflete resposta imune ao antígeno. Pode desenvolver fibrose/hipertensão portal se não tratado. Contatos e assintomáticos também tratados."},{"id":"CM-NEFRO-0004","code":"CM-NEFRO-0004","stem":"Mulher 72 anos com edema em pernas, ascite, hipoalbuminemia 1.8 g/dL, proteinúria 8g/24h, creatinina 1.0. FAN negativo, complemento normal. Causa não-diabética. Qual é o próximo diagnóstico provável?","prompt":"Qual é o diagnóstico provável?","difficulty":"HARD","specialty":"Nefrologia","topic":"Síndrome Nefrótica","alternatives":[{"label":"A","text":"Glomerulonefrite membranosa primária; biópsia renal confirmará","isCorrect":true},{"label":"B","text":"Apenas desnutrição"},{"label":"C","text":"Nefrite lúpica"},{"label":"D","text":"Trombose venosa renal"}],"explanation":"Síndrome nefrótica (proteinúria >3.5g, hipoalbuminemia, edema, hiperlipidemia). Idade avançada + FAN negativo + complemento normal sugere membranosa primária. Biópsia imunofluorescência: depósitos IgG 'full house' é patognomônico. Risco trombose venosa renal."},{"id":"CM-HEMATOLOGIA-0002","code":"CM-HEMATOL-0002","stem":"Mulher 62 anos com fadiga, hematúria. Hemograma: Hb 9.5, MCV 74, Plaquetas 450.000. Reticulócitos 0.5%. Ferritina 15, TIBC elevado, ferro sérico baixo. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico?","difficulty":"MEDIUM","specialty":"Hematologia","topic":"Anemia Ferropriva","alternatives":[{"label":"A","text":"Anemia ferropriva com possível neoplasia urinária; ultrassom rins + IVP","isCorrect":true},{"label":"B","text":"Apenas carência dietética"},{"label":"C","text":"Talassemia trait"},{"label":"D","text":"Anemia aplástica"}],"explanation":"Anemia ferropriva (MCV baixo, ferritina baixa). Hematúria sugere origem urinária (pedra, tumor). Plaquetas elevadas é reativo à anemia. Investigar: colonoscopia, endoscopia alta (GI), ultrassom rins, IVP."},{"id":"CM-CARDIO-0008","code":"CM-CARDIO-0008","stem":"Homem 65 anos com queixa de fadiga progressiva, edema bimaleolar, dispneia aos mínimos esforços, hepatomegalia pulsátil. Ecocardiograma: FE 25%, dilatação severa de câmaras, regurgitação tricúspide severa. Qual é a melhor indicação?","prompt":"Qual é o próximo passo terapêutico?","difficulty":"HARD","specialty":"Cardiologia","topic":"Insuficiência Cardíaca Avançada","alternatives":[{"label":"A","text":"Terapia otimizada + avaliação para transplante cardíaco ou ressincronizador","isCorrect":true},{"label":"B","text":"Apenas diuréticos"},{"label":"C","text":"Observação e conforto"},{"label":"D","text":"Angioplastia coronária preventiva"}],"explanation":"IC estágio D (refratária). FE <25% é indicação para CRT-D se QRS >120. Transplante candidato ideal se idade <65, sem comorbidades. Se não candidato, considerar VAD (assistência ventricular) ou cuidados paliativos."},{"id":"CM-REUMATOLOGIA-0003","code":"CM-REUM-0003","stem":"Homem 48 anos com dor nas costas inflamatória (piora à noite, melhora com exercício), rigidez matinal 90 min. HLA-B27 positivo, SpA score elevado. Radiografia coluna: sindesmófitos iniciais. Qual é o tratamento?","prompt":"Qual é a melhor abordagem terapêutica?","difficulty":"HARD","specialty":"Reumatologia","topic":"Espondilite Anquilosante","alternatives":[{"label":"A","text":"AINE contínuo + TNF-alfa inibidor (etanercepte ou adalimumab) se inadequada resposta","isCorrect":true},{"label":"B","text":"Apenas repouso"},{"label":"C","text":"Fisioterapia sem farmacoterapia"},{"label":"D","text":"Corticoides sistêmicos de longo prazo"}],"explanation":"Espondilite anquilosante: HLA-B27+ com sindesmófitos confirmam. AINE reduz dor 50%. TNF-bloqueadores param progressão estrutural e melhoram função. Exercício e fisioterapia complementam. Prognóstico melhorou significativamente com biológicos."},{"id":"CM-PNEUMO-0006","code":"CM-PNEUMO-0006","stem":"Mulher 58 anos com tosse crônica produtiva, fadiga, dispneia. Radiografia: infiltrados bibasilares reticulares, volumes pulmonares normais. TC TCAR: opacidades em vidro fosco basal com tração bronquial. Qual é a próxima investigação?","prompt":"Qual é o diagnóstico mais provável?","difficulty":"HARD","specialty":"Pneumologia","topic":"Fibrose Pulmonar Idiopática","alternatives":[{"label":"A","text":"FPI provável; começar pirfenidona ou nintedanib","isCorrect":true},{"label":"B","text":"Apenas tosse crônica idiopática"},{"label":"C","text":"Sarcoidose pulmonar"},{"label":"D","text":"Bronquite crônica simples"}],"explanation":"FPI: padrão UIP em TCAR (vidro fosco + tração + consolidações) com ausência de achados sugestivos de doença alternativa. Prognóstico ruim sem tratamento (progressão 3-5 anos). Pirfenidona/nintedanib reduzem declínio FEV1 50%. Possível transplante."},{"id":"CM-ENDOCRINOLOGIA-0005","code":"CM-ENDO-0005","stem":"Homem 52 anos com História de pressão arterial elevada (160/95), cefaleia, dor abdominal epigástrica, palpitações. Glicemia 180 mg/dL, urina com catecolaminas elevadas. Tomografia adrenal: nódulo 3cm à esquerda. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico?","difficulty":"HARD","specialty":"Endocrinologia","topic":"Feocromocitoma","alternatives":[{"label":"A","text":"Feocromocitoma; bloqueio alfa seguido de beta após 2 semanas, depois cirurgia","isCorrect":true},{"label":"B","text":"Apenas HAS essencial"},{"label":"C","text":"Apenas nódulo adrenal incidental"},{"label":"D","text":"Adenoma produtor de cortisol"}],"explanation":"Feocromocitoma: tríade HAS paroxística + palpitações + diaforese. Catecolaminas elevadas confirmam. Ordem crítica: alfabloquear ANTES betabloqueador (evita crise hipertensiva). Cirurgia após controle adequado. Risco crise hipertensiva intraoperatória."},{"id":"CM-GASTRO-0005","code":"CM-GASTRO-0005","stem":"Mulher 45 anos com vômito incoercível há 3 dias, perda ponderal, deidratação. Sem dor abdominal. Endoscopia: úlcera péptica gástrica com sangramento ativo (Forrest 1b). Qual é o tratamento endoscópico indicado?","prompt":"Qual é a melhor abordagem endoscópica?","difficulty":"MEDIUM","specialty":"Gastroenterologia","topic":"Úlcera Péptica com Sangramento","alternatives":[{"label":"A","text":"Injeção de epinefrina + ligadura com fita elástica","isCorrect":true},{"label":"B","text":"Apenas observação do sangramento"},{"label":"C","text":"Cauterização térmica isolada"},{"label":"D","text":"Transfusão sem hemostasia"}],"explanation":"Sangramento ativo (Forrest 1b) requer hemostasia combinada. Epinefrina 1:10.000 + ligadura (ou clipe) reduz resangramento 10-15% vs monoterapia. IBP IV (omeprazol) após hemostasia 80mg bolus + infusão. Taxa sucesso 90-95%."},{"id":"CM-NEURO-0005","code":"CM-NEURO-0005","stem":"Mulher 62 anos com queixa de tontura rotatória súbita, náusea, vômito, nistagmo horizonte-rotatório. Teste Romberg negativo, marcha normal, Romberg: queda para lado afetado. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico?","difficulty":"MEDIUM","specialty":"Neurologia","topic":"Tontura Periférica","alternatives":[{"label":"A","text":"Vertigem periférica (provável VPPB ou neurite vestibular); manobra Epley se VPPB","isCorrect":true},{"label":"B","text":"Tontura central por AVE"},{"label":"C","text":"Hipotensão ortostática"},{"label":"D","text":"Infecção auditiva sem vertigem"}],"explanation":"Vertigem periférica: nistagmo, náusea, queda para lado afetado, teste dinâmico positivo. VPPB: Epley maneuver tem taxa sucesso 80%. Neurite: repouso + betaistina. Descartar AVE (teste de Romberg anormal = central)."},{"id":"CM-CARDIO-0009","code":"CM-CARDIO-0009","stem":"Homem 40 anos com palpitações, sensação de desmaio. ECG: QT longo 520ms, sem síncope prévia. História familiar: morte súbita em primo aos 35 anos. Qual é a próxima investigação e tratamento?","prompt":"Qual é a conduta mais apropriada?","difficulty":"HARD","specialty":"Cardiologia","topic":"Síndrome do QT Longo","alternatives":[{"label":"A","text":"Teste genético + betabloqueador + possível ICD se histórico morte súbita familiar","isCorrect":true},{"label":"B","text":"Apenas observação"},{"label":"C","text":"Ablação por radiofrequência"},{"label":"D","text":"Apenas tranquilizantes"}],"explanation":"Síndrome QT longo genético: risco Torsade de Pointes e morte súbita. Betabloqueador é primeira linha (reduz eventos 80%). Genômica identifica tipo (LQTS1-LQTS5). Família rastreada. ICD se eventos sintomáticos ou morte familiar prematura."},{"id":"CM-REUMATOLOGIA-0004","code":"CM-REUM-0004","stem":"Mulher 38 anos com síndrome de Raynaud, úlceras digitais, fibrose pulmonar, esofagite de refluxo. Anticorpos anti-centrômero positivo, ScL-70 negativo. Qual é o diagnóstico?","prompt":"Qual é a forma mais provável de esclerose sistêmica?","difficulty":"HARD","specialty":"Reumatologia","topic":"Esclerose Sistêmica","alternatives":[{"label":"A","text":"Forma limitada (CREST); vasodilatadores + inibidor bomba protônica","isCorrect":true},{"label":"B","text":"Forma difusa (dcSSc)"},{"label":"C","text":"Síndrome de Raynaud primária"},{"label":"D","text":"Apenas refluxo gastroesofágico"}],"explanation":"CREST (Calcinose, Raynaud, Esofagite, Esclerodactilia, Telangiectasia): anti-centrômero+ tem evolução lenta. ScL-70+ é forma difusa com prognóstico pior. Nifedipino para Raynaud. Monitorar pulmão (TCAR anual). Inibidor ACE se crise renal."},{"id":"CM-PNEUMO-0007","code":"CM-PNEUMO-0007","stem":"Homem 52 anos com tosse seca, dispneia progressiva, história de exposição ocupacional a asbesto por 30 anos. Radiografia: placas pleurais bilaterais, espessamento pleural. Qual é a próxima investigação?","prompt":"Qual é o próximo passo?","difficulty":"MEDIUM","specialty":"Pneumologia","topic":"Doença Pleural por Asbesto","alternatives":[{"label":"A","text":"Teste de função pulmonar + TC de alta resolução para avaliar fibrose","isCorrect":true},{"label":"B","text":"Apenas radiografia serial"},{"label":"C","text":"Biopsia pleural imediata"},{"label":"D","text":"Observação sem investigação"}],"explanation":"Exposição asbesto: placas pleurais (achado benigno), espessamento (pode progredir). Necessário descartar mesotelioma pleural (TC, possivelmente PET). Teste função redução FVC sugere fibrose. Vigilância: TC a cada 2-3 anos."},{"id":"CM-INFECTOLOGIA-0005","code":"CM-INFECTO-0005","stem":"Homem 35 anos com febre 39°C, tremores, calafrios noturnos há 2 semanas. Viagem recente ao Brasil. Hemograma: Hb 9.8, Plt 98.000, parasitas intraeritrocitários em gota espessa. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico e tratamento?","difficulty":"MEDIUM","specialty":"Infectologia","topic":"Malária","alternatives":[{"label":"A","text":"Malária (P. vivax ou P. ovale); artemeter-lumefantrina + primaquina","isCorrect":true},{"label":"B","text":"Apenas febre tifóide"},{"label":"C","text":"Dengue hemorrágica"},{"label":"D","text":"Tripanosomíase"}],"explanation":"Malária: gota espessa identifica espécie. P. vivax/ovale: artemeter-lumefantrina 6 doses, depois primaquina 15mg dia (cuidado G6PD). P. falciparum: artemeter-lumefantrina. Risco recaídas se não primaquina. Sintomas podem durar semanas mesmo após tratamento."},{"id":"CM-NEFROLOGIA-0005","code":"CM-NEFRO-0005","stem":"Homem 62 anos com DM2 há 10 anos, HAS mal controlada, creatinina 4.2 (eGFR 15), uréia 98, K 6.8, bicarbonato 16. Qual é a principal indicação?","prompt":"Qual é a próxima conduta?","difficulty":"MEDIUM","specialty":"Nefrologia","topic":"DRC Estágio 5","alternatives":[{"label":"A","text":"Avaliação para terapia renal substitutiva (diálise ou transplante)","isCorrect":true},{"label":"B","text":"Apenas medicações para controle"},{"label":"C","text":"Esperar progressão"},{"label":"D","text":"Apenas repouso e dieta"}],"explanation":"DRC estágio 5 (eGFR <15) indica preparação para TRS. Hiperuricemia, acidose, hipercalemia precisam controle. Criar fístula AV se diálise prevista. Se transplante candidato, listar precocemente. Educação do paciente para escolha modalidade."},{"id":"CM-HEMATOLOGIA-0003","code":"CM-HEMATOL-0003","stem":"Mulher 78 anos com fadiga progressiva, dor óssea. Hemograma: Hb 8.5, creatinina 3.0, cálcio 11.5, albumina 2.2. Proteinúria 4.5 g/24h (tipo Bence-Jones kappa). Qual é o diagnóstico?","prompt":"Qual é o diagnóstico?","difficulty":"HARD","specialty":"Hematologia","topic":"Mieloma Múltiplo","alternatives":[{"label":"A","text":"Mieloma múltiplo; quimioterapia + bortezomibe + transplante TCTH","isCorrect":true},{"label":"B","text":"Apenas insuficiência renal crônica"},{"label":"C","text":"Hiperparatireoidismo"},{"label":"D","text":"Apenas osteoporose"}],"explanation":"Mieloma: anemia + IRA (cilindros proteicos) + hipercalcemia + proteinúria Bence-Jones. Biópsia medula mostrará plasmocitose >30%. Prognóstico melhorou com novos agentes. Bifosfonatos para doença óssea. Vigilância infecções."},{"id":"CM-CARDIO-0010","code":"CM-CARDIO-0010","stem":"Mulher 68 anos com história de infarto prévio, angina estável. Apresenta troponina elevada 1.5 ng/mL, ST isoelétrico em repouso. PA 135/80, FC 82 bpm. Qual é o diagnóstico e tratamento?","prompt":"Qual é o diagnóstico mais provável?","difficulty":"MEDIUM","specialty":"Cardiologia","topic":"NSTEMI","alternatives":[{"label":"A","text":"NSTEMI; clopidogrel + AAS + anticoagulação + angiografia urgente (<24h)","isCorrect":true},{"label":"B","text":"Apenas angina estável"},{"label":"C","text":"Troponina falsamente elevada"},{"label":"D","text":"Apenas arritmia"}],"explanation":"NSTEMI: troponina elevada + sintomas anginosos. Clopidogrel + AAS reduzem morte/infarto 20%. Enoxaparina ou heparina. Angiografia <24h com PCI se possível. Dupla antiagregação por 12 meses. Contraindicação fibrinólise em NSTEMI."},{"id":"CM-REUMATOLOGIA-0005","code":"CM-REUM-0005","stem":"Homem 42 anos com artralgia em grandes articulações (joelhos, ombros, quadril), febre, erupção urticariforme, artrose de rápida progressão. HLA-B27 negativo. ANA/RF negativo. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico provável?","difficulty":"MEDIUM","specialty":"Reumatologia","topic":"Artrite Viral","alternatives":[{"label":"A","text":"Artrite viral (possivelmente Parvovírus B19 ou vírus da hepatite C); tratamento sintomático","isCorrect":true},{"label":"B","text":"AR soronegativa"},{"label":"C","text":"Apenas artose degenerativa"},{"label":"D","text":"Apenas viremia transitória"}],"explanation":"Artrite viral: poliartralgia simétrica, febre, rash. Parvovírus B19 em mulheres causa AR-like. Vírus hepatite C artrite. ANA/RF negativos afastam autoimune. Maioria resolvem em semanas. Suporte sintomático. PCR viral confirma etiologia."},{"id":"CM-GASTRO-0006","code":"CM-GASTRO-0006","stem":"Homem 58 anos com dor epigástrica, saciedade precoce, vômito ocasional. Endoscopia: úlcera gástrica 2cm, sem sangramento. Biópsia negativa para H. pylori, ulcerogênico negativo. Medicação atual: AINE diário há 3 anos. Qual é a próxima conduta?","prompt":"Qual é a abordagem mais apropriada?","difficulty":"MEDIUM","specialty":"Gastroenterologia","topic":"Úlcera Induzida por AINE","alternatives":[{"label":"A","text":"Parar AINE + IBP por 8-12 semanas + trocar para acetaminofeno/COX-2 se necessário analgésico","isCorrect":true},{"label":"B","text":"Continuar AINE com dose reduzida"},{"label":"C","text":"Apenas antagonista H2"},{"label":"D","text":"Cirurgia vagotomia"}],"explanation":"Úlcera por AINE: cessação é essencial. IBP acelera cicatrização. Trocar para acetaminofeno/tramadol se dor. Se necessário AINE, usar COX-2 seletivo (celecoxibe) com IBP. Erradicação H. pylori desnecessária se negativo."},{"id":"CM-PNEUMO-0008","code":"CM-PNEUMO-0008","stem":"Mulher 45 anos com asma intermitente bem controlada há anos. Apresenta sibilância noturna frequente, despertares noturnos últimos 2 meses, tosse ao riso. Qual é a próxima abordagem?","prompt":"Qual é o próximo passo?","difficulty":"MEDIUM","specialty":"Pneumologia","topic":"Asma Inadequadamente Controlada","alternatives":[{"label":"A","text":"Intensificar: corticoide inalado de baixa dose + beta-2 agonista de longa ação","isCorrect":true},{"label":"B","text":"Apenas beta-2 agonista de curta ação conforme necessário"},{"label":"C","text":"Apenas antihistamínico"},{"label":"D","text":"Observação sem mudança"}],"explanation":"Asma inadequadamente controlada (sibilância noturna, despertares). Escalar para corticoide inalado baixa dose + LABA. Revisar aderência, técnica inalador, gatilhos. Considerar desensibilização se alérgenos identificados."},{"id":"CM-ENDOCRINOLOGIA-0006","code":"CM-ENDO-0006","stem":"Mulher 32 anos grávida (28 semanas) com glicemia jejum 115 mg/dL, após sobrecarga 165 mg/dL. Sem cetose. Qual é a classificação de White?","prompt":"Qual é a classificação de White?","difficulty":"MEDIUM","specialty":"Endocrinologia","topic":"Diabetes Gestacional - Classificação White","alternatives":[{"label":"A","text":"Classe A1 (apenas hiperglicemia de jejum controlável com dieta)","isCorrect":true},{"label":"B","text":"Classe A2 (requer insulina)"},{"label":"C","text":"Classe B (diabetes pré-gestacional)"},{"label":"D","text":"Classe G (diabetes com nefropatia)"}],"explanation":"Classificação White: A1 = diabetes gestacional controlável com dieta. A2 = diabetes gestacional com insulina. B-T = diabetes pré-gestacional. Risco aumentado de macrossomia, hipoglicemia neonatal. Monitorização glicemia pré e pós-prandial."},{"id":"CM-NEURO-0006","code":"CM-NEURO-0006","stem":"Homem 58 anos com tremor progressivo em repouso, mas melhora com movimento ativo, fadiga, constipação. ECG mostra QT longo. Qual é o diagnóstico diferencial?","prompt":"Qual é a causa mais provável?","difficulty":"HARD","specialty":"Neurologia","topic":"Tremor de Repouso com QT Longo","alternatives":[{"label":"A","text":"Parkinsonismo induzido por antipsicótico ou metoclopramida","isCorrect":true},{"label":"B","text":"Doença de Parkinson idiopática"},{"label":"C","text":"Tremor essencial"},{"label":"D","text":"Ataxia cerebelar"}],"explanation":"Tremor repouso melhora com movimento = Parkinson. QT longo + sintomas extrapiramidais sugerem antipsicótico (haloperidol prolonga QT). Descontinuar agente causal. Trihexifenidil pode ajudar acutamente. Risco síndrome neuroléptica maligna."},{"id":"CM-INFECTO-0006","code":"CM-INFECTO-0006","stem":"Mulher 42 anos com candidemia confirmada em hemocultura. CD4 esperado baixo (HIV+). Qual é o tratamento inicial?","prompt":"Qual é o antifúngico inicial mais apropriado?","difficulty":"MEDIUM","specialty":"Infectologia","topic":"Candidemia em Imunocomprometido","alternatives":[{"label":"A","text":"Fluconazol IV 400mg/dia ou anidulafungina se albicans não-suscetível","isCorrect":true},{"label":"B","text":"Apenas fluconazol oral"},{"label":"C","text":"Apenas anfotericina B"},{"label":"D","text":"Observação sem tratamento"}],"explanation":"Candidemia: sepse fúngica requer tratamento IV. Fluconazol se C. albicans suscetível. Anidulafungina/micafungina se não-albicans ou resistência. Remover cateter central se possível. ART para HIV aumenta imunidade."},{"id":"CM-CARDIO-0011","code":"CM-CARDIO-0011","stem":"Homem 62 anos com história de varizes e trombose venosa profunda prévia em MID há 2 anos. Agora com edema unilateral MID, claudicação intermitente. Ultrassom: oclusão de artéria ilíaca. Qual é a indicação?","prompt":"Qual é a próxima investigação?","difficulty":"HARD","specialty":"Cardiologia","topic":"Doença Arterial Periférica","alternatives":[{"label":"A","text":"Angiografia com cateter ou CT angiografia para planejamento revascularização","isCorrect":true},{"label":"B","text":"Apenas anticoagulação"},{"label":"C","text":"Repouso sem investigação"},{"label":"D","text":"Apenas tratamento dos sintomas"}],"explanation":"DAP com oclusão ilíaca: risco amputação. Angiografia permite intervalo revascularização (PTA com stent vs cirurgia bypass). Reabilitação pós-intervenção. Cessação tabagismo essencial. Prognóstico melhor se revascularizado."},{"id":"CM-REUMATOLOGIA-0006","code":"CM-REUM-0006","stem":"Homem 55 anos com gota aguda primeiro episódio. Ácido úrico 9.2 mg/dL, uricosúria 24h elevada, cálculos renais história. Qual é o tratamento agudo e crônico?","prompt":"Qual é a abordagem terapêutica?","difficulty":"MEDIUM","specialty":"Reumatologia","topic":"Gota Aguda","alternatives":[{"label":"A","text":"Aguda: AINE ou colchicina; Crônico: alopurinol ou febuxostat após 2-4 semanas","isCorrect":true},{"label":"B","text":"Apenas alopurinol imediato"},{"label":"C","text":"Apenas repouso e fluidos"},{"label":"D","text":"Apenas anti-hipertensivos"}],"explanation":"Gota: crise aguda com AINE/colchicina. Nunca iniciar uratizador durante crise (pode piorar). Alopurinol 2-4 semanas após resolução, começar baixa dose (100mg) e titular. Cálculos renais indicam hiperexcretor: alopurinol preferível a febuxostat."},{"id":"CM-PNEUMO-0009","code":"CM-PNEUMO-0009","stem":"Mulher 55 anos com história de asma não-alérgica. Apresenta sibilância, tosse com mudanças de temperatura. Qual é o mecanismo e tratamento?","prompt":"Qual é o diagnóstico e manejo?","difficulty":"MEDIUM","specialty":"Pneumologia","topic":"Asma Não-Alérgica","alternatives":[{"label":"A","text":"Asma não-alérgica (hiperreatividade brônquica); evitar gatilhos + beta-2 agonista conforme necessário","isCorrect":true},{"label":"B","text":"Apenas rinite alérgica"},{"label":"C","text":"DPOC"},{"label":"D","text":"Apenas tosse psicogênica"}],"explanation":"Asma não-alérgica: hiperreatividade às mudanças temperatura/umidade. Teste provocação com metacolina positivo. Tratamento: evitar gatilhos, beta-2 agonista, possível corticoide inalado. Prognóstico melhor que forma alérgica."},{"id":"CM-GASTRO-0007","code":"CM-GASTRO-0007","stem":"Homem 68 anos com ressecção gástrica para úlcera há 30 anos. Agora com anemia macrocítica, parestesias, ataxia, B12 49 pg/mL. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico?","difficulty":"MEDIUM","specialty":"Gastroenterologia","topic":"Anemia Megaloblástica Pós-Gastrectomia","alternatives":[{"label":"A","text":"Deficiência B12 (ausência fator intrínseco pós-gastrectomia); B12 IM mensal","isCorrect":true},{"label":"B","text":"Apenas deficiência folato"},{"label":"C","text":"Anemia ferropriva"},{"label":"D","text":"Síndrome Dumping"}],"explanation":"Gastrectomia remove fundo gástrico (fator intrínseco). Deficiência B12 desenvolve anos após (estoques corporais 3-5 anos). Polineuropatia irreversível se não tratada. B12 IM 1000mcg mensal indefinidamente. Folato concomitante."},{"id":"CM-HEMATOLOGIA-0004","code":"CM-HEMATOL-0004","stem":"Mulher 72 anos com sangramento gengivais, equimoses, petéquias. Hemograma: Hb 8.5, Plt 15.000, WBC 3200. Medula óssea: edema/fibrosis, diminuição celularidade. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico?","difficulty":"HARD","specialty":"Hematologia","topic":"Mielodisplasia com Pancitopenia","alternatives":[{"label":"A","text":"Síndrome Mielodisplásica com citopenia; transfusões de suporte, possível azacitidina","isCorrect":true},{"label":"B","text":"Apenas anemia aplástica"},{"label":"C","text":"Trombocitopenia imune"},{"label":"D","text":"Apenas deficiência folato"}],"explanation":"SMD: pancitopenia + displasia medular. Risco progressão para leucemia aguda. Azacitidina reduz progressão 50%. Transfusões PRN. Quelante ferro. Monitorar blastos. Prognóstico depende citogenética."},{"id":"CM-NEURO-0007","code":"CM-NEURO-0007","stem":"Homem 38 anos com cefaleia progressiva, convulsão generalizada, edema de papila. RM: lesão 4cm cortical com efeito de massa. Qual é o diagnóstico mais provável?","prompt":"Qual é o diagnóstico?","difficulty":"HARD","specialty":"Neurologia","topic":"Glioma Cerebral","alternatives":[{"label":"A","text":"Glioblastoma ou glioma anaplástico; biópsia/ressecção máxima + radioterapia/quimioterapia","isCorrect":true},{"label":"B","text":"Apenas angioma"},{"label":"C","text":"Apenas meningioma benigno"},{"label":"D","text":"Apenas inflamação"}],"explanation":"Glioma: convulsão (70%), cefaleia, efeito de massa. Grau IV (glioblastoma) é mais agressivo. Ressecção máxima > biópsia. Radioterapia + temozolomida estende mediana sobrevida para 14-15 meses. Prognóstico ruim (mediana <2 anos)."},{"id":"CM-INFECTOLOGIA-0007","code":"CM-INFECTO-0007","stem":"Mulher 28 anos com coceira genital, corrimento branco, disúria. Potássio: monilíase (Candida). Qual é o tratamento?","prompt":"Qual é o tratamento mais apropriado?","difficulty":"MEDIUM","specialty":"Infectologia","topic":"Vulvovaginite por Candida","alternatives":[{"label":"A","text":"Fluconazol 150mg VO dose única ou miconazol/tioconazol tópico","isCorrect":true},{"label":"B","text":"Apenas metronidazol"},{"label":"C","text":"Apenas repouso sexual"},{"label":"D","text":"Apenas higiene local"}],"explanation":"Candidíase vulvovaginal: fluconazol oral única dose é conveniente. Tópicos (miconazol creme) alternativa se grávida (absorção sistêmica mínima). Parceiro raramente requer tratamento. Recorrências mensais sugere HIV ou diabetes."},{"id":"CM-CARDIO-0012","code":"CM-CARDIO-0012","stem":"Homem 50 anos com dor torácica atípica, pressão arterial normal, troponina negativa, ECG normal. Qual é a próxima investigação?","prompt":"Qual é o próximo passo diagnóstico?","difficulty":"MEDIUM","specialty":"Cardiologia","topic":"Dor Torácica com Baixo Risco","alternatives":[{"label":"A","text":"Teste de estresse (ergométrica/cintilografia) se probabilidade intermediária","isCorrect":true},{"label":"B","text":"Apenas analgésicos"},{"label":"C","text":"Angiografia coronária imediata"},{"label":"D","text":"Apenas observação sem investigação"}],"explanation":"Dor torácica típica com troponina negativa e ECG normal tem risco baixo de SCA. Teste estresse estratifica risco. Se negativo e sintomas resolvem, alta hospitalar com seguimento. Se positivo, considerar angiografia."},{"id":"CM-REUMATOLOGIA-0007","code":"CM-REUM-0007","stem":"Mulher 35 anos com artralgia simétrica mãos/pés, facies lúpica, úlcera bucal, hematúria microscópica. FAN 1:640, C3 baixo, anti-dsDNA elevado. Qual é a próxima abordagem?","prompt":"Qual é a abordagem terapêutica inicial?","difficulty":"HARD","specialty":"Reumatologia","topic":"Lúpus com Nefrite","alternatives":[{"label":"A","text":"Biópsia renal + prednisona + metotrexato/micofenolato para nefrite lúpica","isCorrect":true},{"label":"B","text":"Apenas hidroxicloroquina"},{"label":"C","text":"Apenas observação"},{"label":"D","text":"Apenas antiinflamatórios"}],"explanation":"Nefrite lúpica (hematúria + proteinúria): biópsia define classe (I-VI). Prednisona 1mg/kg/dia + micofenolato (alternativa ciclofosfamida) reduz progressão para insuficiência renal. Monitorização creatinina mensal."},{"id":"CM-PNEUMO-0010","code":"CM-PNEUMO-0010","stem":"Homem 65 anos com dispneia aos esforços, tosse crônica, histórico ocupacional asbesto 20 anos. Radiografia: veladura em torno do coração (derrame pleural). Tomografia: espessamento pleural difuso. Qual é a próxima investigação?","prompt":"Qual é o próximo passo diagnóstico?","difficulty":"HARD","specialty":"Pneumologia","topic":"Mesotelioma Pleural","alternatives":[{"label":"A","text":"Biópsia pleural (toracoscopia ou agulha) para confirmar mesotelioma","isCorrect":true},{"label":"B","text":"Apenas tomografia com seguimento"},{"label":"C","text":"Apenas drenagem pleural de conforto"},{"label":"D","text":"Apenas observação sem biopsia"}],"explanation":"Exposição asbesto + derrame pleural + espessamento = risco mesotelioma. Biópsia confirmação diagnóstica. Imunohistoquímica: CK5/6+, WT1+, calretinina+. Prognóstico grave (mediana 12-21 meses). Quimioterapia cisplatina + pemetrexed."},{"id":"CM-NEURO-0008","code":"CM-NEURO-0008","stem":"Mulher 52 anos com dormência progressiva em pernas, fraqueza, dificuldade para andar. Reflexos abolidos distalmente, sinal de Romberg positivo. RM coluna: sem lesão compressiva. Qual é a hipótese diagnóstica?","prompt":"Qual é o diagnóstico mais provável?","difficulty":"HARD","specialty":"Neurologia","topic":"Polineuropatia","alternatives":[{"label":"A","text":"Polineuropatia sensitiva; investigar: eletroneuromiografia, glicemia, vitamina B12, sífilis","isCorrect":true},{"label":"B","text":"Apenas mielopatia cervical"},{"label":"C","text":"Apenas fraqueza muscular primária"},{"label":"D","text":"Apenas distúrbio psicogênico"}],"explanation":"Polineuropatia: dormência progressiva, reflexos abolidos, sem lesão medular. Causas: diabetes, B12, álcool, toxinas, HIV, sífilis, vasculite. ENMG diferencia desmielinizante vs axonal. Tratamento da causa primária essencial."},{"id":"CM-ENDOCRINOLOGIA-0007","code":"CM-ENDO-0007","stem":"Homem 58 anos com fraqueza muscular, cefaleia, polidipsia, poliúria. Glicemia 320 mg/dL, pH 7.28, bicarbonato 12, cetonas sangue positivas. Qual é o estado metabólico?","prompt":"Qual é o diagnóstico?","difficulty":"HARD","specialty":"Endocrinologia","topic":"Cetoacidose Diabética","alternatives":[{"label":"A","text":"Cetoacidose diabética; insulina rápida IV + fluidos + eletrólitos + monitorização","isCorrect":true},{"label":"B","text":"Apenas hiperglicemia simples"},{"label":"C","text":"Apenas cetose alcoólica"},{"label":"D","text":"Apenas desidratação"}],"explanation":"CAD: hiperglicemia + acidose (pH <7.30) + cetonemia. Insulina rápida reduz glicemia 100mg/dL/h. Reposição agressiva K+ (risco hipocalemia com insulina). Procurar precipitante (infecção, IAM). Mortalidade 1-5% com tratamento."},{"id":"CM-INFECTOLOGIA-0008","code":"CM-INFECTO-0008","stem":"Mulher 32 anos com dor abdominal, diarreia mucossanguinolenta, febre 38.5°C. Coprocultura: Shigella. Hemograma: WBC 12.000. Qual é o tratamento?","prompt":"Qual é o tratamento mais apropriado?","difficulty":"MEDIUM","specialty":"Infectologia","topic":"Shigelose","alternatives":[{"label":"A","text":"Repouso + fluidos IV + antibiótico (ciprofloxacina) se disenteria","isCorrect":true},{"label":"B","text":"Apenas loperamida"},{"label":"C","text":"Apenas observação"},{"label":"D","text":"Cirurgia de emergência"}],"explanation":"Shigelose: disenteria com risco complicações. Fluidos essencial. Antibiótico reduz duração 50%. Contraindicação loperamida (aumenta risco megacólon tóxico). Contatos monitorados. Precauções de higiene (alto contágio)."},{"id":"CM-NEFROLOGY-0006","code":"CM-NEFRO-0006","stem":"Homem 68 anos com creatinina 5.5, ureia 125, K 6.5, P 5.8, Ca 7.2, HCO3 16. Refratar a diálise 3x/semana há 1 ano. Qual é a complicação mais temida?","prompt":"Qual é a complicação mais provável?","difficulty":"MEDIUM","specialty":"Nefrologia","topic":"Insuficiência Renal Estágio 5D","alternatives":[{"label":"A","text":"Osteodistrofia renal (hiperparatireoidismo secundário, calcificações vasculares)","isCorrect":true},{"label":"B","text":"Apenas anemia"},{"label":"C","text":"Apenas hipertensão"},{"label":"D","text":"Apenas desnutrição"}],"explanation":"DRC dialítica: hiperparatiroidismo secundário → P elevado, Ca baixo. Calcificações vasculares aceleram morte cardiovascular. Quelante fósforo, vitamina D ativa, possível cinacalcete. Risco morte súbita arrítmica."},{"id":"CM-GASTRO-0008","code":"CM-GASTRO-0008","stem":"Homem 72 anos com hematêmese, melena. Endoscopia: varizes esofágicas sangramento ativo. PA 90/60, FC 120, Hb 7.2. Qual é o tratamento imediato?","prompt":"Qual é a terapia inicial mais apropriada?","difficulty":"HARD","specialty":"Gastroenterologia","topic":"Varizes Esofágicas com Sangramento","alternatives":[{"label":"A","text":"Ligadura endoscópica + terlipressina IV + albumina 6% + protoniero IV","isCorrect":true},{"label":"B","text":"Apenas transfusão maciça"},{"label":"C","text":"Apenas esclerose sem ligadura"},{"label":"D","text":"Apenas observação"}],"explanation":"Sangramento varicoso: emergência. Ligadura elástica padrão ouro (melhor que esclerose). Terlipressina reduz resangramento. Albumina 6% restaura volemia (evita sobrecarga). Restrição fluidos (risco ascite/encefalopatia). Antibióticos profiláticos (ceftriaxona)."},{"id":"CM-HEMATOLOGIA-0005","code":"CM-HEMATOL-0005","stem":"Mulher 52 anos com fadiga, dor óssea, hipercalcemia 11.8. Hemograma: Hb 8.8, WBC 6200, Plt 180.000. Proteína monoclonal elevada. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico mais provável?","difficulty":"HARD","specialty":"Hematologia","topic":"Gamopatia Monoclonal","alternatives":[{"label":"A","text":"Mieloma múltiplo; biopsia medular confirmará, depois quimioterapia","isCorrect":true},{"label":"B","text":"Apenas hiperparatireoidismo"},{"label":"C","text":"Apenas hipervitaminose A"},{"label":"D","text":"Apenas insuficiência renal"}],"explanation":"Mieloma: proteína monoclonal + anemia + hipercalcemia + dor óssea. Biópsia medular >30% plasmócitos. Citogenética prognóstico. Terapia multi-agente (bortezomibe, lenalidomida, dexametasona) + TCTH. Bisfosfonate para osso."},{"id":"CM-CARDIO-0013","code":"CM-CARDIO-0013","stem":"Mulher 48 anos com palpitações, sincope breve recuperação. ECG: complexo QRS largo 160ms, ritmo regular. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico?","difficulty":"HARD","specialty":"Cardiologia","topic":"Taquicardia Ventricular","alternatives":[{"label":"A","text":"Taquicardia ventricular sustentada; amiodarona + cardioversão sincronizada se instável","isCorrect":true},{"label":"B","text":"Apenas SVT com aberrância"},{"label":"C","text":"Apenas tremor muscular"},{"label":"D","text":"Apenas artefato de ECG"}],"explanation":"TV sustentada: risco morte súbita. Cardioversão sincronizada se hemodinamicamente instável. Amiodarona IV (15mg/kg em 30-60min) se estável. ICD após resolução episódio. Correção eletrolítica (K, Mg, Ca). Evitar classe IC sem correção."},{"id":"CM-REUMATOLOGIA-0008","code":"CM-REUM-0008","stem":"Homem 62 anos com artralgia simétrica mãos/pés, raynaud, úlceras digitais, acroesclerose. Anticorpo anti-Scl-70 positivo. Qual é a forma de esclerodermia?","prompt":"Qual é a forma de esclerodermia?","difficulty":"HARD","specialty":"Reumatologia","topic":"Esclerodermia Forma Difusa","alternatives":[{"label":"A","text":"Esclerodermia sistêmica forma difusa (dcSSc); investigar fibrose pulmonar e crise renal","isCorrect":true},{"label":"B","text":"Forma limitada (CREST)"},{"label":"C","text":"Apenas síndrome Raynaud primária"},{"label":"D","text":"Apenas poliartrite inflamatória"}],"explanation":"dcSSc (anti-Scl-70+): acometimento cutâneo proximal, órgãos internos. Fibrose pulmonar 80%, cardiopatia 30%, crise renal 10%. Vigilância: TCAR anual, PA, creatinina. Bosentan para crise renal. Prognóstico pior que forma limitada."},{"id":"CM-PNEUMO-0011","code":"CM-PNEUMO-0011","stem":"Mulher 45 anos com tosse seca, dispneia, artralgias, erupção nodosa eritematosa. Radiografia tórax: linfadenopatia hilar. Teste Kveim-Siltzbach positivo. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico?","difficulty":"MEDIUM","specialty":"Pneumologia","topic":"Sarcoidose","alternatives":[{"label":"A","text":"Sarcoidose (estágio 1); monitorar com TC em 3-6 meses, corticoides se sintomático","isCorrect":true},{"label":"B","text":"Apenas tuberculose"},{"label":"C","text":"Apenas coccidioidomicose"},{"label":"D","text":"Apenas artrite reumatoide"}],"explanation":"Sarcoidose: linfadenopatia hilar, nódulos eritematosos, Kveim+. Biópsia mostra granulomas não-caseosos. Maioria (90%) resolvem espontaneamente. Corticoides se hipercalcemia, fibrose pulmonar ou sintomas. Seguimento 2-5 anos."},{"id":"CM-ENDOCRINOLOGIA-0008","code":"CM-ENDO-0008","stem":"Mulher 35 anos com fadiga, ganho ponderal, brasicária, menstruação irregular. TSH 8.5, T4 livre 0.8. Anticorpos anti-TPO 280. Qual é o diagnóstico?","prompt":"Qual é o diagnóstico e tratamento?","difficulty":"MEDIUM","specialty":"Endocrinologia","topic":"Tireoidite de Hashimoto","alternatives":[{"label":"A","text":"Hipotireoidismo por tireoidite de Hashimoto; levotiroxina ajustada por TSH","isCorrect":true},{"label":"B","text":"Apenas depressão"},{"label":"C","text":"Apenas obesidade simples"},{"label":"D","text":"Apenas anemia"}],"explanation":"Hashimoto: anti-TPO+ com hipotireoidismo. Levotiroxina início 25-50mcg/dia, aumentar 25mcg a cada 4-6 semanas até TSH 2-4 mIU/L. Monitorização trimestral até estável, depois anual. Gravidez: aumentar 25-30% dose."}]
+    ];
+
+    // ============ STATE ============
+    let state = {
+      attempts: {},
+      currentQuestionIndex: 0,
+      currentAnswer: null,
+      answered: false
+    };
+
+    // ============ INIT ============
+    function init() {
+      loadState();
+      populateSpecialtyFilter();
+      updateStats();
+      renderQuestionsList();
+      attachKeyboardShortcuts();
+    }
+
+    function switchView(viewName) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById(viewName).classList.add('active');
+    }
+
+    function switchTab(tabName) {
+      document.querySelectorAll('.tab-content').forEach(t => t.classList.remove('active'));
+      document.getElementById(tabName).classList.add('active');
+
+      document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+
+      if (tabName === 'solve') renderSolveView();
+      if (tabName === 'questions') renderQuestionsList();
+      if (tabName === 'stats') renderStatsView();
+    }
+
+    // ============ FILTERS ============
+    function populateSpecialtyFilter() {
+      const specialties = [...new Set(QUESTIONS.map(q => q.specialty))];
+      const select = document.getElementById('specialty-filter');
+      specialties.forEach(spec => {
+        const option = document.createElement('option');
+        option.value = spec;
+        option.textContent = spec;
+        select.appendChild(option);
+      });
+    }
+
+    function filterQuestions() {
+      renderQuestionsList();
+    }
+
+    // ============ QUESTIONS LIST ============
+    function renderQuestionsList() {
+      const specialty = document.getElementById('specialty-filter').value;
+      const filtered = specialty ? QUESTIONS.filter(q => q.specialty === specialty) : QUESTIONS;
+
+      const container = document.getElementById('questions-list');
+      container.innerHTML = '';
+
+      filtered.forEach((q, idx) => {
+        const attempt = state.attempts[q.id] || {};
+        const statusIcon = attempt.isCorrect ? '✓' : attempt.isCorrect === false ? '✗' : '○';
+        const statusColor = attempt.isCorrect ? 'var(--success)' : attempt.isCorrect === false ? '#EF4444' : 'var(--text-secondary)';
+
+        const card = document.createElement('div');
+        card.className = 'question-card';
+        card.innerHTML = `
+          <div style="display: flex; gap: 1rem; align-items: flex-start;">
+            <span style="color: ${statusColor}; font-weight: bold; font-size: 1.2rem; min-width: 24px;">${statusIcon}</span>
+            <div style="flex: 1;">
+              <div class="question-code">${q.code}</div>
+              <div class="question-topic">${q.topic}</div>
+              <div class="question-text">${q.prompt}</div>
+              <button class="solve-btn" onclick="goToQuestion('${q.id}')">Resolver</button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // ============ SOLVE VIEW ============
+    function goToQuestion(questionId) {
+      state.currentQuestionIndex = QUESTIONS.findIndex(q => q.id === questionId);
+      switchView('app');
+      setTimeout(() => switchTab('solve'), 0);
+    }
+
+    function renderSolveView() {
+      const q = QUESTIONS[state.currentQuestionIndex];
+      if (!q) return;
+
+      const attempt = state.attempts[q.id] || {};
+      state.currentAnswer = attempt.selectedLabel || null;
+      state.answered = attempt.isCorrect !== undefined;
+
+      const container = document.getElementById('solve-container');
+      container.innerHTML = `
+        <div class="solve-content">
+          <div class="question-progress">
+            ${state.currentQuestionIndex + 1} / ${QUESTIONS.length}
+          </div>
+          <div class="progress-bar">
+            <div class="progress-fill" style="width: ${((state.currentQuestionIndex + 1) / QUESTIONS.length) * 100}%"></div>
+          </div>
+
+          <div style="background: var(--bg-secondary); padding: 1rem; border-radius: 8px; font-size: 0.85rem;">
+            <div style="font-family: 'IBM Plex Mono', monospace; color: var(--primary); font-weight: 600; margin-bottom: 0.5rem;">${q.code}</div>
+            <div style="color: var(--text-secondary);">${q.specialty} • ${q.topic} • Dificuldade: ${q.difficulty}</div>
+          </div>
+
+          <div class="question-stem">${q.stem}</div>
+          <div class="question-prompt">${q.prompt}</div>
+
+          <div class="alternatives">
+            ${q.alternatives.map(alt => {
+              let className = 'alt-btn';
+              if (state.answered) {
+                if (alt.isCorrect) className += ' correct';
+                else if (alt.label === state.currentAnswer && !alt.isCorrect) className += ' wrong';
+                className += ' answered';
+              } else if (alt.label === state.currentAnswer) {
+                className += ' selected';
+              }
+
+              return `
+                <button class="${className}"
+                  onclick="selectAnswer('${alt.label}')"
+                  ${state.answered ? 'disabled' : ''}>
+                  <strong>${alt.label})</strong> ${alt.text}
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          ${state.answered ? `
+            <div class="explanation">
+              <strong>Explicação:</strong><br><br>${q.explanation}
+            </div>
+          ` : ''}
+
+          <div class="action-buttons">
+            ${!state.answered ? `
+              <button class="btn-primary" onclick="confirmAnswer()">
+                Confirmar (Enter)
+              </button>
+            ` : `
+              <button class="btn-primary" onclick="nextQuestion()">
+                Próxima (→)
+              </button>
+            `}
+            ${state.currentQuestionIndex > 0 ? `
+              <button class="btn-primary" style="background: var(--bg-secondary); color: var(--primary); border: 1px solid var(--border);" onclick="prevQuestion()">← Anterior</button>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function selectAnswer(label) {
+      if (!state.answered) {
+        state.currentAnswer = label;
+        renderSolveView();
+      }
+    }
+
+    function confirmAnswer() {
+      if (!state.currentAnswer) return;
+
+      const q = QUESTIONS[state.currentQuestionIndex];
+      const isCorrect = q.alternatives.find(a => a.label === state.currentAnswer)?.isCorrect || false;
+
+      state.attempts[q.id] = {
+        selectedLabel: state.currentAnswer,
+        isCorrect,
+        timestamp: Date.now()
+      };
+
+      state.answered = true;
+      saveState();
+      updateStats();
+      renderStatsView();
+      renderSolveView();
+    }
+
+    function nextQuestion() {
+      if (state.currentQuestionIndex < QUESTIONS.length - 1) {
+        state.currentQuestionIndex++;
+        state.currentAnswer = null;
+        state.answered = false;
+        renderSolveView();
+      }
+    }
+
+    function prevQuestion() {
+      if (state.currentQuestionIndex > 0) {
+        state.currentQuestionIndex--;
+        state.currentAnswer = null;
+        state.answered = false;
+        renderSolveView();
+      }
+    }
+
+    // ============ STATS ============
+    function updateStats() {
+      const answered = Object.keys(state.attempts).length;
+      const correct = Object.values(state.attempts).filter(a => a.isCorrect).length;
+      const accuracy = answered > 0 ? ((correct / answered) * 100).toFixed(1) : '-';
+
+      document.getElementById('stat-answered').textContent = answered;
+      document.getElementById('stat-correct').textContent = correct;
+      document.getElementById('stat-accuracy').textContent = accuracy === '-' ? '-' : accuracy + '%';
+    }
+
+    function renderStatsView() {
+      const bySpecialty = {};
+      QUESTIONS.forEach(q => {
+        if (!bySpecialty[q.specialty]) bySpecialty[q.specialty] = { total: 0, correct: 0 };
+        bySpecialty[q.specialty].total++;
+        if (state.attempts[q.id]?.isCorrect) bySpecialty[q.specialty].correct++;
+      });
+
+      let html = '';
+      Object.entries(bySpecialty).forEach(([specialty, stats]) => {
+        const pct = stats.total > 0 ? ((stats.correct / stats.total) * 100) : 0;
+        html += `
+          <div class="specialty-stat">
+            <div class="specialty-header">
+              <span>${specialty}</span>
+              <span>${stats.correct}/${stats.total}</span>
+            </div>
+            <div class="specialty-bar">
+              <div class="specialty-progress" style="width: ${pct}%"></div>
+            </div>
+          </div>
+        `;
+      });
+
+      document.getElementById('stats-by-specialty').innerHTML = html;
+    }
+
+    // ============ PERSISTENCE ============
+    function saveState() {
+      try {
+        localStorage.setItem('qbank-state', JSON.stringify(state));
+      } catch (e) {
+        console.warn('localStorage unavailable');
+      }
+    }
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem('qbank-state');
+        if (saved) state = JSON.parse(saved);
+      } catch (e) {
+        console.warn('Could not load state');
+      }
+    }
+
+    // ============ KEYBOARD SHORTCUTS ============
+    function attachKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        if (document.getElementById('solve').classList.contains('active')) {
+          if (['a', 'b', 'c', 'd'].includes(e.key.toLowerCase())) {
+            selectAnswer(e.key.toUpperCase());
+          }
+          if (e.key === 'Enter' && !state.answered) confirmAnswer();
+          if (e.key === 'ArrowRight') nextQuestion();
+          if (e.key === 'ArrowLeft') prevQuestion();
+        }
+      });
+    }
+
+    // Init on load
+    window.addEventListener('load', init);
+  </script>
+</body>
+</html>
