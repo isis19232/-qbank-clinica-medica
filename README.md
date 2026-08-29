@@ -26,6 +26,16 @@ questões e com o tutor em modo degradado.
 ANTHROPIC_API_KEY="sk-ant-..."
 ```
 
+## Produção
+
+Veja [**docs/03-deployment.md**](docs/03-deployment.md) para deploy em Vercel com PostgreSQL.
+
+Resumo:
+- Ambiente: Vercel + Vercel Postgres
+- Migrações: Prisma Migrate (aplicadas automaticamente)
+- Autenticação: AUTH_SECRET seguro obrigatório
+- IA: ANTHROPIC_API_KEY opcional
+
 ## Scripts
 
 | Comando | O que faz |

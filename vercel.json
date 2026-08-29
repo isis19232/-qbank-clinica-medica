@@ -1,0 +1,10 @@
+{
+  "buildCommand": "prisma migrate deploy && npm run build",
+  "framework": "nextjs",
+  "env": [
+    "DATABASE_URL",
+    "AUTH_SECRET",
+    "ANTHROPIC_API_KEY",
+    "AI_MODEL"
+  ]
+}
