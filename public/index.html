@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QBank Clínica Médica</title>
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --bg-primary: #0f172a;
+      --bg-secondary: #1e293b;
+      --bg-tertiary: #334155;
+      --text-primary: #f1f5f9;
+      --text-secondary: #cbd5e1;
+      --border: #475569;
+      --blue: #3b82f6;
+      --blue-dark: #1e40af;
+      --green: #10b981;
+      --red: #ef4444;
+      --yellow: #f59e0b;
+    }
+
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg-primary: #ffffff;
+        --bg-secondary: #f8fafc;
+        --bg-tertiary: #e2e8f0;
+        --text-primary: #1e293b;
+        --text-secondary: #475569;
+        --border: #cbd5e1;
+      }
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif;
+      background-color: var(--bg-primary);
+      color: var(--text-primary);
+      line-height: 1.5;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      padding: 16px;
+    }
+
+    header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      margin-bottom: 24px;
+      padding-bottom: 16px;
+      border-bottom: 1px solid var(--border);
+    }
+
+    .logo {
+      font-size: 24px;
+      font-weight: bold;
+      color: var(--blue);
+    }
+
+    .nav-tabs {
+      display: flex;
+      gap: 8px;
+      margin-bottom: 24px;
+      border-bottom: 1px solid var(--border);
+      overflow-x: auto;
+    }
+
+    .tab-btn {
+      padding: 12px 16px;
+      background: none;
+      border: none;
+      color: var(--text-secondary);
+      cursor: pointer;
+      border-bottom: 2px solid transparent;
+      font-size: 14px;
+      white-space: nowrap;
+      transition: all 0.2s;
+    }
+
+    .tab-btn.active {
+      color: var(--blue);
+      border-bottom-color: var(--blue);
+    }
+
+    .view {
+      display: none;
+    }
+
+    .view.active {
+      display: block;
+    }
+
+    .card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 16px;
+      margin-bottom: 12px;
+    }
+
+    .btn {
+      padding: 12px 16px;
+      background: var(--blue);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      cursor: pointer;
+      font-size: 14px;
+      font-weight: 500;
+      transition: background 0.2s;
+    }
+
+    .btn:hover {
+      background: var(--blue-dark);
+    }
+
+    .btn-secondary {
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
+    }
+
+    .btn-secondary:hover {
+      background: var(--border);
+    }
+
+    .question-stem {
+      font-size: 16px;
+      margin-bottom: 16px;
+      line-height: 1.6;
+    }
+
+    .alternatives {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      margin-bottom: 16px;
+    }
+
+    .alt-btn {
+      padding: 12px;
+      background: var(--bg-tertiary);
+      border: 2px solid var(--border);
+      color: var(--text-primary);
+      border-radius: 6px;
+      cursor: pointer;
+      text-align: left;
+      transition: all 0.2s;
+      font-size: 14px;
+    }
+
+    .alt-btn:hover {
+      border-color: var(--blue);
+      background: var(--bg-secondary);
+    }
+
+    .alt-btn.selected {
+      border-color: var(--blue);
+      background: var(--blue);
+      color: white;
+    }
+
+    .alt-btn.correct {
+      border-color: var(--green);
+      background: var(--green);
+      color: white;
+    }
+
+    .alt-btn.wrong {
+      border-color: var(--red);
+      background: var(--red);
+      color: white;
+    }
+
+    .explanation {
+      background: var(--bg-tertiary);
+      border-left: 4px solid var(--blue);
+      padding: 12px;
+      margin: 16px 0;
+      border-radius: 4px;
+      font-size: 14px;
+    }
+
+    .stat-row {
+      display: flex;
+      justify-content: space-between;
+      padding: 8px 0;
+      font-size: 14px;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+    }
+
+    .stat-value {
+      font-weight: 600;
+      color: var(--text-primary);
+    }
+
+    .filter-group {
+      margin-bottom: 16px;
+    }
+
+    .filter-label {
+      display: block;
+      font-size: 12px;
+      color: var(--text-secondary);
+      margin-bottom: 6px;
+      text-transform: uppercase;
+    }
+
+    select {
+      width: 100%;
+      padding: 10px;
+      background: var(--bg-secondary);
+      color: var(--text-primary);
+      border: 1px solid var(--border);
+      border-radius: 6px;
+      font-size: 14px;
+    }
+
+    .loading {
+      text-align: center;
+      color: var(--text-secondary);
+      padding: 32px;
+    }
+
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.active {
+      display: flex;
+    }
+
+    .modal-content {
+      background: var(--bg-primary);
+      border-radius: 8px;
+      padding: 24px;
+      max-width: 600px;
+      width: 90%;
+      max-height: 80vh;
+      overflow-y: auto;
+    }
+
+    .modal-close {
+      float: right;
+      background: none;
+      border: none;
+      color: var(--text-primary);
+      font-size: 24px;
+      cursor: pointer;
+    }
+
+    @media (max-width: 480px) {
+      .container {
+        padding: 12px;
+      }
+
+      .question-stem {
+        font-size: 15px;
+      }
+
+      .alt-btn {
+        padding: 10px;
+        font-size: 13px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <header>
+      <div class="logo">CM</div>
+      <h1 style="flex: 1; margin-left: 16px; font-size: 18px;">QBank Clínica</h1>
+    </header>
+
+    <div class="nav-tabs">
+      <button class="tab-btn active" onclick="switchView('dashboard')">Dashboard</button>
+      <button class="tab-btn" onclick="switchView('questions')">Questões</button>
+      <button class="tab-btn" onclick="switchView('solve')">Resolver</button>
+      <button class="tab-btn" onclick="switchView('stats')">Stats</button>
+    </div>
+
+    <!-- Dashboard -->
+    <div id="dashboard" class="view active">
+      <div class="card">
+        <h2>Bem-vindo ao QBank</h2>
+        <p style="margin-top: 8px; color: var(--text-secondary);">
+          Banco de questões de Clínica Médica com motor adaptativo e repetição espaçada.
+        </p>
+      </div>
+
+      <div class="card">
+        <h3 style="margin-bottom: 12px;">📊 Resumo</h3>
+        <div class="stat-row">
+          <span class="stat-label">Total de questões</span>
+          <span class="stat-value" id="total-questions">27</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Respondidas</span>
+          <span class="stat-value" id="answered-count">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Acertos</span>
+          <span class="stat-value" id="correct-count">0</span>
+        </div>
+        <div class="stat-row">
+          <span class="stat-label">Taxa de acerto</span>
+          <span class="stat-value" id="accuracy">-</span>
+        </div>
+      </div>
+
+      <button class="btn" style="width: 100%;" onclick="switchView('solve')">
+        ▶ Começar a Resolver
+      </button>
+    </div>
+
+    <!-- Questões -->
+    <div id="questions" class="view">
+      <div class="filter-group">
+        <label class="filter-label">Especialidade</label>
+        <select id="specialty-filter" onchange="filterQuestions()">
+          <option value="">Todas</option>
+        </select>
+      </div>
+
+      <div id="questions-list"></div>
+    </div>
+
+    <!-- Resolver -->
+    <div id="solve" class="view">
+      <div id="solve-container"></div>
+    </div>
+
+    <!-- Stats -->
+    <div id="stats" class="view">
+      <div id="stats-container"></div>
+    </div>
+  </div>
+
+  <script>
+    // ============ CONFIG ============
+    // GitHub repo raw URL (CORS-friendly, updated when repo updates)
+    // Change BRANCH_NAME if using different branch
+    const BRANCH_NAME = 'claude/clinical-medicine-qbank-brazil-xuv4c6';
+    const REPO_URL = `https://raw.githubusercontent.com/isis19232/-qbank-clinica-medica/${BRANCH_NAME}/public/questoes.json`;
+
+    // Alternative: GitHub Gist URL (if you prefer to host separately)
+    // const GIST_URL = 'https://gist.githubusercontent.com/{username}/{gist_id}/raw/questoes.json';
+
+    // Use repo URL as primary source
+    const DATA_URL = REPO_URL;
+
+    // Fallback questions if gist unavailable
+    const FALLBACK_QUESTIONS = [
+      {
+        id: "CM-CARD-0001",
+        code: "CM-CARD-0001",
+        stem: "Paciente 65 anos com dispneia, edema bimaleolar e hepatomegalia. PA: 160/100 mmHg. Ausculta com estertores bibasais. ECG: fibrilação atrial.",
+        prompt: "Qual é o diagnóstico mais provável?",
+        difficulty: "MEDIUM",
+        specialty: "Cardiologia",
+        topic: "Insuficiência Cardíaca",
+        alternatives: [
+          { label: "A", text: "Insuficiência cardíaca descompensada com fibrilação atrial", isCorrect: true },
+          { label: "B", text: "Edema pulmonar agudo isolado" },
+          { label: "C", text: "Pneumonia" },
+          { label: "D", text: "Embolia pulmonar" }
+        ],
+        explanation: "Sinais de insuficiência cardíaca com fibrilação atrial nova."
+      }
+    ];
+
+    // ============ DATA ============
+    let QUESTIONS = FALLBACK_QUESTIONS;
+
+    // ============ STATE ============
+    let state = {
+      attempts: {},
+      currentQuestionIndex: 0,
+      currentAnswer: null,
+      answered: false,
+      questionsLoaded: false
+    };
+
+    // ============ INIT ============
+    function init() {
+      loadState();
+      loadQuestionsFromGist();
+    }
+
+    async function loadQuestionsFromGist() {
+      try {
+        const response = await fetch(DATA_URL, {
+          headers: { 'Accept': 'application/json' }
+        });
+        if (response.ok) {
+          QUESTIONS = await response.json();
+          state.questionsLoaded = true;
+          console.log(`Loaded ${QUESTIONS.length} questions from ${DATA_URL}`);
+        } else {
+          console.warn('Data source fetch failed, using fallback');
+        }
+      } catch (e) {
+        console.warn('Could not fetch data source, using fallback:', e.message);
+      }
+
+      // Initialize UI after questions loaded (or fallback ready)
+      populateSpecialtyFilter();
+      updateStats();
+      renderQuestionsList();
+      attachKeyboardShortcuts();
+
+      // Update total count
+      document.getElementById('total-questions').textContent = QUESTIONS.length;
+    }
+
+    function switchView(viewName) {
+      document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
+      document.getElementById(viewName).classList.add('active');
+
+      // Find and activate corresponding tab
+      const tabs = document.querySelectorAll('.tab-btn');
+      const viewNames = ['dashboard', 'questions', 'solve', 'stats'];
+      tabs.forEach((btn, idx) => {
+        btn.classList.remove('active');
+        if (viewNames[idx] === viewName) btn.classList.add('active');
+      });
+
+      if (viewName === 'solve') renderSolveView();
+      if (viewName === 'questions') renderQuestionsList();
+      if (viewName === 'stats') renderStatsView();
+    }
+
+    // ============ FILTERS ============
+    function populateSpecialtyFilter() {
+      const specialties = [...new Set(QUESTIONS.map(q => q.specialty))];
+      const select = document.getElementById('specialty-filter');
+      specialties.forEach(spec => {
+        const option = document.createElement('option');
+        option.value = spec;
+        option.textContent = spec;
+        select.appendChild(option);
+      });
+    }
+
+    function filterQuestions() {
+      renderQuestionsList();
+    }
+
+    // ============ QUESTIONS LIST ============
+    function renderQuestionsList() {
+      const specialty = document.getElementById('specialty-filter').value;
+      const filtered = specialty ? QUESTIONS.filter(q => q.specialty === specialty) : QUESTIONS;
+
+      const container = document.getElementById('questions-list');
+      container.innerHTML = '';
+
+      filtered.forEach((q, idx) => {
+        const attempt = state.attempts[q.id] || {};
+        const statusIcon = attempt.isCorrect ? '✓' : attempt.isCorrect === false ? '✗' : '○';
+        const statusColor = attempt.isCorrect ? '#10b981' : attempt.isCorrect === false ? '#ef4444' : 'var(--text-secondary)';
+
+        const card = document.createElement('div');
+        card.className = 'card';
+        card.innerHTML = `
+          <div style="display: flex; gap: 12px; align-items: flex-start;">
+            <span style="color: ${statusColor}; font-weight: bold; font-size: 18px;">${statusIcon}</span>
+            <div style="flex: 1;">
+              <div style="font-weight: 600; margin-bottom: 4px;">${q.code}</div>
+              <div style="font-size: 13px; color: var(--text-secondary); margin-bottom: 8px;">${q.topic}</div>
+              <div style="font-size: 14px; margin-bottom: 8px;">${q.prompt}</div>
+              <button class="btn btn-secondary" style="font-size: 12px;" onclick="goToQuestion('${q.id}')">
+                Resolver
+              </button>
+            </div>
+          </div>
+        `;
+        container.appendChild(card);
+      });
+    }
+
+    // ============ SOLVE VIEW ============
+    function goToQuestion(questionId) {
+      state.currentQuestionIndex = QUESTIONS.findIndex(q => q.id === questionId);
+      switchView('solve');
+    }
+
+    function renderSolveView() {
+      const q = QUESTIONS[state.currentQuestionIndex];
+      if (!q) return;
+
+      const attempt = state.attempts[q.id] || {};
+      state.currentAnswer = attempt.selectedLabel || null;
+      state.answered = !!attempt.isCorrect !== undefined ? attempt.isCorrect !== null : false;
+
+      const container = document.getElementById('solve-container');
+      container.innerHTML = `
+        <div style="margin-bottom: 24px;">
+          <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">
+            ${state.currentQuestionIndex + 1} / ${QUESTIONS.length}
+          </div>
+          <div style="width: 100%; height: 4px; background: var(--bg-tertiary); border-radius: 2px; overflow: hidden;">
+            <div style="width: ${((state.currentQuestionIndex + 1) / QUESTIONS.length) * 100}%; height: 100%; background: var(--blue);"></div>
+          </div>
+        </div>
+
+        <div class="card">
+          <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px;">${q.code} • ${q.specialty} • ${q.topic}</div>
+          <div style="font-size: 12px; color: var(--text-secondary); margin-bottom: 8px; text-transform: uppercase;">Dificuldade: ${q.difficulty}</div>
+        </div>
+
+        <div class="card">
+          <div class="question-stem">${q.stem}</div>
+          <div style="font-weight: 600; margin-bottom: 12px; color: var(--blue);">${q.prompt}</div>
+
+          <div class="alternatives">
+            ${q.alternatives.map(alt => {
+              let className = 'alt-btn';
+              if (state.answered) {
+                if (alt.isCorrect) className += ' correct';
+                else if (alt.label === state.currentAnswer && !alt.isCorrect) className += ' wrong';
+              } else if (alt.label === state.currentAnswer) {
+                className += ' selected';
+              }
+
+              return `
+                <button class="${className}"
+                  onclick="selectAnswer('${alt.label}')"
+                  ${state.answered ? 'disabled' : ''}>
+                  <strong>${alt.label})</strong> ${alt.text}
+                </button>
+              `;
+            }).join('')}
+          </div>
+
+          ${state.answered ? `
+            <div class="explanation">
+              <strong>Explicação:</strong> ${q.explanation}
+            </div>
+          ` : ''}
+
+          <div style="display: flex; gap: 8px; margin-top: 16px;">
+            ${!state.answered ? `
+              <button class="btn" style="flex: 1;" onclick="confirmAnswer()">
+                Confirmar resposta (Enter)
+              </button>
+            ` : `
+              <button class="btn" style="flex: 1;" onclick="nextQuestion()">
+                Próxima (→)
+              </button>
+            `}
+            ${state.currentQuestionIndex > 0 ? `
+              <button class="btn btn-secondary" onclick="prevQuestion()">← Anterior</button>
+            ` : ''}
+          </div>
+        </div>
+      `;
+    }
+
+    function selectAnswer(label) {
+      if (!state.answered) {
+        state.currentAnswer = label;
+        renderSolveView();
+      }
+    }
+
+    function confirmAnswer() {
+      if (!state.currentAnswer) return;
+
+      const q = QUESTIONS[state.currentQuestionIndex];
+      const isCorrect = q.alternatives.find(a => a.label === state.currentAnswer)?.isCorrect || false;
+
+      state.attempts[q.id] = {
+        selectedLabel: state.currentAnswer,
+        isCorrect,
+        timestamp: Date.now()
+      };
+
+      state.answered = true;
+      saveState();
+      updateStats();
+      renderSolveView();
+    }
+
+    function nextQuestion() {
+      if (state.currentQuestionIndex < QUESTIONS.length - 1) {
+        state.currentQuestionIndex++;
+        state.currentAnswer = null;
+        state.answered = false;
+        renderSolveView();
+      }
+    }
+
+    function prevQuestion() {
+      if (state.currentQuestionIndex > 0) {
+        state.currentQuestionIndex--;
+        state.currentAnswer = null;
+        state.answered = false;
+        renderSolveView();
+      }
+    }
+
+    // ============ STATS ============
+    function updateStats() {
+      const answered = Object.keys(state.attempts).length;
+      const correct = Object.values(state.attempts).filter(a => a.isCorrect).length;
+      const accuracy = answered > 0 ? ((correct / answered) * 100).toFixed(1) : '-';
+
+      document.getElementById('answered-count').textContent = answered;
+      document.getElementById('correct-count').textContent = correct;
+      document.getElementById('accuracy').textContent = accuracy === '-' ? '-' : accuracy + '%';
+    }
+
+    function renderStatsView() {
+      const container = document.getElementById('stats-container');
+
+      const bySpecialty = {};
+      QUESTIONS.forEach(q => {
+        if (!bySpecialty[q.specialty]) bySpecialty[q.specialty] = { total: 0, correct: 0 };
+        bySpecialty[q.specialty].total++;
+        if (state.attempts[q.id]?.isCorrect) bySpecialty[q.specialty].correct++;
+      });
+
+      let html = '<h2>Desempenho por Especialidade</h2>';
+      Object.entries(bySpecialty).forEach(([specialty, stats]) => {
+        const pct = stats.total > 0 ? ((stats.correct / stats.total) * 100).toFixed(0) : 0;
+        html += `
+          <div class="card">
+            <div style="display: flex; justify-content: space-between; margin-bottom: 8px;">
+              <span style="font-weight: 600;">${specialty}</span>
+              <span style="font-weight: 600;">${stats.correct}/${stats.total} (${pct}%)</span>
+            </div>
+            <div style="width: 100%; height: 8px; background: var(--bg-tertiary); border-radius: 4px; overflow: hidden;">
+              <div style="width: ${pct}%; height: 100%; background: var(--green);"></div>
+            </div>
+          </div>
+        `;
+      });
+
+      container.innerHTML = html;
+    }
+
+    // ============ PERSISTENCE ============
+    function saveState() {
+      try {
+        localStorage.setItem('qbank-state', JSON.stringify(state));
+      } catch (e) {
+        console.warn('localStorage unavailable');
+      }
+    }
+
+    function loadState() {
+      try {
+        const saved = localStorage.getItem('qbank-state');
+        if (saved) state = JSON.parse(saved);
+      } catch (e) {
+        console.warn('Could not load state from localStorage');
+      }
+    }
+
+    // ============ KEYBOARD SHORTCUTS ============
+    function attachKeyboardShortcuts() {
+      document.addEventListener('keydown', (e) => {
+        if (document.getElementById('solve').classList.contains('active')) {
+          if (['a', 'b', 'c', 'd'].includes(e.key.toLowerCase())) {
+            selectAnswer(e.key.toUpperCase());
+          }
+          if (e.key === 'Enter' && !state.answered) confirmAnswer();
+          if (e.key === 'ArrowRight') nextQuestion();
+          if (e.key === 'ArrowLeft') prevQuestion();
+        }
+      });
+    }
+
+    // Init on load
+    window.addEventListener('load', init);
+  </script>
+</body>
+</html>
