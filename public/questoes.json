@@ -8,10 +8,26 @@
     "specialty": "Cardiologia",
     "topic": "Síndrome Coronariana Aguda",
     "alternatives": [
-      { "label": "A", "text": "Angioplastia primária com tempo porta-balão <90 minutos", "isCorrect": true },
-      { "label": "B", "text": "Fibrinólise com tenecteplase seguida de angiografia em 3-24 horas" },
-      { "label": "C", "text": "Apenas dupla antiagregação (AAS + clopidogrel)" },
-      { "label": "D", "text": "Anticoagulação com heparina e espera de estabilização" }
+      {
+        "label": "A",
+        "text": "Angioplastia primária com tempo porta-balão <90 minutos",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Fibrinólise com tenecteplase seguida de angiografia em 3-24 horas",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas dupla antiagregação (AAS + clopidogrel)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Anticoagulação com heparina e espera de estabilização",
+        "isCorrect": false
+      }
     ],
     "explanation": "STEMI inferior com apresentação precoce. Angioplastia primária é padrão ouro quando disponível em <90 min, com melhor desfecho que fibrinólise. Reduz mortalidade em 25% comparado à fibrinólise."
   },
@@ -24,10 +40,26 @@
     "specialty": "Cardiologia",
     "topic": "Insuficiência Cardíaca Descompensada",
     "alternatives": [
-      { "label": "A", "text": "IECA/ARB + betabloqueador + diurético + digoxina", "isCorrect": true },
-      { "label": "B", "text": "Apenas digoxina e diurético para controle de frequência" },
-      { "label": "C", "text": "Só diurético e esperar melhora com repouso" },
-      { "label": "D", "text": "Betabloqueador isolado sem terapia neurohormonal" }
+      {
+        "label": "A",
+        "text": "IECA/ARB + betabloqueador + diurético + digoxina",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas digoxina e diurético para controle de frequência",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Só diurético e esperar melhora com repouso",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Betabloqueador isolado sem terapia neurohormonal",
+        "isCorrect": false
+      }
     ],
     "explanation": "IC sistólica com FA. Terapia tripla: IECA (reduz mortalidade), betabloqueador (controla FC e melhora síntomas), diurético (alívio de congestão). Digoxina adjuvante para controle de FC. Considere ivabradina se FC inadequada."
   },
@@ -40,10 +72,26 @@
     "specialty": "Pneumologia",
     "topic": "DPOC",
     "alternatives": [
-      { "label": "A", "text": "GOLD D; LAMA + LABA", "isCorrect": true },
-      { "label": "B", "text": "GOLD C; LAMA isolado" },
-      { "label": "C", "text": "GOLD E; LAMA + LABA + corticoide inalado" },
-      { "label": "D", "text": "GOLD B; SABA conforme necessário" }
+      {
+        "label": "A",
+        "text": "GOLD D; LAMA + LABA",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "GOLD C; LAMA isolado",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "GOLD E; LAMA + LABA + corticoide inalado",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "GOLD B; SABA conforme necessário",
+        "isCorrect": false
+      }
     ],
     "explanation": "GOLD D: VEF1 <30% com exacerbações. LAMA + LABA é tratamento duplo de base. Só adicionar corticoide inalado se exacerbações frequentes com componente eosinofílico. Não há indicação de tripla terapia neste caso."
   },
@@ -56,10 +104,26 @@
     "specialty": "Neurologia",
     "topic": "Acidente Vascular Encefálico Isquêmico",
     "alternatives": [
-      { "label": "A", "text": "Trombolítico IV (alteplase) + antiagregante + anticoagulação", "isCorrect": true },
-      { "label": "B", "text": "Apenas antiagregante e observação" },
-      { "label": "C", "text": "Anticoagulação e esperar 48h para RM" },
-      { "label": "D", "text": "Fibrinólise contra-indicada por idade" }
+      {
+        "label": "A",
+        "text": "Trombolítico IV (alteplase) + antiagregante + anticoagulação",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas antiagregante e observação",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Anticoagulação e esperar 48h para RM",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Fibrinólise contra-indicada por idade",
+        "isCorrect": false
+      }
     ],
     "explanation": "AVE isquêmico em janela terapêutica (<4.5h). Alteplase EV reduz incapacidade em ~11%. Idade não é contra-indicação. NIHSS moderado favorece tratamento. Considere trombectomia se oclusão de grande vaso."
   },
@@ -72,10 +136,26 @@
     "specialty": "Endocrinologia",
     "topic": "Adenoma Hipofisário",
     "alternatives": [
-      { "label": "A", "text": "Cirurgia transesfenoidal por efeito de massa e risco visual", "isCorrect": true },
-      { "label": "B", "text": "Bromocriptina 15 mg/dia com seguimento clínico anual" },
-      { "label": "C", "text": "Apenas radioterapia sem cirurgia" },
-      { "label": "D", "text": "Observação com RM em 6 meses" }
+      {
+        "label": "A",
+        "text": "Cirurgia transesfenoidal por efeito de massa e risco visual",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Bromocriptina 15 mg/dia com seguimento clínico anual",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas radioterapia sem cirurgia",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Observação com RM em 6 meses",
+        "isCorrect": false
+      }
     ],
     "explanation": "Macroadenoma (>10mm) com sinais de efeito de massa (erosão óssea, déficit campal). Indica cirurgia. Agonista dopamina é primeira linha para microprolactinomas. Cirurgia reduz risco de cegueira irreversível."
   },
@@ -88,10 +168,26 @@
     "specialty": "Infectologia",
     "topic": "Endocardite Infecciosa",
     "alternatives": [
-      { "label": "A", "text": "Penicilina G cristalina + gentamicina IV", "isCorrect": true },
-      { "label": "B", "text": "Ceftriaxona isolada por 4 semanas" },
-      { "label": "C", "text": "Vancomicina + rifampicina" },
-      { "label": "D", "text": "Fluoroquinolona como monoterapia" }
+      {
+        "label": "A",
+        "text": "Penicilina G cristalina + gentamicina IV",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Ceftriaxona isolada por 4 semanas",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Vancomicina + rifampicina",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Fluoroquinolona como monoterapia",
+        "isCorrect": false
+      }
     ],
     "explanation": "Endocardite por S. bovis (sensível). Penicilina G + gentamicina sinérgica por 4-6 semanas. Requer avaliação cirúrgica se vegetation >10mm ou insuficiência aguda. S. bovis associado a neoplasia colônica (colonoscopia pós-tratamento)."
   },
@@ -104,10 +200,26 @@
     "specialty": "Nefrologia",
     "topic": "Hipertensão Maligna e IRA",
     "alternatives": [
-      { "label": "A", "text": "Nefroesclerose aguda / Emergência hipertensiva", "isCorrect": true },
-      { "label": "B", "text": "Glomerulonefrite pós-infecciosa" },
-      { "label": "C", "text": "Síndrome nefrótica em diabetes" },
-      { "label": "D", "text": "Insuficiência renal crônica descompensada" }
+      {
+        "label": "A",
+        "text": "Nefroesclerose aguda / Emergência hipertensiva",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Glomerulonefrite pós-infecciosa",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Síndrome nefrótica em diabetes",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Insuficiência renal crônica descompensada",
+        "isCorrect": false
+      }
     ],
     "explanation": "Tríade clássica: HAS severa + IRA rápida + proteinúria/hematúria + cilindros. Edema cerebral sugere encefalopatia hipertensiva. Necessário redução controlada de PA (não abrupta) e biopsia renal se curso atípico. Prognóstico melhorou com tratamentos anti-hipertensivos modernos."
   },
@@ -120,10 +232,26 @@
     "specialty": "Gastroenterologia",
     "topic": "Câncer Gástrico",
     "alternatives": [
-      { "label": "A", "text": "Estadiamento completo com endosonografia + TC torax/abdome + PET-CT, depois gastrectomia", "isCorrect": true },
-      { "label": "B", "text": "Imediatamente quimioterapia neo-adjuvante" },
-      { "label": "C", "text": "Apenas gastrectomia sem estadiamento adicional" },
-      { "label": "D", "text": "Observação com endoscopia seriada" }
+      {
+        "label": "A",
+        "text": "Estadiamento completo com endosonografia + TC torax/abdome + PET-CT, depois gastrectomia",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Imediatamente quimioterapia neo-adjuvante",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas gastrectomia sem estadiamento adicional",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Observação com endoscopia seriada",
+        "isCorrect": false
+      }
     ],
     "explanation": "Câncer gástrico requer estadiamento completo. Endosonografia avalia profundidade/linfonodos regionais. Neoadjuvância seguida de cirurgia melhora sobrevida em tumores ressecáveis. Tipo difuso (signet-ring) tem pior prognóstico."
   },
@@ -136,10 +264,26 @@
     "specialty": "Hematologia",
     "topic": "Leucemia Promielocítica",
     "alternatives": [
-      { "label": "A", "text": "ATRA + arsênico trivalente com transfusão prudente e fator fresco congelado", "isCorrect": true },
-      { "label": "B", "text": "Quimioterapia citotóxica intensiva imediata" },
-      { "label": "C", "text": "Apenas transfusões de plaquetas para manter >20000" },
-      { "label": "D", "text": "Espera por diferenciação espontânea" }
+      {
+        "label": "A",
+        "text": "ATRA + arsênico trivalente com transfusão prudente e fator fresco congelado",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Quimioterapia citotóxica intensiva imediata",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas transfusões de plaquetas para manter >20000",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Espera por diferenciação espontânea",
+        "isCorrect": false
+      }
     ],
     "explanation": "LPA é emergência com coagulopatia consumptiva. ATRA + arsênico é cura em 80-90% com baixa toxicidade. Transfusões devem ser PRUDENTES (risco de hemorragia/trombose). Síndrome de diferenciação ocorre 1-4 semanas após ATRA."
   },
@@ -152,10 +296,26 @@
     "specialty": "Cardiologia",
     "topic": "Arritmias Cardíacas",
     "alternatives": [
-      { "label": "A", "text": "Manobra de Valsalva ou masagem carotídea", "isCorrect": true },
-      { "label": "B", "text": "Adenosina IV 6mg bolus rápido" },
-      { "label": "C", "text": "Amiodarona IV 300mg" },
-      { "label": "D", "text": "Cardioversão sincronizada imediata" }
+      {
+        "label": "A",
+        "text": "Manobra de Valsalva ou masagem carotídea",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Adenosina IV 6mg bolus rápido",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Amiodarona IV 300mg",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cardioversão sincronizada imediata",
+        "isCorrect": false
+      }
     ],
     "explanation": "SVT hemodinamicamente estável. Manobras vagais (Valsalva, masagem carotídea) são primeira linha. Se não funcionarem, adenosina IV é próxima opção. Cardioversão reservada para instabilidade hemodinâmica."
   },
@@ -168,10 +328,26 @@
     "specialty": "Pneumologia",
     "topic": "Pneumocistose",
     "alternatives": [
-      { "label": "A", "text": "Pneumonia por Pneumocystis jirovecii em imunocomprometido", "isCorrect": true },
-      { "label": "B", "text": "Tuberculose pulmonar miliar" },
-      { "label": "C", "text": "Pneumonia viral atípica" },
-      { "label": "D", "text": "Fibrose pulmonar idiopática aguda" }
+      {
+        "label": "A",
+        "text": "Pneumonia por Pneumocystis jirovecii em imunocomprometido",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Tuberculose pulmonar miliar",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Pneumonia viral atípica",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Fibrose pulmonar idiopática aguda",
+        "isCorrect": false
+      }
     ],
     "explanation": "PCP: padrão vidro fosco, LDH elevado, achado de trofozoítos/cistos. Comum em HIV CD4 <200. Tratamento: TMP-SMX ou pentamidina inalada. Profilaxia indicada se CD4 <200."
   },
@@ -184,10 +360,26 @@
     "specialty": "Neurologia",
     "topic": "Doença de Parkinson",
     "alternatives": [
-      { "label": "A", "text": "Doença de Parkinson; Levodopa + inibidor de descarboxilase", "isCorrect": true },
-      { "label": "B", "text": "Tremor essencial; Propranolol" },
-      { "label": "C", "text": "Atrofia multissistêmica; Fludrocortisona" },
-      { "label": "D", "text": "Parkinsonismo vascular; Apenas fisioterapia" }
+      {
+        "label": "A",
+        "text": "Doença de Parkinson; Levodopa + inibidor de descarboxilase",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Tremor essencial; Propranolol",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Atrofia multissistêmica; Fludrocortisona",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Parkinsonismo vascular; Apenas fisioterapia",
+        "isCorrect": false
+      }
     ],
     "explanation": "Parkinson: tríade tremor repouso + rigidez + bradicinesia. Levodopa + carbidopa é padrão ouro. Agonistas dopaminérgicos alternativa em doentes jovens (<60) para minimizar discinesias. Cognição preservada afasta demência Lewy."
   },
@@ -200,10 +392,26 @@
     "specialty": "Endocrinologia",
     "topic": "Diabetes Gestacional",
     "alternatives": [
-      { "label": "A", "text": "Dieta e exercício com monitorização de glicemia, medicação se não controlado", "isCorrect": true },
-      { "label": "B", "text": "Metformina imediata em todos os casos" },
-      { "label": "C", "text": "Insulina subcutânea desde o diagnóstico" },
-      { "label": "D", "text": "Apenas monitorização sem intervenção" }
+      {
+        "label": "A",
+        "text": "Dieta e exercício com monitorização de glicemia, medicação se não controlado",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Metformina imediata em todos os casos",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Insulina subcutânea desde o diagnóstico",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas monitorização sem intervenção",
+        "isCorrect": false
+      }
     ],
     "explanation": "Diabetes gestacional: dieta e exercício controlam 80% dos casos. Medicação (metformina ou insulina) se hiperglicemia persistir. Monitorização de glicemia capilar pré-prandial e 2h pós-prandial. Risco aumentado de diabetes tipo 2 pós-parto."
   },
@@ -216,10 +424,26 @@
     "specialty": "Gastroenterologia",
     "topic": "Varizes Esofágicas",
     "alternatives": [
-      { "label": "A", "text": "Ligadura elástica de varizes + terlipressina + antibiótico profilático", "isCorrect": true },
-      { "label": "B", "text": "Apenas esclerose endoscópica" },
-      { "label": "C", "text": "Propranolol oral para profilaxia secundária" },
-      { "label": "D", "text": "Observação sem intervenção urgente" }
+      {
+        "label": "A",
+        "text": "Ligadura elástica de varizes + terlipressina + antibiótico profilático",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas esclerose endoscópica",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Propranolol oral para profilaxia secundária",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Observação sem intervenção urgente",
+        "isCorrect": false
+      }
     ],
     "explanation": "Varizes com sangramento: ligadura é primeira linha (melhor que esclerose). Terlipressina reduz morbimortalidade. Ceftriaxona profilática reduz infecções bacterianas. Reposição volêmica cuidadosa (risco de ascite/encefalopatia)."
   },
@@ -232,10 +456,26 @@
     "specialty": "Infectologia",
     "topic": "Meningite Viral",
     "alternatives": [
-      { "label": "A", "text": "Meningite viral (enterovírus/HSV-2) vs Meningite tuberculosa", "isCorrect": true },
-      { "label": "B", "text": "Meningite bacteriana por Neisseria meningitidis" },
-      { "label": "C", "text": "Meningite fúngica por Cryptococcus" },
-      { "label": "D", "text": "Meningite por Mycobacterium tuberculosis apenas" }
+      {
+        "label": "A",
+        "text": "Meningite viral (enterovírus/HSV-2) vs Meningite tuberculosa",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Meningite bacteriana por Neisseria meningitidis",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Meningite fúngica por Cryptococcus",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Meningite por Mycobacterium tuberculosis apenas",
+        "isCorrect": false
+      }
     ],
     "explanation": "Perfil linfocitário com proteína moderada e glicose levemente baixa sugere viral vs tuberculosa. Gram negativo afasta bacteriana piogênica. Culturas negativas sugerem viral. Tratamento cobre ambas (aciclovir + INH/RIF) até excluir TB."
   },
@@ -248,10 +488,26 @@
     "specialty": "Nefrologia",
     "topic": "Doença Renal Crônica em Diabetes",
     "alternatives": [
-      { "label": "A", "text": "Mantém IECA/ARB, adiciona finerenone, semaglutida (GLP-1) e pode considerar SGLT2i", "isCorrect": true },
-      { "label": "B", "text": "Apenas diuréticos de alça para controle de volume" },
-      { "label": "C", "text": "Insulina para controlar HbA1c agressivamente" },
-      { "label": "D", "text": "Preparação para diálise imediata" }
+      {
+        "label": "A",
+        "text": "Mantém IECA/ARB, adiciona finerenone, semaglutida (GLP-1) e pode considerar SGLT2i",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas diuréticos de alça para controle de volume",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Insulina para controlar HbA1c agressivamente",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Preparação para diálise imediata",
+        "isCorrect": false
+      }
     ],
     "explanation": "DRC estágio 3b-4 diabética. IECA/ARB reduz proteinúria e progressão. Finerenone (antagonista mineralocorticoide) reduz morte renal 34%. GLP-1 (semaglutida) reduz morte cardiovascular. SGLT2i contraindicado por eGFR <20. Controle adequado de PA e glicemia essencial."
   },
@@ -264,10 +520,26 @@
     "specialty": "Hematologia",
     "topic": "Leucemia Aguda",
     "alternatives": [
-      { "label": "A", "text": "Leucemia aguda com risco de síndrome de lise tumoral e leucostase", "isCorrect": true },
-      { "label": "B", "text": "Linfoma com apenas envolvimento medular" },
-      { "label": "C", "text": "Mielodisplasia de baixo risco" },
-      { "label": "D", "text": "Infecção viral com reação linfomonocitária" }
+      {
+        "label": "A",
+        "text": "Leucemia aguda com risco de síndrome de lise tumoral e leucostase",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Linfoma com apenas envolvimento medular",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Mielodisplasia de baixo risco",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Infecção viral com reação linfomonocitária",
+        "isCorrect": false
+      }
     ],
     "explanation": "Leucemia aguda: >20% blastos. WBC 85.000 alto risco de leucostase (dispneia, confusão). Risco de síndrome lise: hiperkalemia, hiperfosfatemia, hiperuricemia, hipocalcemia. Necessário fluidos agressivos, alopurinol/febuxostat, urato oxidase, monitorização cardíaca."
   },
@@ -280,10 +552,26 @@
     "specialty": "Pneumologia",
     "topic": "Nódulo Pulmonar",
     "alternatives": [
-      { "label": "A", "text": "Biópsia percutânea ou broncoscopia com biopsia", "isCorrect": true },
-      { "label": "B", "text": "Seguimento com TC em 3 meses" },
-      { "label": "C", "text": "Cirurgia ressectiva exploratória" },
-      { "label": "D", "text": "Apenas observação por ser achado incidental" }
+      {
+        "label": "A",
+        "text": "Biópsia percutânea ou broncoscopia com biopsia",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Seguimento com TC em 3 meses",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cirurgia ressectiva exploratória",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas observação por ser achado incidental",
+        "isCorrect": false
+      }
     ],
     "explanation": "Nódulo >1cm em fumador com captação PET sugere risco aumentado de malignidade. Biópsia diagnóstica indicada. PET-CT auxiliar mas não substitui confirmação histológica. Cirurgia sem diagnóstico é overtreatment."
   },
@@ -296,10 +584,26 @@
     "specialty": "Neurologia",
     "topic": "Síndrome de Encefalopatia Posterior Reversível",
     "alternatives": [
-      { "label": "A", "text": "Síndrome de Encefalopatia Posterior Reversível (PRES)", "isCorrect": true },
-      { "label": "B", "text": "Meningite asséptica" },
-      { "label": "C", "text": "Tumor cerebral" },
-      { "label": "D", "text": "Trombose venosa cerebral" }
+      {
+        "label": "A",
+        "text": "Síndrome de Encefalopatia Posterior Reversível (PRES)",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Meningite asséptica",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tumor cerebral",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Trombose venosa cerebral",
+        "isCorrect": false
+      }
     ],
     "explanation": "PRES: cefaleia + HAS + edema subcortical região posterior (RNM) + ausência de achados no LCR. Associada a HAS, eclâmpsia, imunossupressores, citotóxicos. Reversível se tratada promptamente. Redução controlada de PA é essencial."
   },
@@ -312,10 +616,26 @@
     "specialty": "Endocrinologia",
     "topic": "Hipogonadismo",
     "alternatives": [
-      { "label": "A", "text": "Hipogonadismo hipogonadotrófico; RM hipófise para avaliar estrutura", "isCorrect": true },
-      { "label": "B", "text": "Hipogonadismo hipergonadotrófico; biópsia testicular" },
-      { "label": "C", "text": "Apenas deficiência de vitamina D" },
-      { "label": "D", "text": "Envelhecimento normal sem necessidade de investigação" }
+      {
+        "label": "A",
+        "text": "Hipogonadismo hipogonadotrófico; RM hipófise para avaliar estrutura",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Hipogonadismo hipergonadotrófico; biópsia testicular",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas deficiência de vitamina D",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Envelhecimento normal sem necessidade de investigação",
+        "isCorrect": false
+      }
     ],
     "explanation": "Testosterona baixa com LH/FSH normais = hipogonadismo central. Necessário RM hipófise para descartar tumor/compressão. Pode ser secundário a obesidade, medicações, apneia, hiperprolactinemia. Reposição de testosterona se confirmado e sintomático."
   },
@@ -328,10 +648,26 @@
     "specialty": "Gastroenterologia",
     "topic": "Anemia por Deficiência de Ferro",
     "alternatives": [
-      { "label": "A", "text": "Colonoscopia e endoscopia alta para descartar lesão maligna/sangrante", "isCorrect": true },
-      { "label": "B", "text": "Apenas suplementação de ferro oral" },
-      { "label": "C", "text": "Teste para celiquia com dosagem de tTG-IgA" },
-      { "label": "D", "text": "Fecograma para avaliar parasitas" }
+      {
+        "label": "A",
+        "text": "Colonoscopia e endoscopia alta para descartar lesão maligna/sangrante",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas suplementação de ferro oral",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Teste para celiquia com dosagem de tTG-IgA",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Fecograma para avaliar parasitas",
+        "isCorrect": false
+      }
     ],
     "explanation": "Anemia microcítica ferropriva em mulher >50 anos requer colonoscopia para descartar câncer/pólipo/sangramento GI. Endoscopia alta complementar. Alteração hábito intestinal é red flag. Celiquia segundo de menos comum."
   },
@@ -344,10 +680,26 @@
     "specialty": "Infectologia",
     "topic": "Meningococcemia/Choque Séptico",
     "alternatives": [
-      { "label": "A", "text": "Antibiótico empiricamente (ceftriaxona 2g IV 6/6h) + fluido + vasopressores", "isCorrect": true },
-      { "label": "B", "text": "Punção lombar imediata para LCR" },
-      { "label": "C", "text": "TC crânio antes de qualquer intervenção" },
-      { "label": "D", "text": "Apenas observação com hemocultura" }
+      {
+        "label": "A",
+        "text": "Antibiótico empiricamente (ceftriaxona 2g IV 6/6h) + fluido + vasopressores",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Punção lombar imediata para LCR",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "TC crânio antes de qualquer intervenção",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas observação com hemocultura",
+        "isCorrect": false
+      }
     ],
     "explanation": "Choque séptico meningocócico: antibióticos antes da LCR. Não retardar por imagem. Ceftriaxona 2g IV 6/6h, fluido agressivo, vasopressores. Mortalidade ~50% sem tratamento pronto. Dexametasona 10mg IV reduz sequelas neurológicas."
   },
@@ -360,10 +712,26 @@
     "specialty": "Nefrologia",
     "topic": "Glomerulonefrite Rapidamente Progressiva",
     "alternatives": [
-      { "label": "A", "text": "GNRP; dosagem de ANCA, FAN, anti-GBM", "isCorrect": true },
-      { "label": "B", "text": "Apenas IRA pré-renal, reposição volêmica" },
-      { "label": "C", "text": "Infecção urinária complicada" },
-      { "label": "D", "text": "Trauma renal com sangramento" }
+      {
+        "label": "A",
+        "text": "GNRP; dosagem de ANCA, FAN, anti-GBM",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas IRA pré-renal, reposição volêmica",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Infecção urinária complicada",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Trauma renal com sangramento",
+        "isCorrect": false
+      }
     ],
     "explanation": "Hematúria + proteinúria + cilindros + IRA rápida = GNRP. Investigar ANCA (vasculite associada), FAN (LES), anti-GBM (anti-membrana basal). Biópsia renal urgente se suspeita. Corticoides + imunossupressão pode salvar função renal."
   },
@@ -376,10 +744,26 @@
     "specialty": "Cardiologia",
     "topic": "Fibrilação Atrial Paroxística",
     "alternatives": [
-      { "label": "A", "text": "Betabloqueador como primeira linha + anticoagulação", "isCorrect": true },
-      { "label": "B", "text": "Verapamil e propafenona" },
-      { "label": "C", "text": "Digoxina isolada" },
-      { "label": "D", "text": "Apenas anticoagulação sem controle de FC" }
+      {
+        "label": "A",
+        "text": "Betabloqueador como primeira linha + anticoagulação",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Verapamil e propafenona",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Digoxina isolada",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas anticoagulação sem controle de FC",
+        "isCorrect": false
+      }
     ],
     "explanation": "FA paroxística sem cardiopatia estrutural. Betabloqueador (metoprolol, atenolol) ou não-dihidropiridina (verapamil, diltiazem). Anticoagulação por CHA₂DS₂-VASc ≥1 ponto em mulher. Considere ablação se sintomas refratários."
   },
@@ -392,10 +776,26 @@
     "specialty": "Pneumologia",
     "topic": "Tromboembolia Pulmonar",
     "alternatives": [
-      { "label": "A", "text": "TEP intermediária; anticoagulação com enoxaparina + varfarina ou DOAC", "isCorrect": true },
-      { "label": "B", "text": "Apenas suporte com oxigênio" },
-      { "label": "C", "text": "Fibrinólise sistemática" },
-      { "label": "D", "text": "Filtro de cava sem anticoagulação" }
+      {
+        "label": "A",
+        "text": "TEP intermediária; anticoagulação com enoxaparina + varfarina ou DOAC",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas suporte com oxigênio",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Fibrinólise sistemática",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Filtro de cava sem anticoagulação",
+        "isCorrect": false
+      }
     ],
     "explanation": "TEP segmentar sem choque (pressão arterial normal). Anticoagulação é padrão ouro. Fibrinólise reservada para TEP massiva com choque. Duração: 3 meses se provável primeira não provocada, 6+ meses se tromboembolia recorrente."
   },
@@ -408,10 +808,26 @@
     "specialty": "Cardiologia",
     "topic": "Dislipidemia e Hipertensão",
     "alternatives": [
-      { "label": "A", "text": "Modificação estilo de vida + estatina de alta intensidade + antihipertensivo", "isCorrect": true },
-      { "label": "B", "text": "Apenas acompanhamento sem medicação" },
-      { "label": "C", "text": "Fibrato isolado" },
-      { "label": "D", "text": "Cirurgia bariátrica imediata" }
+      {
+        "label": "A",
+        "text": "Modificação estilo de vida + estatina de alta intensidade + antihipertensivo",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas acompanhamento sem medicação",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Fibrato isolado",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cirurgia bariátrica imediata",
+        "isCorrect": false
+      }
     ],
     "explanation": "Síndrome metabólica com HAS e dislipidemia. Estatina reduz eventos cardíacos 30%. IECA/ARB além de HAS tem proteção cardiovascular. Perda 5-10% peso melhora todos os fatores. Triglicerídeos altos sugerem resistência insulínica."
   },
@@ -424,10 +840,26 @@
     "specialty": "Reumatologia",
     "topic": "Artrite Reumatoide",
     "alternatives": [
-      { "label": "A", "text": "Diagnóstico de AR; DMARD (metotrexato) + corticoide de transição + AINE", "isCorrect": true },
-      { "label": "B", "text": "Apenas AINE e observação" },
-      { "label": "C", "text": "Apenas corticoide a longo prazo" },
-      { "label": "D", "text": "Expectativa de remissão espontânea" }
+      {
+        "label": "A",
+        "text": "Diagnóstico de AR; DMARD (metotrexato) + corticoide de transição + AINE",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas AINE e observação",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas corticoide a longo prazo",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Expectativa de remissão espontânea",
+        "isCorrect": false
+      }
     ],
     "explanation": "AR anti-CCP positivo é pior prognóstico. DMARD começar em até 3 meses reduz progressão de erosões 70%. Remissão precoce melhora desfecho a longo prazo. Biológicos se inadequada resposta aos DMARDs convencionais."
   },
@@ -440,10 +872,26 @@
     "specialty": "Cardiologia",
     "topic": "Estenose Mitral",
     "alternatives": [
-      { "label": "A", "text": "Valvuloplastia percutânea ou cirurgia por sintomas graves + área <1.5 cm²", "isCorrect": true },
-      { "label": "B", "text": "Apenas diurético e betabloqueador" },
-      { "label": "C", "text": "Anticoagulação sem intervenção" },
-      { "label": "D", "text": "Observação sem sintomas" }
+      {
+        "label": "A",
+        "text": "Valvuloplastia percutânea ou cirurgia por sintomas graves + área <1.5 cm²",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas diurético e betabloqueador",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Anticoagulação sem intervenção",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Observação sem sintomas",
+        "isCorrect": false
+      }
     ],
     "explanation": "Estenose mitral sintomática com área <1cm² é indicação para intervenção. Valvuloplastia se válvula adequada (sem calcificação, regurgitação importante). Cirurgia se valvuloplastia contraindicada ou falhou. Anticoagulação se FA presente."
   },
@@ -456,10 +904,26 @@
     "specialty": "Gastroenterologia",
     "topic": "Obstrução Intestinal",
     "alternatives": [
-      { "label": "A", "text": "Obstrução de intestino delgado por brida/aderência; TC abdome", "isCorrect": true },
-      { "label": "B", "text": "Apendicite aguda" },
-      { "label": "C", "text": "Cólica biliar" },
-      { "label": "D", "text": "Isquemia mesentérica" }
+      {
+        "label": "A",
+        "text": "Obstrução de intestino delgado por brida/aderência; TC abdome",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apendicite aguda",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cólica biliar",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Isquemia mesentérica",
+        "isCorrect": false
+      }
     ],
     "explanation": "Obstrução mecânica de intestino delgado sem cirurgia prévia: considerar brida congênita, tumor, ou hérnia interna. TC com contraste oral/IV avalia localização obstrução e viabilidade. Maioria casos não complicados resolvem com repouso, SNG, e fluidos."
   },
@@ -472,10 +936,26 @@
     "specialty": "Reumatologia",
     "topic": "Lúpus Eritematoso Sistêmico",
     "alternatives": [
-      { "label": "A", "text": "LES com atividade leve-moderada; considerar luprite e glomerulonefrite" },
-      { "label": "B", "text": "Apenas fotossensibilidade cutânea" },
-      { "label": "C", "text": "Síndrome seca primária" },
-      { "label": "D", "text": "Dermatite alérgica" }
+      {
+        "label": "A",
+        "text": "LES com atividade leve-moderada; considerar luprite e glomerulonefrite",
+        "isCorrect": false
+      },
+      {
+        "label": "B",
+        "text": "Apenas fotossensibilidade cutânea",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Síndrome seca primária",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Dermatite alérgica",
+        "isCorrect": false
+      }
     ],
     "explanation": "LES: critérios diagnósticos presentes (malar, úlcera, artrite, FAN+, anti-dsDNA+, C3/C4 baixos). Necessário avaliar proteinúria, creatinina para nefrite. Começar prednisona + hidroxicloroquina + DMARD. Monitorização trimestral."
   },
@@ -488,10 +968,26 @@
     "specialty": "Pneumologia",
     "topic": "Tuberculose Pulmonar",
     "alternatives": [
-      { "label": "A", "text": "Quadriplacebo (RIPE) por 2 meses + IP por 4 meses; testar HIV e começar ART se positivo", "isCorrect": true },
-      { "label": "B", "text": "Apenas isoniazida isolada" },
-      { "label": "C", "text": "Pneumotórax terapêutico" },
-      { "label": "D", "text": "Apenas repouso hospitalar" }
+      {
+        "label": "A",
+        "text": "Quadriplacebo (RIPE) por 2 meses + IP por 4 meses; testar HIV e começar ART se positivo",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas isoniazida isolada",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Pneumotórax terapêutico",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas repouso hospitalar",
+        "isCorrect": false
+      }
     ],
     "explanation": "TB ativa: quadriplacebo por fase intensiva. Vigilância de hepatotoxicidade (RIPE causa). Teste HIV urgente (risco aumentado de TB-HIV com má prognóstico). ART se CD4 <50. Notificação compulsória. Contatos avaliados."
   },
@@ -504,10 +1000,26 @@
     "specialty": "Neurologia",
     "topic": "Tumor Intracraniano",
     "alternatives": [
-      { "label": "A", "text": "Ressonância com gadolínio para melhor caracterização; neurocirurgia se viável", "isCorrect": true },
-      { "label": "B", "text": "Apenas traçado eletroencefalográfico" },
-      { "label": "C", "text": "Punção lombar imediata" },
-      { "label": "D", "text": "Observação sem intervenção" }
+      {
+        "label": "A",
+        "text": "Ressonância com gadolínio para melhor caracterização; neurocirurgia se viável",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas traçado eletroencefalográfico",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Punção lombar imediata",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Observação sem intervenção",
+        "isCorrect": false
+      }
     ],
     "explanation": "Lesão expansiva com papiledema é emergência neurológica. RM com gadolínio diferencia tipo (primário vs metastático). Edema significante pode requerer osmóticos (manitol) e corticoides antes cirurgia. Biópsia/ressecção para diagnóstico e tratamento."
   },
@@ -520,10 +1032,26 @@
     "specialty": "Endocrinologia",
     "topic": "Tireotoxicose",
     "alternatives": [
-      { "label": "A", "text": "Doença de Graves; PTU ou metimazol + propranolol", "isCorrect": true },
-      { "label": "B", "text": "Tireoidite de Hashimoto" },
-      { "label": "C", "text": "Tiroidismo por iodo" },
-      { "label": "D", "text": "Apenas deficiência de iodo" }
+      {
+        "label": "A",
+        "text": "Doença de Graves; PTU ou metimazol + propranolol",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Tireoidite de Hashimoto",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tiroidismo por iodo",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas deficiência de iodo",
+        "isCorrect": false
+      }
     ],
     "explanation": "Graves: TRAb+ (diferencia de tiroidite). PTU preferível no 1º trimestre (menor risco teratogênico). Propranolol controla sintomas adrenérgicos. Resposta 6-12 meses, 50% remissão após descontinuação. Oftalmologia se exoftalmos."
   },
@@ -536,10 +1064,26 @@
     "specialty": "Infectologia",
     "topic": "Esquistossomose",
     "alternatives": [
-      { "label": "A", "text": "Praziquantel 40 mg/kg VO em 2-3 doses", "isCorrect": true },
-      { "label": "B", "text": "Apenas azatioprina" },
-      { "label": "C", "text": "Antiespasmódicos e observação" },
-      { "label": "D", "text": "Antibióticos para infecção bacteriana" }
+      {
+        "label": "A",
+        "text": "Praziquantel 40 mg/kg VO em 2-3 doses",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas azatioprina",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Antiespasmódicos e observação",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Antibióticos para infecção bacteriana",
+        "isCorrect": false
+      }
     ],
     "explanation": "Esquistossomose mansônica: praziquantel é padrão ouro. Mata vermes adultos mas não ovos. Eosinofilia reflete resposta imune ao antígeno. Pode desenvolver fibrose/hipertensão portal se não tratado. Contatos e assintomáticos também tratados."
   },
@@ -552,10 +1096,26 @@
     "specialty": "Nefrologia",
     "topic": "Síndrome Nefrótica",
     "alternatives": [
-      { "label": "A", "text": "Glomerulonefrite membranosa primária; biópsia renal confirmará", "isCorrect": true },
-      { "label": "B", "text": "Apenas desnutrição" },
-      { "label": "C", "text": "Nefrite lúpica" },
-      { "label": "D", "text": "Trombose venosa renal" }
+      {
+        "label": "A",
+        "text": "Glomerulonefrite membranosa primária; biópsia renal confirmará",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas desnutrição",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Nefrite lúpica",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Trombose venosa renal",
+        "isCorrect": false
+      }
     ],
     "explanation": "Síndrome nefrótica (proteinúria >3.5g, hipoalbuminemia, edema, hiperlipidemia). Idade avançada + FAN negativo + complemento normal sugere membranosa primária. Biópsia imunofluorescência: depósitos IgG 'full house' é patognomônico. Risco trombose venosa renal."
   },
@@ -568,10 +1128,26 @@
     "specialty": "Hematologia",
     "topic": "Anemia Ferropriva",
     "alternatives": [
-      { "label": "A", "text": "Anemia ferropriva com possível neoplasia urinária; ultrassom rins + IVP", "isCorrect": true },
-      { "label": "B", "text": "Apenas carência dietética" },
-      { "label": "C", "text": "Talassemia trait" },
-      { "label": "D", "text": "Anemia aplástica" }
+      {
+        "label": "A",
+        "text": "Anemia ferropriva com possível neoplasia urinária; ultrassom rins + IVP",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas carência dietética",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Talassemia trait",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Anemia aplástica",
+        "isCorrect": false
+      }
     ],
     "explanation": "Anemia ferropriva (MCV baixo, ferritina baixa). Hematúria sugere origem urinária (pedra, tumor). Plaquetas elevadas é reativo à anemia. Investigar: colonoscopia, endoscopia alta (GI), ultrassom rins, IVP."
   },
@@ -584,10 +1160,26 @@
     "specialty": "Cardiologia",
     "topic": "Insuficiência Cardíaca Avançada",
     "alternatives": [
-      { "label": "A", "text": "Terapia otimizada + avaliação para transplante cardíaco ou ressincronizador", "isCorrect": true },
-      { "label": "B", "text": "Apenas diuréticos" },
-      { "label": "C", "text": "Observação e conforto" },
-      { "label": "D", "text": "Angioplastia coronária preventiva" }
+      {
+        "label": "A",
+        "text": "Terapia otimizada + avaliação para transplante cardíaco ou ressincronizador",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas diuréticos",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Observação e conforto",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Angioplastia coronária preventiva",
+        "isCorrect": false
+      }
     ],
     "explanation": "IC estágio D (refratária). FE <25% é indicação para CRT-D se QRS >120. Transplante candidato ideal se idade <65, sem comorbidades. Se não candidato, considerar VAD (assistência ventricular) ou cuidados paliativos."
   },
@@ -600,10 +1192,26 @@
     "specialty": "Reumatologia",
     "topic": "Espondilite Anquilosante",
     "alternatives": [
-      { "label": "A", "text": "AINE contínuo + TNF-alfa inibidor (etanercepte ou adalimumab) se inadequada resposta", "isCorrect": true },
-      { "label": "B", "text": "Apenas repouso" },
-      { "label": "C", "text": "Fisioterapia sem farmacoterapia" },
-      { "label": "D", "text": "Corticoides sistêmicos de longo prazo" }
+      {
+        "label": "A",
+        "text": "AINE contínuo + TNF-alfa inibidor (etanercepte ou adalimumab) se inadequada resposta",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas repouso",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Fisioterapia sem farmacoterapia",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Corticoides sistêmicos de longo prazo",
+        "isCorrect": false
+      }
     ],
     "explanation": "Espondilite anquilosante: HLA-B27+ com sindesmófitos confirmam. AINE reduz dor 50%. TNF-bloqueadores param progressão estrutural e melhoram função. Exercício e fisioterapia complementam. Prognóstico melhorou significativamente com biológicos."
   },
@@ -616,10 +1224,26 @@
     "specialty": "Pneumologia",
     "topic": "Fibrose Pulmonar Idiopática",
     "alternatives": [
-      { "label": "A", "text": "FPI provável; começar pirfenidona ou nintedanib", "isCorrect": true },
-      { "label": "B", "text": "Apenas tosse crônica idiopática" },
-      { "label": "C", "text": "Sarcoidose pulmonar" },
-      { "label": "D", "text": "Bronquite crônica simples" }
+      {
+        "label": "A",
+        "text": "FPI provável; começar pirfenidona ou nintedanib",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas tosse crônica idiopática",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Sarcoidose pulmonar",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Bronquite crônica simples",
+        "isCorrect": false
+      }
     ],
     "explanation": "FPI: padrão UIP em TCAR (vidro fosco + tração + consolidações) com ausência de achados sugestivos de doença alternativa. Prognóstico ruim sem tratamento (progressão 3-5 anos). Pirfenidona/nintedanib reduzem declínio FEV1 50%. Possível transplante."
   },
@@ -632,10 +1256,26 @@
     "specialty": "Endocrinologia",
     "topic": "Feocromocitoma",
     "alternatives": [
-      { "label": "A", "text": "Feocromocitoma; bloqueio alfa seguido de beta após 2 semanas, depois cirurgia", "isCorrect": true },
-      { "label": "B", "text": "Apenas HAS essencial" },
-      { "label": "C", "text": "Apenas nódulo adrenal incidental" },
-      { "label": "D", "text": "Adenoma produtor de cortisol" }
+      {
+        "label": "A",
+        "text": "Feocromocitoma; bloqueio alfa seguido de beta após 2 semanas, depois cirurgia",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas HAS essencial",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas nódulo adrenal incidental",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Adenoma produtor de cortisol",
+        "isCorrect": false
+      }
     ],
     "explanation": "Feocromocitoma: tríade HAS paroxística + palpitações + diaforese. Catecolaminas elevadas confirmam. Ordem crítica: alfabloquear ANTES betabloqueador (evita crise hipertensiva). Cirurgia após controle adequado. Risco crise hipertensiva intraoperatória."
   },
@@ -648,10 +1288,26 @@
     "specialty": "Gastroenterologia",
     "topic": "Úlcera Péptica com Sangramento",
     "alternatives": [
-      { "label": "A", "text": "Injeção de epinefrina + ligadura com fita elástica", "isCorrect": true },
-      { "label": "B", "text": "Apenas observação do sangramento" },
-      { "label": "C", "text": "Cauterização térmica isolada" },
-      { "label": "D", "text": "Transfusão sem hemostasia" }
+      {
+        "label": "A",
+        "text": "Injeção de epinefrina + ligadura com fita elástica",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas observação do sangramento",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Cauterização térmica isolada",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Transfusão sem hemostasia",
+        "isCorrect": false
+      }
     ],
     "explanation": "Sangramento ativo (Forrest 1b) requer hemostasia combinada. Epinefrina 1:10.000 + ligadura (ou clipe) reduz resangramento 10-15% vs monoterapia. IBP IV (omeprazol) após hemostasia 80mg bolus + infusão. Taxa sucesso 90-95%."
   },
@@ -664,10 +1320,26 @@
     "specialty": "Neurologia",
     "topic": "Tontura Periférica",
     "alternatives": [
-      { "label": "A", "text": "Vertigem periférica (provável VPPB ou neurite vestibular); manobra Epley se VPPB", "isCorrect": true },
-      { "label": "B", "text": "Tontura central por AVE" },
-      { "label": "C", "text": "Hipotensão ortostática" },
-      { "label": "D", "text": "Infecção auditiva sem vertigem" }
+      {
+        "label": "A",
+        "text": "Vertigem periférica (provável VPPB ou neurite vestibular); manobra Epley se VPPB",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Tontura central por AVE",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Hipotensão ortostática",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Infecção auditiva sem vertigem",
+        "isCorrect": false
+      }
     ],
     "explanation": "Vertigem periférica: nistagmo, náusea, queda para lado afetado, teste dinâmico positivo. VPPB: Epley maneuver tem taxa sucesso 80%. Neurite: repouso + betaistina. Descartar AVE (teste de Romberg anormal = central)."
   },
@@ -680,10 +1352,26 @@
     "specialty": "Cardiologia",
     "topic": "Síndrome do QT Longo",
     "alternatives": [
-      { "label": "A", "text": "Teste genético + betabloqueador + possível ICD se histórico morte súbita familiar", "isCorrect": true },
-      { "label": "B", "text": "Apenas observação" },
-      { "label": "C", "text": "Ablação por radiofrequência" },
-      { "label": "D", "text": "Apenas tranquilizantes" }
+      {
+        "label": "A",
+        "text": "Teste genético + betabloqueador + possível ICD se histórico morte súbita familiar",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas observação",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Ablação por radiofrequência",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas tranquilizantes",
+        "isCorrect": false
+      }
     ],
     "explanation": "Síndrome QT longo genético: risco Torsade de Pointes e morte súbita. Betabloqueador é primeira linha (reduz eventos 80%). Genômica identifica tipo (LQTS1-LQTS5). Família rastreada. ICD se eventos sintomáticos ou morte familiar prematura."
   },
@@ -696,10 +1384,26 @@
     "specialty": "Reumatologia",
     "topic": "Esclerose Sistêmica",
     "alternatives": [
-      { "label": "A", "text": "Forma limitada (CREST); vasodilatadores + inibidor bomba protônica", "isCorrect": true },
-      { "label": "B", "text": "Forma difusa (dcSSc)" },
-      { "label": "C", "text": "Síndrome de Raynaud primária" },
-      { "label": "D", "text": "Apenas refluxo gastroesofágico" }
+      {
+        "label": "A",
+        "text": "Forma limitada (CREST); vasodilatadores + inibidor bomba protônica",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Forma difusa (dcSSc)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Síndrome de Raynaud primária",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas refluxo gastroesofágico",
+        "isCorrect": false
+      }
     ],
     "explanation": "CREST (Calcinose, Raynaud, Esofagite, Esclerodactilia, Telangiectasia): anti-centrômero+ tem evolução lenta. ScL-70+ é forma difusa com prognóstico pior. Nifedipino para Raynaud. Monitorar pulmão (TCAR anual). Inibidor ACE se crise renal."
   },
@@ -712,10 +1416,26 @@
     "specialty": "Pneumologia",
     "topic": "Doença Pleural por Asbesto",
     "alternatives": [
-      { "label": "A", "text": "Teste de função pulmonar + TC de alta resolução para avaliar fibrose", "isCorrect": true },
-      { "label": "B", "text": "Apenas radiografia serial" },
-      { "label": "C", "text": "Biopsia pleural imediata" },
-      { "label": "D", "text": "Observação sem investigação" }
+      {
+        "label": "A",
+        "text": "Teste de função pulmonar + TC de alta resolução para avaliar fibrose",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas radiografia serial",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Biopsia pleural imediata",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Observação sem investigação",
+        "isCorrect": false
+      }
     ],
     "explanation": "Exposição asbesto: placas pleurais (achado benigno), espessamento (pode progredir). Necessário descartar mesotelioma pleural (TC, possivelmente PET). Teste função redução FVC sugere fibrose. Vigilância: TC a cada 2-3 anos."
   },
@@ -728,10 +1448,26 @@
     "specialty": "Infectologia",
     "topic": "Malária",
     "alternatives": [
-      { "label": "A", "text": "Malária (P. vivax ou P. ovale); artemeter-lumefantrina + primaquina", "isCorrect": true },
-      { "label": "B", "text": "Apenas febre tifóide" },
-      { "label": "C", "text": "Dengue hemorrágica" },
-      { "label": "D", "text": "Tripanosomíase" }
+      {
+        "label": "A",
+        "text": "Malária (P. vivax ou P. ovale); artemeter-lumefantrina + primaquina",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas febre tifóide",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Dengue hemorrágica",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Tripanosomíase",
+        "isCorrect": false
+      }
     ],
     "explanation": "Malária: gota espessa identifica espécie. P. vivax/ovale: artemeter-lumefantrina 6 doses, depois primaquina 15mg dia (cuidado G6PD). P. falciparum: artemeter-lumefantrina. Risco recaídas se não primaquina. Sintomas podem durar semanas mesmo após tratamento."
   },
@@ -744,10 +1480,26 @@
     "specialty": "Nefrologia",
     "topic": "DRC Estágio 5",
     "alternatives": [
-      { "label": "A", "text": "Avaliação para terapia renal substitutiva (diálise ou transplante)", "isCorrect": true },
-      { "label": "B", "text": "Apenas medicações para controle" },
-      { "label": "C", "text": "Esperar progressão" },
-      { "label": "D", "text": "Apenas repouso e dieta" }
+      {
+        "label": "A",
+        "text": "Avaliação para terapia renal substitutiva (diálise ou transplante)",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas medicações para controle",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Esperar progressão",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas repouso e dieta",
+        "isCorrect": false
+      }
     ],
     "explanation": "DRC estágio 5 (eGFR <15) indica preparação para TRS. Hiperuricemia, acidose, hipercalemia precisam controle. Criar fístula AV se diálise prevista. Se transplante candidato, listar precocemente. Educação do paciente para escolha modalidade."
   },
@@ -760,10 +1512,26 @@
     "specialty": "Hematologia",
     "topic": "Mieloma Múltiplo",
     "alternatives": [
-      { "label": "A", "text": "Mieloma múltiplo; quimioterapia + bortezomibe + transplante TCTH", "isCorrect": true },
-      { "label": "B", "text": "Apenas insuficiência renal crônica" },
-      { "label": "C", "text": "Hiperparatireoidismo" },
-      { "label": "D", "text": "Apenas osteoporose" }
+      {
+        "label": "A",
+        "text": "Mieloma múltiplo; quimioterapia + bortezomibe + transplante TCTH",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas insuficiência renal crônica",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Hiperparatireoidismo",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas osteoporose",
+        "isCorrect": false
+      }
     ],
     "explanation": "Mieloma: anemia + IRA (cilindros proteicos) + hipercalcemia + proteinúria Bence-Jones. Biópsia medula mostrará plasmocitose >30%. Prognóstico melhorou com novos agentes. Bifosfonatos para doença óssea. Vigilância infecções."
   },
@@ -776,10 +1544,26 @@
     "specialty": "Cardiologia",
     "topic": "NSTEMI",
     "alternatives": [
-      { "label": "A", "text": "NSTEMI; clopidogrel + AAS + anticoagulação + angiografia urgente (<24h)", "isCorrect": true },
-      { "label": "B", "text": "Apenas angina estável" },
-      { "label": "C", "text": "Troponina falsamente elevada" },
-      { "label": "D", "text": "Apenas arritmia" }
+      {
+        "label": "A",
+        "text": "NSTEMI; clopidogrel + AAS + anticoagulação + angiografia urgente (<24h)",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas angina estável",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Troponina falsamente elevada",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas arritmia",
+        "isCorrect": false
+      }
     ],
     "explanation": "NSTEMI: troponina elevada + sintomas anginosos. Clopidogrel + AAS reduzem morte/infarto 20%. Enoxaparina ou heparina. Angiografia <24h com PCI se possível. Dupla antiagregação por 12 meses. Contraindicação fibrinólise em NSTEMI."
   },
@@ -792,10 +1576,26 @@
     "specialty": "Reumatologia",
     "topic": "Artrite Viral",
     "alternatives": [
-      { "label": "A", "text": "Artrite viral (possivelmente Parvovírus B19 ou vírus da hepatite C); tratamento sintomático", "isCorrect": true },
-      { "label": "B", "text": "AR soronegativa" },
-      { "label": "C", "text": "Apenas artose degenerativa" },
-      { "label": "D", "text": "Apenas viremia transitória" }
+      {
+        "label": "A",
+        "text": "Artrite viral (possivelmente Parvovírus B19 ou vírus da hepatite C); tratamento sintomático",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "AR soronegativa",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas artose degenerativa",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas viremia transitória",
+        "isCorrect": false
+      }
     ],
     "explanation": "Artrite viral: poliartralgia simétrica, febre, rash. Parvovírus B19 em mulheres causa AR-like. Vírus hepatite C artrite. ANA/RF negativos afastam autoimune. Maioria resolvem em semanas. Suporte sintomático. PCR viral confirma etiologia."
   },
@@ -808,10 +1608,26 @@
     "specialty": "Gastroenterologia",
     "topic": "Úlcera Induzida por AINE",
     "alternatives": [
-      { "label": "A", "text": "Parar AINE + IBP por 8-12 semanas + trocar para acetaminofeno/COX-2 se necessário analgésico", "isCorrect": true },
-      { "label": "B", "text": "Continuar AINE com dose reduzida" },
-      { "label": "C", "text": "Apenas antagonista H2" },
-      { "label": "D", "text": "Cirurgia vagotomia" }
+      {
+        "label": "A",
+        "text": "Parar AINE + IBP por 8-12 semanas + trocar para acetaminofeno/COX-2 se necessário analgésico",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Continuar AINE com dose reduzida",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas antagonista H2",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cirurgia vagotomia",
+        "isCorrect": false
+      }
     ],
     "explanation": "Úlcera por AINE: cessação é essencial. IBP acelera cicatrização. Trocar para acetaminofeno/tramadol se dor. Se necessário AINE, usar COX-2 seletivo (celecoxibe) com IBP. Erradicação H. pylori desnecessária se negativo."
   },
@@ -824,10 +1640,26 @@
     "specialty": "Pneumologia",
     "topic": "Asma Inadequadamente Controlada",
     "alternatives": [
-      { "label": "A", "text": "Intensificar: corticoide inalado de baixa dose + beta-2 agonista de longa ação", "isCorrect": true },
-      { "label": "B", "text": "Apenas beta-2 agonista de curta ação conforme necessário" },
-      { "label": "C", "text": "Apenas antihistamínico" },
-      { "label": "D", "text": "Observação sem mudança" }
+      {
+        "label": "A",
+        "text": "Intensificar: corticoide inalado de baixa dose + beta-2 agonista de longa ação",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas beta-2 agonista de curta ação conforme necessário",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas antihistamínico",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Observação sem mudança",
+        "isCorrect": false
+      }
     ],
     "explanation": "Asma inadequadamente controlada (sibilância noturna, despertares). Escalar para corticoide inalado baixa dose + LABA. Revisar aderência, técnica inalador, gatilhos. Considerar desensibilização se alérgenos identificados."
   },
@@ -840,10 +1672,26 @@
     "specialty": "Endocrinologia",
     "topic": "Diabetes Gestacional - Classificação White",
     "alternatives": [
-      { "label": "A", "text": "Classe A1 (apenas hiperglicemia de jejum controlável com dieta)", "isCorrect": true },
-      { "label": "B", "text": "Classe A2 (requer insulina)" },
-      { "label": "C", "text": "Classe B (diabetes pré-gestacional)" },
-      { "label": "D", "text": "Classe G (diabetes com nefropatia)" }
+      {
+        "label": "A",
+        "text": "Classe A1 (apenas hiperglicemia de jejum controlável com dieta)",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Classe A2 (requer insulina)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Classe B (diabetes pré-gestacional)",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Classe G (diabetes com nefropatia)",
+        "isCorrect": false
+      }
     ],
     "explanation": "Classificação White: A1 = diabetes gestacional controlável com dieta. A2 = diabetes gestacional com insulina. B-T = diabetes pré-gestacional. Risco aumentado de macrossomia, hipoglicemia neonatal. Monitorização glicemia pré e pós-prandial."
   },
@@ -856,10 +1704,26 @@
     "specialty": "Neurologia",
     "topic": "Tremor de Repouso com QT Longo",
     "alternatives": [
-      { "label": "A", "text": "Parkinsonismo induzido por antipsicótico ou metoclopramida", "isCorrect": true },
-      { "label": "B", "text": "Doença de Parkinson idiopática" },
-      { "label": "C", "text": "Tremor essencial" },
-      { "label": "D", "text": "Ataxia cerebelar" }
+      {
+        "label": "A",
+        "text": "Parkinsonismo induzido por antipsicótico ou metoclopramida",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Doença de Parkinson idiopática",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Tremor essencial",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Ataxia cerebelar",
+        "isCorrect": false
+      }
     ],
     "explanation": "Tremor repouso melhora com movimento = Parkinson. QT longo + sintomas extrapiramidais sugerem antipsicótico (haloperidol prolonga QT). Descontinuar agente causal. Trihexifenidil pode ajudar acutamente. Risco síndrome neuroléptica maligna."
   },
@@ -872,10 +1736,26 @@
     "specialty": "Infectologia",
     "topic": "Candidemia em Imunocomprometido",
     "alternatives": [
-      { "label": "A", "text": "Fluconazol IV 400mg/dia ou anidulafungina se albicans não-suscetível", "isCorrect": true },
-      { "label": "B", "text": "Apenas fluconazol oral" },
-      { "label": "C", "text": "Apenas anfotericina B" },
-      { "label": "D", "text": "Observação sem tratamento" }
+      {
+        "label": "A",
+        "text": "Fluconazol IV 400mg/dia ou anidulafungina se albicans não-suscetível",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas fluconazol oral",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas anfotericina B",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Observação sem tratamento",
+        "isCorrect": false
+      }
     ],
     "explanation": "Candidemia: sepse fúngica requer tratamento IV. Fluconazol se C. albicans suscetível. Anidulafungina/micafungina se não-albicans ou resistência. Remover cateter central se possível. ART para HIV aumenta imunidade."
   },
@@ -888,10 +1768,26 @@
     "specialty": "Cardiologia",
     "topic": "Doença Arterial Periférica",
     "alternatives": [
-      { "label": "A", "text": "Angiografia com cateter ou CT angiografia para planejamento revascularização", "isCorrect": true },
-      { "label": "B", "text": "Apenas anticoagulação" },
-      { "label": "C", "text": "Repouso sem investigação" },
-      { "label": "D", "text": "Apenas tratamento dos sintomas" }
+      {
+        "label": "A",
+        "text": "Angiografia com cateter ou CT angiografia para planejamento revascularização",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas anticoagulação",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Repouso sem investigação",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas tratamento dos sintomas",
+        "isCorrect": false
+      }
     ],
     "explanation": "DAP com oclusão ilíaca: risco amputação. Angiografia permite intervalo revascularização (PTA com stent vs cirurgia bypass). Reabilitação pós-intervenção. Cessação tabagismo essencial. Prognóstico melhor se revascularizado."
   },
@@ -904,10 +1800,26 @@
     "specialty": "Reumatologia",
     "topic": "Gota Aguda",
     "alternatives": [
-      { "label": "A", "text": "Aguda: AINE ou colchicina; Crônico: alopurinol ou febuxostat após 2-4 semanas", "isCorrect": true },
-      { "label": "B", "text": "Apenas alopurinol imediato" },
-      { "label": "C", "text": "Apenas repouso e fluidos" },
-      { "label": "D", "text": "Apenas anti-hipertensivos" }
+      {
+        "label": "A",
+        "text": "Aguda: AINE ou colchicina; Crônico: alopurinol ou febuxostat após 2-4 semanas",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas alopurinol imediato",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas repouso e fluidos",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas anti-hipertensivos",
+        "isCorrect": false
+      }
     ],
     "explanation": "Gota: crise aguda com AINE/colchicina. Nunca iniciar uratizador durante crise (pode piorar). Alopurinol 2-4 semanas após resolução, começar baixa dose (100mg) e titular. Cálculos renais indicam hiperexcretor: alopurinol preferível a febuxostat."
   },
@@ -920,10 +1832,26 @@
     "specialty": "Pneumologia",
     "topic": "Asma Não-Alérgica",
     "alternatives": [
-      { "label": "A", "text": "Asma não-alérgica (hiperreatividade brônquica); evitar gatilhos + beta-2 agonista conforme necessário", "isCorrect": true },
-      { "label": "B", "text": "Apenas rinite alérgica" },
-      { "label": "C", "text": "DPOC" },
-      { "label": "D", "text": "Apenas tosse psicogênica" }
+      {
+        "label": "A",
+        "text": "Asma não-alérgica (hiperreatividade brônquica); evitar gatilhos + beta-2 agonista conforme necessário",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas rinite alérgica",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "DPOC",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas tosse psicogênica",
+        "isCorrect": false
+      }
     ],
     "explanation": "Asma não-alérgica: hiperreatividade às mudanças temperatura/umidade. Teste provocação com metacolina positivo. Tratamento: evitar gatilhos, beta-2 agonista, possível corticoide inalado. Prognóstico melhor que forma alérgica."
   },
@@ -936,10 +1864,26 @@
     "specialty": "Gastroenterologia",
     "topic": "Anemia Megaloblástica Pós-Gastrectomia",
     "alternatives": [
-      { "label": "A", "text": "Deficiência B12 (ausência fator intrínseco pós-gastrectomia); B12 IM mensal", "isCorrect": true },
-      { "label": "B", "text": "Apenas deficiência folato" },
-      { "label": "C", "text": "Anemia ferropriva" },
-      { "label": "D", "text": "Síndrome Dumping" }
+      {
+        "label": "A",
+        "text": "Deficiência B12 (ausência fator intrínseco pós-gastrectomia); B12 IM mensal",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas deficiência folato",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Anemia ferropriva",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Síndrome Dumping",
+        "isCorrect": false
+      }
     ],
     "explanation": "Gastrectomia remove fundo gástrico (fator intrínseco). Deficiência B12 desenvolve anos após (estoques corporais 3-5 anos). Polineuropatia irreversível se não tratada. B12 IM 1000mcg mensal indefinidamente. Folato concomitante."
   },
@@ -952,10 +1896,26 @@
     "specialty": "Hematologia",
     "topic": "Mielodisplasia com Pancitopenia",
     "alternatives": [
-      { "label": "A", "text": "Síndrome Mielodisplásica com citopenia; transfusões de suporte, possível azacitidina", "isCorrect": true },
-      { "label": "B", "text": "Apenas anemia aplástica" },
-      { "label": "C", "text": "Trombocitopenia imune" },
-      { "label": "D", "text": "Apenas deficiência folato" }
+      {
+        "label": "A",
+        "text": "Síndrome Mielodisplásica com citopenia; transfusões de suporte, possível azacitidina",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas anemia aplástica",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Trombocitopenia imune",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas deficiência folato",
+        "isCorrect": false
+      }
     ],
     "explanation": "SMD: pancitopenia + displasia medular. Risco progressão para leucemia aguda. Azacitidina reduz progressão 50%. Transfusões PRN. Quelante ferro. Monitorar blastos. Prognóstico depende citogenética."
   },
@@ -968,10 +1928,26 @@
     "specialty": "Neurologia",
     "topic": "Glioma Cerebral",
     "alternatives": [
-      { "label": "A", "text": "Glioblastoma ou glioma anaplástico; biópsia/ressecção máxima + radioterapia/quimioterapia", "isCorrect": true },
-      { "label": "B", "text": "Apenas angioma" },
-      { "label": "C", "text": "Apenas meningioma benigno" },
-      { "label": "D", "text": "Apenas inflamação" }
+      {
+        "label": "A",
+        "text": "Glioblastoma ou glioma anaplástico; biópsia/ressecção máxima + radioterapia/quimioterapia",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas angioma",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas meningioma benigno",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas inflamação",
+        "isCorrect": false
+      }
     ],
     "explanation": "Glioma: convulsão (70%), cefaleia, efeito de massa. Grau IV (glioblastoma) é mais agressivo. Ressecção máxima > biópsia. Radioterapia + temozolomida estende mediana sobrevida para 14-15 meses. Prognóstico ruim (mediana <2 anos)."
   },
@@ -984,10 +1960,26 @@
     "specialty": "Infectologia",
     "topic": "Vulvovaginite por Candida",
     "alternatives": [
-      { "label": "A", "text": "Fluconazol 150mg VO dose única ou miconazol/tioconazol tópico", "isCorrect": true },
-      { "label": "B", "text": "Apenas metronidazol" },
-      { "label": "C", "text": "Apenas repouso sexual" },
-      { "label": "D", "text": "Apenas higiene local" }
+      {
+        "label": "A",
+        "text": "Fluconazol 150mg VO dose única ou miconazol/tioconazol tópico",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas metronidazol",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas repouso sexual",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas higiene local",
+        "isCorrect": false
+      }
     ],
     "explanation": "Candidíase vulvovaginal: fluconazol oral única dose é conveniente. Tópicos (miconazol creme) alternativa se grávida (absorção sistêmica mínima). Parceiro raramente requer tratamento. Recorrências mensais sugere HIV ou diabetes."
   },
@@ -1000,10 +1992,26 @@
     "specialty": "Cardiologia",
     "topic": "Dor Torácica com Baixo Risco",
     "alternatives": [
-      { "label": "A", "text": "Teste de estresse (ergométrica/cintilografia) se probabilidade intermediária", "isCorrect": true },
-      { "label": "B", "text": "Apenas analgésicos" },
-      { "label": "C", "text": "Angiografia coronária imediata" },
-      { "label": "D", "text": "Apenas observação sem investigação" }
+      {
+        "label": "A",
+        "text": "Teste de estresse (ergométrica/cintilografia) se probabilidade intermediária",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas analgésicos",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Angiografia coronária imediata",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas observação sem investigação",
+        "isCorrect": false
+      }
     ],
     "explanation": "Dor torácica típica com troponina negativa e ECG normal tem risco baixo de SCA. Teste estresse estratifica risco. Se negativo e sintomas resolvem, alta hospitalar com seguimento. Se positivo, considerar angiografia."
   },
@@ -1016,10 +2024,26 @@
     "specialty": "Reumatologia",
     "topic": "Lúpus com Nefrite",
     "alternatives": [
-      { "label": "A", "text": "Biópsia renal + prednisona + metotrexato/micofenolato para nefrite lúpica", "isCorrect": true },
-      { "label": "B", "text": "Apenas hidroxicloroquina" },
-      { "label": "C", "text": "Apenas observação" },
-      { "label": "D", "text": "Apenas antiinflamatórios" }
+      {
+        "label": "A",
+        "text": "Biópsia renal + prednisona + metotrexato/micofenolato para nefrite lúpica",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas hidroxicloroquina",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas observação",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas antiinflamatórios",
+        "isCorrect": false
+      }
     ],
     "explanation": "Nefrite lúpica (hematúria + proteinúria): biópsia define classe (I-VI). Prednisona 1mg/kg/dia + micofenolato (alternativa ciclofosfamida) reduz progressão para insuficiência renal. Monitorização creatinina mensal."
   },
@@ -1032,10 +2056,26 @@
     "specialty": "Pneumologia",
     "topic": "Mesotelioma Pleural",
     "alternatives": [
-      { "label": "A", "text": "Biópsia pleural (toracoscopia ou agulha) para confirmar mesotelioma", "isCorrect": true },
-      { "label": "B", "text": "Apenas tomografia com seguimento" },
-      { "label": "C", "text": "Apenas drenagem pleural de conforto" },
-      { "label": "D", "text": "Apenas observação sem biopsia" }
+      {
+        "label": "A",
+        "text": "Biópsia pleural (toracoscopia ou agulha) para confirmar mesotelioma",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas tomografia com seguimento",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas drenagem pleural de conforto",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas observação sem biopsia",
+        "isCorrect": false
+      }
     ],
     "explanation": "Exposição asbesto + derrame pleural + espessamento = risco mesotelioma. Biópsia confirmação diagnóstica. Imunohistoquímica: CK5/6+, WT1+, calretinina+. Prognóstico grave (mediana 12-21 meses). Quimioterapia cisplatina + pemetrexed."
   },
@@ -1048,10 +2088,26 @@
     "specialty": "Neurologia",
     "topic": "Polineuropatia",
     "alternatives": [
-      { "label": "A", "text": "Polineuropatia sensitiva; investigar: eletroneuromiografia, glicemia, vitamina B12, sífilis", "isCorrect": true },
-      { "label": "B", "text": "Apenas mielopatia cervical" },
-      { "label": "C", "text": "Apenas fraqueza muscular primária" },
-      { "label": "D", "text": "Apenas distúrbio psicogênico" }
+      {
+        "label": "A",
+        "text": "Polineuropatia sensitiva; investigar: eletroneuromiografia, glicemia, vitamina B12, sífilis",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas mielopatia cervical",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas fraqueza muscular primária",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas distúrbio psicogênico",
+        "isCorrect": false
+      }
     ],
     "explanation": "Polineuropatia: dormência progressiva, reflexos abolidos, sem lesão medular. Causas: diabetes, B12, álcool, toxinas, HIV, sífilis, vasculite. ENMG diferencia desmielinizante vs axonal. Tratamento da causa primária essencial."
   },
@@ -1064,10 +2120,26 @@
     "specialty": "Endocrinologia",
     "topic": "Cetoacidose Diabética",
     "alternatives": [
-      { "label": "A", "text": "Cetoacidose diabética; insulina rápida IV + fluidos + eletrólitos + monitorização", "isCorrect": true },
-      { "label": "B", "text": "Apenas hiperglicemia simples" },
-      { "label": "C", "text": "Apenas cetose alcoólica" },
-      { "label": "D", "text": "Apenas desidratação" }
+      {
+        "label": "A",
+        "text": "Cetoacidose diabética; insulina rápida IV + fluidos + eletrólitos + monitorização",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas hiperglicemia simples",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas cetose alcoólica",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas desidratação",
+        "isCorrect": false
+      }
     ],
     "explanation": "CAD: hiperglicemia + acidose (pH <7.30) + cetonemia. Insulina rápida reduz glicemia 100mg/dL/h. Reposição agressiva K+ (risco hipocalemia com insulina). Procurar precipitante (infecção, IAM). Mortalidade 1-5% com tratamento."
   },
@@ -1080,10 +2152,26 @@
     "specialty": "Infectologia",
     "topic": "Shigelose",
     "alternatives": [
-      { "label": "A", "text": "Repouso + fluidos IV + antibiótico (ciprofloxacina) se disenteria", "isCorrect": true },
-      { "label": "B", "text": "Apenas loperamida" },
-      { "label": "C", "text": "Apenas observação" },
-      { "label": "D", "text": "Cirurgia de emergência" }
+      {
+        "label": "A",
+        "text": "Repouso + fluidos IV + antibiótico (ciprofloxacina) se disenteria",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas loperamida",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas observação",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Cirurgia de emergência",
+        "isCorrect": false
+      }
     ],
     "explanation": "Shigelose: disenteria com risco complicações. Fluidos essencial. Antibiótico reduz duração 50%. Contraindicação loperamida (aumenta risco megacólon tóxico). Contatos monitorados. Precauções de higiene (alto contágio)."
   },
@@ -1096,10 +2184,26 @@
     "specialty": "Nefrologia",
     "topic": "Insuficiência Renal Estágio 5D",
     "alternatives": [
-      { "label": "A", "text": "Osteodistrofia renal (hiperparatireoidismo secundário, calcificações vasculares)", "isCorrect": true },
-      { "label": "B", "text": "Apenas anemia" },
-      { "label": "C", "text": "Apenas hipertensão" },
-      { "label": "D", "text": "Apenas desnutrição" }
+      {
+        "label": "A",
+        "text": "Osteodistrofia renal (hiperparatireoidismo secundário, calcificações vasculares)",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas anemia",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas hipertensão",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas desnutrição",
+        "isCorrect": false
+      }
     ],
     "explanation": "DRC dialítica: hiperparatiroidismo secundário → P elevado, Ca baixo. Calcificações vasculares aceleram morte cardiovascular. Quelante fósforo, vitamina D ativa, possível cinacalcete. Risco morte súbita arrítmica."
   },
@@ -1112,10 +2216,26 @@
     "specialty": "Gastroenterologia",
     "topic": "Varizes Esofágicas com Sangramento",
     "alternatives": [
-      { "label": "A", "text": "Ligadura endoscópica + terlipressina IV + albumina 6% + protoniero IV", "isCorrect": true },
-      { "label": "B", "text": "Apenas transfusão maciça" },
-      { "label": "C", "text": "Apenas esclerose sem ligadura" },
-      { "label": "D", "text": "Apenas observação" }
+      {
+        "label": "A",
+        "text": "Ligadura endoscópica + terlipressina IV + albumina 6% + protoniero IV",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas transfusão maciça",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas esclerose sem ligadura",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas observação",
+        "isCorrect": false
+      }
     ],
     "explanation": "Sangramento varicoso: emergência. Ligadura elástica padrão ouro (melhor que esclerose). Terlipressina reduz resangramento. Albumina 6% restaura volemia (evita sobrecarga). Restrição fluidos (risco ascite/encefalopatia). Antibióticos profiláticos (ceftriaxona)."
   },
@@ -1128,10 +2248,26 @@
     "specialty": "Hematologia",
     "topic": "Gamopatia Monoclonal",
     "alternatives": [
-      { "label": "A", "text": "Mieloma múltiplo; biopsia medular confirmará, depois quimioterapia", "isCorrect": true },
-      { "label": "B", "text": "Apenas hiperparatireoidismo" },
-      { "label": "C", "text": "Apenas hipervitaminose A" },
-      { "label": "D", "text": "Apenas insuficiência renal" }
+      {
+        "label": "A",
+        "text": "Mieloma múltiplo; biopsia medular confirmará, depois quimioterapia",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas hiperparatireoidismo",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas hipervitaminose A",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas insuficiência renal",
+        "isCorrect": false
+      }
     ],
     "explanation": "Mieloma: proteína monoclonal + anemia + hipercalcemia + dor óssea. Biópsia medular >30% plasmócitos. Citogenética prognóstico. Terapia multi-agente (bortezomibe, lenalidomida, dexametasona) + TCTH. Bisfosfonate para osso."
   },
@@ -1144,10 +2280,26 @@
     "specialty": "Cardiologia",
     "topic": "Taquicardia Ventricular",
     "alternatives": [
-      { "label": "A", "text": "Taquicardia ventricular sustentada; amiodarona + cardioversão sincronizada se instável", "isCorrect": true },
-      { "label": "B", "text": "Apenas SVT com aberrância" },
-      { "label": "C", "text": "Apenas tremor muscular" },
-      { "label": "D", "text": "Apenas artefato de ECG" }
+      {
+        "label": "A",
+        "text": "Taquicardia ventricular sustentada; amiodarona + cardioversão sincronizada se instável",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas SVT com aberrância",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas tremor muscular",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas artefato de ECG",
+        "isCorrect": false
+      }
     ],
     "explanation": "TV sustentada: risco morte súbita. Cardioversão sincronizada se hemodinamicamente instável. Amiodarona IV (15mg/kg em 30-60min) se estável. ICD após resolução episódio. Correção eletrolítica (K, Mg, Ca). Evitar classe IC sem correção."
   },
@@ -1160,10 +2312,26 @@
     "specialty": "Reumatologia",
     "topic": "Esclerodermia Forma Difusa",
     "alternatives": [
-      { "label": "A", "text": "Esclerodermia sistêmica forma difusa (dcSSc); investigar fibrose pulmonar e crise renal", "isCorrect": true },
-      { "label": "B", "text": "Forma limitada (CREST)" },
-      { "label": "C", "text": "Apenas síndrome Raynaud primária" },
-      { "label": "D", "text": "Apenas poliartrite inflamatória" }
+      {
+        "label": "A",
+        "text": "Esclerodermia sistêmica forma difusa (dcSSc); investigar fibrose pulmonar e crise renal",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Forma limitada (CREST)",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas síndrome Raynaud primária",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas poliartrite inflamatória",
+        "isCorrect": false
+      }
     ],
     "explanation": "dcSSc (anti-Scl-70+): acometimento cutâneo proximal, órgãos internos. Fibrose pulmonar 80%, cardiopatia 30%, crise renal 10%. Vigilância: TCAR anual, PA, creatinina. Bosentan para crise renal. Prognóstico pior que forma limitada."
   },
@@ -1176,10 +2344,26 @@
     "specialty": "Pneumologia",
     "topic": "Sarcoidose",
     "alternatives": [
-      { "label": "A", "text": "Sarcoidose (estágio 1); monitorar com TC em 3-6 meses, corticoides se sintomático", "isCorrect": true },
-      { "label": "B", "text": "Apenas tuberculose" },
-      { "label": "C", "text": "Apenas coccidioidomicose" },
-      { "label": "D", "text": "Apenas artrite reumatoide" }
+      {
+        "label": "A",
+        "text": "Sarcoidose (estágio 1); monitorar com TC em 3-6 meses, corticoides se sintomático",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas tuberculose",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas coccidioidomicose",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas artrite reumatoide",
+        "isCorrect": false
+      }
     ],
     "explanation": "Sarcoidose: linfadenopatia hilar, nódulos eritematosos, Kveim+. Biópsia mostra granulomas não-caseosos. Maioria (90%) resolvem espontaneamente. Corticoides se hipercalcemia, fibrose pulmonar ou sintomas. Seguimento 2-5 anos."
   },
@@ -1192,10 +2376,26 @@
     "specialty": "Endocrinologia",
     "topic": "Tireoidite de Hashimoto",
     "alternatives": [
-      { "label": "A", "text": "Hipotireoidismo por tireoidite de Hashimoto; levotiroxina ajustada por TSH", "isCorrect": true },
-      { "label": "B", "text": "Apenas depressão" },
-      { "label": "C", "text": "Apenas obesidade simples" },
-      { "label": "D", "text": "Apenas anemia" }
+      {
+        "label": "A",
+        "text": "Hipotireoidismo por tireoidite de Hashimoto; levotiroxina ajustada por TSH",
+        "isCorrect": true
+      },
+      {
+        "label": "B",
+        "text": "Apenas depressão",
+        "isCorrect": false
+      },
+      {
+        "label": "C",
+        "text": "Apenas obesidade simples",
+        "isCorrect": false
+      },
+      {
+        "label": "D",
+        "text": "Apenas anemia",
+        "isCorrect": false
+      }
     ],
     "explanation": "Hashimoto: anti-TPO+ com hipotireoidismo. Levotiroxina início 25-50mcg/dia, aumentar 25mcg a cada 4-6 semanas até TSH 2-4 mIU/L. Monitorização trimestral até estável, depois anual. Gravidez: aumentar 25-30% dose."
   }
