@@ -9,44 +9,70 @@ Interface e conteúdo em português do Brasil.
 
 ## Começando
 
+Requer um banco PostgreSQL (local via Docker, ou um serviço gerenciado gratuito como Neon
+ou Supabase).
+
 ```bash
+cp .env.example .env   # ajuste DATABASE_URL para seu Postgres
 npm install
-npm run setup     # prisma generate + db push + seed
-npm run dev       # http://localhost:3000
+npm run setup           # prisma generate + migrate deploy + seed
+npm run dev              # http://localhost:3000
+```
+
+Sem Postgres à mão, o jeito mais rápido é subir um container local:
+
+```bash
+docker run --name qbank-db -e POSTGRES_PASSWORD=postgres -e POSTGRES_DB=qbank \
+  -p 5432:5432 -d postgres:16
+# DATABASE_URL="postgresql://postgres:postgres@localhost:5432/qbank?schema=public"
 ```
 
 Login de demonstração: `demo@qbank.local` / `demo1234`
 
-O `.env` já vem com um `DATABASE_URL` de SQLite para desenvolvimento. A camada de IA é
-opcional — sem `ANTHROPIC_API_KEY` a aplicação funciona por completo, apenas sem geração de
-questões e com o tutor em modo degradado.
+A camada de IA é opcional — sem `ANTHROPIC_API_KEY` a aplicação funciona por completo,
+apenas sem geração de questões e com o tutor em modo degradado.
 
 ```bash
 # Opcional, habilita geração de questões, tutor completo e correção discursiva
 ANTHROPIC_API_KEY="sk-ant-..."
 ```
 
-## Produção
+## Deploy na Vercel
 
-Veja [**docs/03-deployment.md**](docs/03-deployment.md) para deploy em Vercel com PostgreSQL.
+1. Importe o repositório na Vercel.
+2. Crie um banco Postgres (Vercel Postgres/Neon, Supabase, Railway etc.) e defina
+   `DATABASE_URL` nas variáveis de ambiente do projeto (Production e Preview).
+   Opcionalmente defina `ANTHROPIC_API_KEY` e `AI_MODEL`.
+3. Deploy. O comando de build (`prisma generate && prisma migrate deploy && next build`)
+   já aplica as migrations do Postgres automaticamente a cada deploy.
+4. Rode `npm run db:seed` uma vez apontando para o `DATABASE_URL` de produção, para
+   popular taxonomia, perfis de prova e o banco de questões inicial.
 
-Resumo:
-- Ambiente: Vercel + Vercel Postgres
-- Migrações: Prisma Migrate (aplicadas automaticamente)
-- Autenticação: AUTH_SECRET seguro obrigatório
-- IA: ANTHROPIC_API_KEY opcional
+Veja [**docs/03-deployment.md**](docs/03-deployment.md) para guia completo (local dev setup,
+build local, troubleshooting, performance monitoring).
+
+## Variáveis de ambiente
+
+| Variável | Obrigatória | Descrição |
+|---|---|---|
+| `DATABASE_URL` | Sim | Connection string do PostgreSQL |
+| `ANTHROPIC_API_KEY` | Não | Habilita geração de questões, tutor completo e correção discursiva via IA |
+| `AI_MODEL` | Não | Modelo Anthropic usado pela camada de IA (padrão: `claude-opus-5`) |
+| `AUTH_SECRET` | Não | Autenticação — gere com `openssl rand -base64 32` |
 
 ## Scripts
 
 | Comando | O que faz |
 |---|---|
 | `npm run dev` | Servidor de desenvolvimento |
-| `npm run build` | Build de produção (roda `prisma generate` antes) |
+| `npm run build` | Build de produção (`prisma generate` + `prisma migrate deploy` + `next build`) |
 | `npm start` | Servidor de produção |
 | `npm test` | Suíte de testes (Vitest) |
 | `npm run typecheck` | `tsc --noEmit` |
+| `npm run db:migrate` | Cria uma nova migration a partir de mudanças no schema (dev) |
+| `npm run db:migrate:deploy` | Aplica migrations pendentes (usado no build) |
 | `npm run db:seed` | Repopula taxonomia, perfis e banco de questões (idempotente) |
-| `npm run db:reset` | Recria o banco do zero e semeia |
+| `npm run db:reset` | Recria o banco do zero (`prisma migrate reset`) e semeia |
 
 ## O que está implementado
 

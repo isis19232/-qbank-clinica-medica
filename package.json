@@ -5,17 +5,20 @@
   "description": "Adaptive Clinical Medicine QBank for Brazilian residency preparation",
   "scripts": {
     "dev": "next dev",
-    "build": "prisma generate && next build",
+    "build": "prisma generate && prisma migrate deploy && next build",
     "start": "next start",
+    "postinstall": "prisma generate",
     "lint": "next lint",
     "typecheck": "tsc --noEmit",
     "test": "vitest run",
     "test:watch": "vitest",
     "db:push": "prisma db push",
     "db:generate": "prisma generate",
+    "db:migrate": "prisma migrate dev",
+    "db:migrate:deploy": "prisma migrate deploy",
     "db:seed": "tsx prisma/seed.ts",
-    "db:reset": "prisma db push --force-reset && npm run db:seed",
-    "setup": "prisma generate && prisma db push && npm run db:seed"
+    "db:reset": "prisma migrate reset --force",
+    "setup": "prisma generate && prisma migrate deploy && npm run db:seed"
   },
   "prisma": {
     "seed": "tsx prisma/seed.ts"

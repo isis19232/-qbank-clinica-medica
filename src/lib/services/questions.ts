@@ -202,6 +202,67 @@ async function idsForScope(scope: QuestionFilter["scope"], userId: string): Prom
   }
 }
 
+/**
+ * Fila de revisão editorial: questões `IN_REVIEW` (hoje, só geradas por IA)
+ * com todo o conteúdo visível, gabarito incluso — quem revisa precisa ver o
+ * que o estudante nunca vê antes de responder.
+ */
+export async function listReviewQueue() {
+  const rows = await prisma.question.findMany({
+    where: { status: "IN_REVIEW" },
+    orderBy: { createdAt: "asc" },
+    include: {
+      alternatives: { orderBy: { order: "asc" } },
+      specialty: { select: { name: true } },
+      topic: { select: { name: true } },
+    },
+  });
+
+  return rows.map((q) => ({
+    id: q.id,
+    code: q.code,
+    type: q.type,
+    sourceType: q.sourceType,
+    stem: q.stem,
+    prompt: q.prompt,
+    difficulty: q.difficulty,
+    clinicalReasoningType: q.clinicalReasoningType,
+    specialty: q.specialty,
+    topic: q.topic,
+    guidelineReference: parseJson(q.guidelineReference, guidelineArray, []),
+    explanation: parseJson(q.explanation, explanationSchema, {
+      answerSummary: "",
+      whyCorrect: "",
+      keyClues: [],
+      clinicalPearl: "",
+      commonTrap: "",
+      managementSteps: [],
+    }),
+    createdAt: q.createdAt,
+    alternatives: q.alternatives.map((a) => ({
+      id: a.id,
+      label: a.label,
+      text: a.text,
+      isCorrect: a.isCorrect,
+      rationale: a.rationale,
+    })),
+  }));
+}
+
+/** Aprova (publica) ou rejeita (retira) uma questão em revisão. Idempotente por status. */
+export async function reviewQuestion(id: string, action: "APPROVE" | "REJECT") {
+  const question = await prisma.question.findUnique({ where: { id }, select: { status: true } });
+  if (!question) return null;
+  if (question.status !== "IN_REVIEW") return { id, status: question.status };
+
+  const updated = await prisma.question.update({
+    where: { id },
+    data: { status: action === "APPROVE" ? "PUBLISHED" : "RETIRED", reviewedAt: new Date() },
+    select: { id: true, status: true },
+  });
+  return updated;
+}
+
 export async function getTaxonomy() {
   const areas = await prisma.area.findMany({
     where: { active: true },

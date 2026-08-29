@@ -1,14 +1,14 @@
 // QBank Clínica Médica — schema relacional.
-// Dev: SQLite. Produção: trocar provider para "postgresql" e ajustar DATABASE_URL.
-// Enums são modelados como String + constantes em src/lib/domain/enums.ts para
-// manter compatibilidade entre SQLite e PostgreSQL sem migrações divergentes.
+// Provider: PostgreSQL (compatível com Vercel Postgres, Neon, Supabase etc.).
+// Enums são modelados como String + constantes em src/lib/domain/enums.ts —
+// escolha original que também evita migrações divergentes entre ambientes.
 
 generator client {
   provider = "prisma-client-js"
 }
 
 datasource db {
-  provider = "sqlite"
+  provider = "postgresql"
   url      = env("DATABASE_URL")
 }
 
