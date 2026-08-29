@@ -1,0 +1,883 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>QBank Clínica Médica</title>
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Serif:wght@400;600;700&family=IBM+Plex+Mono:wght@400;500&family=Inter:wght@400;500;600;700&display=swap">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    :root {
+      --primary: #0052A3;
+      --primary-dark: #003D7A;
+      --success: #10B981;
+      --accent: #FBBF24;
+      --bg: #FFFFFF;
+      --bg-secondary: #F8FAFC;
+      --bg-tertiary: #EEF2F7;
+      --text: #1E293B;
+      --text-secondary: #64748B;
+      --border: #CBD5E1;
+      --subtle: #E2E8F0;
+    }
+
+    @media (prefers-color-scheme: dark) {
+      :root:not([data-theme="light"]) {
+        --primary: #3B82F6;
+        --primary-dark: #1E40AF;
+        --success: #10B981;
+        --accent: #FBBF24;
+        --bg: #0F172A;
+        --bg-secondary: #1E293B;
+        --bg-tertiary: #334155;
+        --text: #F1F5F9;
+        --text-secondary: #94A3B8;
+        --border: #475569;
+        --subtle: #1E293B;
+      }
+    }
+
+    :root[data-theme="dark"] {
+      --primary: #3B82F6;
+      --primary-dark: #1E40AF;
+      --success: #10B981;
+      --accent: #FBBF24;
+      --bg: #0F172A;
+      --bg-secondary: #1E293B;
+      --bg-tertiary: #334155;
+      --text: #F1F5F9;
+      --text-secondary: #94A3B8;
+      --border: #475569;
+      --subtle: #1E293B;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3, h4, h5, h6 {
+      font-family: 'IBM Plex Serif', serif;
+      font-weight: 700;
+      line-height: 1.3;
+    }
+
+    h1 {
+      font-size: clamp(2.5rem, 5vw, 4rem);
+      margin-bottom: 1rem;
+    }
+
+    h2 {
+      font-size: clamp(1.875rem, 4vw, 2.5rem);
+      margin-bottom: 0.5rem;
+    }
+
+    h3 {
+      font-size: 1.5rem;
+      margin-bottom: 0.5rem;
+    }
+
+    code, .mono {
+      font-family: 'IBM Plex Mono', monospace;
+      font-size: 0.9em;
+      background: var(--bg-tertiary);
+      padding: 0.25em 0.5em;
+      border-radius: 4px;
+    }
+
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    /* Header */
+    header {
+      background: var(--bg);
+      border-bottom: 1px solid var(--border);
+      position: sticky;
+      top: 0;
+      z-index: 100;
+      backdrop-filter: blur(10px);
+      background: var(--bg)CC;
+    }
+
+    .header-content {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 0;
+    }
+
+    .logo {
+      font-family: 'IBM Plex Serif', serif;
+      font-size: 1.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      text-decoration: none;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .logo-mark {
+      width: 32px;
+      height: 32px;
+      background: var(--primary);
+      border-radius: 6px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-weight: 700;
+      font-size: 0.9rem;
+    }
+
+    nav {
+      display: flex;
+      gap: 2rem;
+    }
+
+    nav a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      font-weight: 500;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--primary);
+    }
+
+    .cta-btn {
+      padding: 0.75rem 1.5rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 6px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .cta-btn:hover {
+      background: var(--primary-dark);
+      transform: translateY(-2px);
+    }
+
+    /* Hero */
+    .hero {
+      padding: 4rem 0 3rem;
+      text-align: center;
+    }
+
+    .hero h1 {
+      color: var(--text);
+      margin-bottom: 1rem;
+      text-wrap: balance;
+    }
+
+    .hero-subtitle {
+      font-size: 1.25rem;
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      max-width: 600px;
+      margin-left: auto;
+      margin-right: auto;
+      text-wrap: balance;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .btn-primary {
+      padding: 1rem 2rem;
+      background: var(--primary);
+      color: white;
+      border: none;
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-primary:hover {
+      background: var(--primary-dark);
+      transform: translateY(-3px);
+      box-shadow: 0 8px 16px rgba(0, 82, 163, 0.2);
+    }
+
+    .btn-secondary {
+      padding: 1rem 2rem;
+      background: var(--bg-secondary);
+      color: var(--primary);
+      border: 2px solid var(--primary);
+      border-radius: 8px;
+      font-weight: 600;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.2s;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .btn-secondary:hover {
+      background: var(--primary);
+      color: white;
+    }
+
+    /* Features Grid */
+    .features {
+      padding: 4rem 0;
+      background: var(--bg-secondary);
+    }
+
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+      margin-top: 2rem;
+    }
+
+    .feature-card {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 2rem;
+      transition: all 0.3s;
+    }
+
+    .feature-card:hover {
+      border-color: var(--primary);
+      box-shadow: 0 4px 12px rgba(0, 82, 163, 0.1);
+      transform: translateY(-4px);
+    }
+
+    .feature-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .feature-card h3 {
+      color: var(--primary);
+      margin-bottom: 0.75rem;
+    }
+
+    .feature-card p {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      line-height: 1.7;
+    }
+
+    /* Stats Section */
+    .stats {
+      padding: 4rem 0;
+    }
+
+    .stats h2 {
+      text-align: center;
+      margin-bottom: 3rem;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 2rem;
+      margin-bottom: 3rem;
+    }
+
+    .stat-card {
+      background: var(--bg-secondary);
+      border: 1px solid var(--border);
+      border-radius: 8px;
+      padding: 1.5rem;
+      text-align: center;
+    }
+
+    .stat-number {
+      font-size: 2.5rem;
+      font-weight: 700;
+      color: var(--primary);
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .stat-label {
+      color: var(--text-secondary);
+      font-size: 0.95rem;
+      margin-top: 0.5rem;
+      font-weight: 500;
+    }
+
+    /* Specialty Distribution */
+    .specialty-list {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+    }
+
+    .specialty-item {
+      background: var(--bg-secondary);
+      border-left: 4px solid var(--primary);
+      border-radius: 4px;
+      padding: 1.5rem;
+    }
+
+    .specialty-name {
+      font-weight: 600;
+      color: var(--text);
+      margin-bottom: 0.75rem;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    .specialty-count {
+      background: var(--primary);
+      color: white;
+      padding: 0.25rem 0.75rem;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      font-family: 'IBM Plex Mono', monospace;
+    }
+
+    .specialty-bar {
+      height: 8px;
+      background: var(--border);
+      border-radius: 4px;
+      overflow: hidden;
+    }
+
+    .specialty-fill {
+      height: 100%;
+      background: linear-gradient(90deg, var(--primary), var(--success));
+      transition: width 0.8s ease-out;
+    }
+
+    /* App Section */
+    .app-section {
+      padding: 4rem 0;
+      background: var(--bg-secondary);
+    }
+
+    .app-section h2 {
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .app-container {
+      background: var(--bg);
+      border: 1px solid var(--border);
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+      min-height: 600px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .app-tabs {
+      display: flex;
+      border-bottom: 1px solid var(--border);
+      background: var(--bg-secondary);
+    }
+
+    .app-tab {
+      flex: 1;
+      padding: 1rem;
+      border: none;
+      background: transparent;
+      cursor: pointer;
+      font-family: 'Inter', sans-serif;
+      font-weight: 500;
+      color: var(--text-secondary);
+      transition: all 0.2s;
+      border-bottom: 2px solid transparent;
+      margin-bottom: -1px;
+    }
+
+    .app-tab.active {
+      color: var(--primary);
+      border-bottom-color: var(--primary);
+      background: var(--bg);
+    }
+
+    .app-content {
+      flex: 1;
+      padding: 2rem;
+      overflow-y: auto;
+    }
+
+    .app-launch-container {
+      text-align: center;
+      padding: 3rem 2rem;
+    }
+
+    .app-launch-container h3 {
+      margin-bottom: 1rem;
+    }
+
+    .app-launch-container p {
+      color: var(--text-secondary);
+      margin-bottom: 2rem;
+      max-width: 400px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .features-list {
+      text-align: left;
+      display: grid;
+      gap: 1rem;
+      margin: 2rem 0;
+      max-width: 500px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .features-list li {
+      list-style: none;
+      display: flex;
+      gap: 1rem;
+      align-items: flex-start;
+    }
+
+    .features-list li::before {
+      content: "✓";
+      color: var(--success);
+      font-weight: 700;
+      font-size: 1.2rem;
+      min-width: 24px;
+    }
+
+    /* Footer */
+    footer {
+      background: var(--bg-secondary);
+      border-top: 1px solid var(--border);
+      padding: 2rem 0;
+      margin-top: 4rem;
+    }
+
+    .footer-content {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    .footer-section h4 {
+      font-family: 'IBM Plex Serif', serif;
+      margin-bottom: 1rem;
+      color: var(--text);
+    }
+
+    .footer-section a {
+      display: block;
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 0.95rem;
+      margin-bottom: 0.5rem;
+      transition: color 0.2s;
+    }
+
+    .footer-section a:hover {
+      color: var(--primary);
+    }
+
+    .footer-bottom {
+      text-align: center;
+      padding-top: 2rem;
+      border-top: 1px solid var(--border);
+      color: var(--text-secondary);
+      font-size: 0.9rem;
+    }
+
+    /* Responsive */
+    @media (max-width: 768px) {
+      nav {
+        display: none;
+      }
+
+      .hero {
+        padding: 3rem 0 2rem;
+      }
+
+      .features, .stats, .app-section {
+        padding: 3rem 0;
+      }
+
+      .container {
+        padding: 0 1rem;
+      }
+
+      .app-tabs {
+        flex-wrap: wrap;
+      }
+
+      .app-tab {
+        flex: 1;
+        min-width: 150px;
+      }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      * {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+  <!-- Header -->
+  <header>
+    <div class="container">
+      <div class="header-content">
+        <a href="#" class="logo">
+          <div class="logo-mark">CM</div>
+          QBank
+        </a>
+        <nav>
+          <a href="#features">Features</a>
+          <a href="#stats">Questões</a>
+          <a href="#app">Acessar</a>
+        </nav>
+        <a href="#app" class="cta-btn">Abrir App</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- Hero -->
+  <section class="hero">
+    <div class="container">
+      <h1>QBank Clínica Médica</h1>
+      <p class="hero-subtitle">100 questões de clínica médica de alta qualidade, seguindo o padrão de provas de residência médica</p>
+      <div class="hero-cta">
+        <a href="#app" class="btn-primary">Acessar App →</a>
+        <a href="#stats" class="btn-secondary">Ver Questões</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="container">
+      <h2>Por que usar QBank?</h2>
+      <div class="features-grid">
+        <div class="feature-card">
+          <div class="feature-icon">📚</div>
+          <h3>100 Questões Clínicas</h3>
+          <p>Banco expandido com questões modernas, baseadas em protocolos atuais e padrão de prova de residência.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📱</div>
+          <h3>Sem Instalação</h3>
+          <p>Acesse direto no navegador de qualquer dispositivo. Funciona perfeitamente no iPad, iPhone e computador.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">💾</div>
+          <h3>Dados Locais</h3>
+          <p>Seu progresso é salvo automaticamente no dispositivo. Funciona offline após o primeiro acesso.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">📊</div>
+          <h3>Estatísticas Detalhadas</h3>
+          <p>Acompanhe seu desempenho por especialidade e identifique áreas para melhora.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">🎯</div>
+          <h3>Filtros por Especialidade</h3>
+          <p>Organize seu estudo por especialidade: Cardiologia, Pneumologia, Neurologia, e mais.</p>
+        </div>
+        <div class="feature-card">
+          <div class="feature-icon">⌨️</div>
+          <h3>Atalhos do Teclado</h3>
+          <p>A-D para selecionar, Enter para confirmar, setas para navegar. Estude de forma fluida e rápida.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Stats -->
+  <section class="stats" id="stats">
+    <div class="container">
+      <h2>100 Questões Distribuídas</h2>
+
+      <div class="stats-grid">
+        <div class="stat-card">
+          <div class="stat-number">100</div>
+          <div class="stat-label">Questões Totais</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">9</div>
+          <div class="stat-label">Especialidades</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-number">50%</div>
+          <div class="stat-label">Dificuldade HARD</div>
+        </div>
+      </div>
+
+      <h3 style="text-align: center; margin-bottom: 2rem; color: var(--text-secondary);">Distribuição por Especialidade</h3>
+
+      <div class="specialty-list">
+        <div class="specialty-item">
+          <div class="specialty-name">
+            Cardiologia
+            <span class="specialty-count">13</span>
+          </div>
+          <div class="specialty-bar">
+            <div class="specialty-fill" style="width: 52%"></div>
+          </div>
+        </div>
+        <div class="specialty-item">
+          <div class="specialty-name">
+            Pneumologia
+            <span class="specialty-count">11</span>
+          </div>
+          <div class="specialty-bar">
+            <div class="specialty-fill" style="width: 44%"></div>
+          </div>
+        </div>
+        <div class="specialty-item">
+          <div class="specialty-name">
+            Reumatologia
+            <span class="specialty-count">8</span>
+          </div>
+          <div class="specialty-bar">
+            <div class="specialty-fill" style="width: 32%"></div>
+          </div>
+        </div>
+        <div class="specialty-item">
+          <div class="specialty-name">
+            Gastroenterologia
+            <span class="specialty-count">8</span>
+          </div>
+          <div class="specialty-bar">
+            <div class="specialty-fill" style="width: 32%"></div>
+          </div>
+        </div>
+        <div class="specialty-item">
+          <div class="specialty-name">
+            Neurologia
+            <span class="specialty-count">8</span>
+          </div>
+          <div class="specialty-bar">
+            <div class="specialty-fill" style="width: 32%"></div>
+          </div>
+        </div>
+        <div class="specialty-item">
+          <div class="specialty-name">
+            Endocrinologia
+            <span class="specialty-count">8</span>
+          </div>
+          <div class="specialty-bar">
+            <div class="specialty-fill" style="width: 32%"></div>
+          </div>
+        </div>
+        <div class="specialty-item">
+          <div class="specialty-name">
+            Infectologia
+            <span class="specialty-count">8</span>
+          </div>
+          <div class="specialty-bar">
+            <div class="specialty-fill" style="width: 32%"></div>
+          </div>
+        </div>
+        <div class="specialty-item">
+          <div class="specialty-name">
+            Nefrologia
+            <span class="specialty-count">6</span>
+          </div>
+          <div class="specialty-bar">
+            <div class="specialty-fill" style="width: 24%"></div>
+          </div>
+        </div>
+        <div class="specialty-item">
+          <div class="specialty-name">
+            Hematologia
+            <span class="specialty-count">5</span>
+          </div>
+          <div class="specialty-bar">
+            <div class="specialty-fill" style="width: 20%"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- App Section -->
+  <section class="app-section" id="app">
+    <div class="container" style="margin-bottom: 2rem;">
+      <h2>Acessar QBank</h2>
+    </div>
+
+    <div class="app-container">
+      <div class="app-tabs">
+        <button class="app-tab active" onclick="switchTab('online')">Online (GitHub)</button>
+        <button class="app-tab" onclick="switchTab('embed')">Link Direto</button>
+      </div>
+
+      <div class="app-content">
+        <div id="online-tab" style="display: block;">
+          <div class="app-launch-container">
+            <h3>Acessar QBank Online</h3>
+            <p>A aplicação está hospedada no GitHub e se atualiza automaticamente com novas questões.</p>
+
+            <a href="https://raw.githubusercontent.com/isis19232/-qbank-clinica-medica/claude/clinical-medicine-qbank-brazil-xuv4c6/public/index.html" class="btn-primary" target="_blank" rel="noopener noreferrer">
+              Abrir App no Navegador ↗
+            </a>
+
+            <ul class="features-list">
+              <li>✓ Funciona no iPad, iPhone, computador e tablet</li>
+              <li>✓ Nenhuma instalação necessária</li>
+              <li>✓ Seu progresso é salvo automaticamente</li>
+              <li>✓ 100 questões de alta qualidade</li>
+              <li>✓ Tema automático claro/escuro</li>
+            </ul>
+
+            <p style="margin-top: 2rem; font-size: 0.9rem; color: var(--text-secondary);">
+              <code>https://raw.githubusercontent.com/isis19232/-qbank-clinica-medica/claude/clinical-medicine-qbank-brazil-xuv4c6/public/index.html</code>
+            </p>
+          </div>
+        </div>
+
+        <div id="embed-tab" style="display: none;">
+          <div class="app-launch-container">
+            <h3>Compartilhe o Link</h3>
+            <p>Copie e compartilhe este link com seus colegas:</p>
+
+            <div style="background: var(--bg-secondary); padding: 1.5rem; border-radius: 8px; margin: 2rem 0; word-break: break-all;">
+              <code style="font-family: 'IBM Plex Mono', monospace; color: var(--primary);">https://raw.githubusercontent.com/isis19232/-qbank-clinica-medica/claude/clinical-medicine-qbank-brazil-xuv4c6/public/index.html</code>
+            </div>
+
+            <button class="btn-primary" onclick="copyToClipboard()">📋 Copiar Link</button>
+
+            <div style="margin-top: 2rem; text-align: left; max-width: 400px; margin-left: auto; margin-right: auto;">
+              <h4 style="margin-bottom: 1rem;">Como usar:</h4>
+              <ol style="color: var(--text-secondary); line-height: 2; margin-left: 1.5rem;">
+                <li>Abra o link em qualquer navegador (Safari, Chrome, Edge)</li>
+                <li>Marque como favorito para acesso rápido</li>
+                <li>Seu progresso é salvo automaticamente no dispositivo</li>
+                <li>Compartilhe com seus colegas de residência</li>
+              </ol>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <div class="footer-content">
+        <div class="footer-section">
+          <h4>QBank</h4>
+          <p style="color: var(--text-secondary); font-size: 0.9rem;">
+            Banco de questões de clínica médica focado em excelência educacional para residência médica brasileira.
+          </p>
+        </div>
+        <div class="footer-section">
+          <h4>Sobre</h4>
+          <a href="https://github.com/isis19232/-qbank-clinica-medica" target="_blank" rel="noopener noreferrer">Repositório GitHub</a>
+          <a href="https://github.com/isis19232/-qbank-clinica-medica/blob/claude/clinical-medicine-qbank-brazil-xuv4c6/README.md" target="_blank" rel="noopener noreferrer">Documentação</a>
+        </div>
+        <div class="footer-section">
+          <h4>Recursos</h4>
+          <a href="#features">Features</a>
+          <a href="#stats">Questões</a>
+          <a href="#app">Acessar App</a>
+        </div>
+      </div>
+      <div class="footer-bottom">
+        <p>&copy; 2026 QBank Clínica Médica. Desenvolvido para médicos residentes brasileiros.</p>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    function switchTab(tabName) {
+      // Hide all tabs
+      document.querySelectorAll('[id$="-tab"]').forEach(tab => {
+        tab.style.display = 'none';
+      });
+
+      // Deactivate all buttons
+      document.querySelectorAll('.app-tab').forEach(btn => {
+        btn.classList.remove('active');
+      });
+
+      // Show selected tab
+      document.getElementById(tabName + '-tab').style.display = 'block';
+
+      // Activate selected button
+      event.target.classList.add('active');
+    }
+
+    function copyToClipboard() {
+      const url = 'https://raw.githubusercontent.com/isis19232/-qbank-clinica-medica/claude/clinical-medicine-qbank-brazil-xuv4c6/public/index.html';
+      navigator.clipboard.writeText(url).then(() => {
+        const btn = event.target;
+        const originalText = btn.textContent;
+        btn.textContent = '✓ Copiado!';
+        setTimeout(() => {
+          btn.textContent = originalText;
+        }, 2000);
+      });
+    }
+
+    // Smooth scroll for anchors
+    document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+      anchor.addEventListener('click', function (e) {
+        const href = this.getAttribute('href');
+        if (href !== '#' && document.querySelector(href)) {
+          e.preventDefault();
+          document.querySelector(href).scrollIntoView({
+            behavior: 'smooth'
+          });
+        }
+      });
+    });
+
+    // Animate specialty bars on scroll
+    const observerOptions = {
+      threshold: 0.3,
+      rootMargin: '0px 0px -100px 0px'
+    };
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.style.width = entry.target.getAttribute('data-width') || entry.target.style.width;
+        }
+      });
+    }, observerOptions);
+
+    document.querySelectorAll('.specialty-fill').forEach((el, idx) => {
+      const width = el.style.width;
+      el.setAttribute('data-width', width);
+      el.style.width = '0';
+      observer.observe(el);
+    });
+  </script>
+</body>
+</html>
