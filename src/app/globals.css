@@ -1,0 +1,150 @@
+@import "tailwindcss";
+
+/*
+ * Tema. Definido inteiramente em tokens no :root para que o modo escuro seja
+ * uma troca de valores, não uma segunda folha de estilo.
+ */
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --color-ink-50: #f6f7f9;
+  --color-ink-100: #eceef2;
+  --color-ink-200: #d5dae3;
+  --color-ink-300: #b0b9c9;
+  --color-ink-400: #8492a9;
+  --color-ink-500: #64748b;
+  --color-ink-600: #4d5a6d;
+  --color-ink-700: #3d4859;
+  --color-ink-800: #2b3341;
+  --color-ink-900: #1b2230;
+  --color-ink-950: #10151f;
+
+  --color-brand-50: #eef6ff;
+  --color-brand-100: #d9ecff;
+  --color-brand-200: #bcdcff;
+  --color-brand-300: #8ec6ff;
+  --color-brand-400: #59a5fb;
+  --color-brand-500: #3283f6;
+  --color-brand-600: #1e64eb;
+  --color-brand-700: #1a4fd8;
+  --color-brand-800: #1c42af;
+  --color-brand-900: #1d3b8a;
+
+  --color-ok-500: #16a34a;
+  --color-ok-100: #dcfce7;
+  --color-warn-500: #d97706;
+  --color-warn-100: #fef3c7;
+  --color-bad-500: #dc2626;
+  --color-bad-100: #fee2e2;
+}
+
+:root {
+  --bg: #f7f8fa;
+  --surface: #ffffff;
+  --surface-2: #f2f4f7;
+  --border: #e2e6ed;
+  --text: #1b2230;
+  --text-muted: #64748b;
+  color-scheme: light;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --bg: #10151f;
+    --surface: #1b2230;
+    --surface-2: #232c3c;
+    --border: #2f394b;
+    --text: #eceef2;
+    --text-muted: #8492a9;
+    color-scheme: dark;
+  }
+}
+
+* {
+  border-color: var(--border);
+}
+
+body {
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ── Primitivos reutilizados em toda a aplicação ── */
+
+.surface {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: 0.75rem;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  border-radius: 0.5rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  cursor: pointer;
+  transition: background 120ms ease, border-color 120ms ease, opacity 120ms ease;
+}
+.btn:hover:not(:disabled) { background: var(--surface-2); }
+.btn:disabled { opacity: 0.5; cursor: not-allowed; }
+.btn:focus-visible { outline: 2px solid var(--color-brand-500); outline-offset: 2px; }
+
+.btn-primary {
+  background: var(--color-brand-600);
+  border-color: var(--color-brand-600);
+  color: #fff;
+}
+.btn-primary:hover:not(:disabled) { background: var(--color-brand-700); }
+
+.input {
+  width: 100%;
+  border-radius: 0.5rem;
+  border: 1px solid var(--border);
+  background: var(--surface);
+  color: var(--text);
+  padding: 0.5rem 0.75rem;
+  font-size: 0.875rem;
+}
+.input:focus { outline: 2px solid var(--color-brand-500); outline-offset: -1px; }
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.25rem;
+  border-radius: 9999px;
+  border: 1px solid var(--border);
+  background: var(--surface-2);
+  padding: 0.125rem 0.625rem;
+  font-size: 0.6875rem;
+  font-weight: 500;
+  letter-spacing: 0.01em;
+}
+
+/* Tabelas de exames complementares — precisam rolar em telas estreitas. */
+.scroll-x {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+}
+
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: none; }
+}
+.fade-in { animation: fade-in 180ms ease-out; }
+
+@media print {
+  .no-print { display: none !important; }
+}

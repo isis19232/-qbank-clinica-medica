@@ -1,0 +1,563 @@
+// QBank Clínica Médica — schema relacional.
+// Dev: SQLite. Produção: trocar provider para "postgresql" e ajustar DATABASE_URL.
+// Enums são modelados como String + constantes em src/lib/domain/enums.ts para
+// manter compatibilidade entre SQLite e PostgreSQL sem migrações divergentes.
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlite"
+  url      = env("DATABASE_URL")
+}
+
+// ─────────────────────────────────────────────────────────────
+// Identidade e sessão
+// ─────────────────────────────────────────────────────────────
+
+model User {
+  id           String   @id @default(cuid())
+  email        String   @unique
+  name         String
+  passwordHash String
+  role         String   @default("STUDENT") // STUDENT | AUTHOR | ADMIN
+  targetExamId String?
+  dailyGoal    Int      @default(20)
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+
+  targetExam     ExamProfile?         @relation(fields: [targetExamId], references: [id], onDelete: SetNull)
+  sessions       Session[]
+  attempts       Attempt[]
+  questionStats  UserQuestionStat[]
+  errorEntries   ErrorNotebookEntry[]
+  flashcards     Flashcard[]
+  studySessions  StudySession[]
+  favorites      Favorite[]
+  generationJobs GenerationJob[]
+
+  @@index([targetExamId])
+}
+
+model Session {
+  id        String   @id @default(cuid())
+  userId    String
+  tokenHash String   @unique
+  userAgent String?
+  expiresAt DateTime
+  createdAt DateTime @default(now())
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@index([userId])
+  @@index([expiresAt])
+}
+
+// ─────────────────────────────────────────────────────────────
+// Taxonomia — Área > Especialidade > Tópico > Subtópico
+// ─────────────────────────────────────────────────────────────
+
+model Area {
+  id     String  @id @default(cuid())
+  slug   String  @unique
+  name   String
+  order  Int     @default(0)
+  active Boolean @default(true)
+
+  specialties Specialty[]
+}
+
+model Specialty {
+  id     String @id @default(cuid())
+  areaId String
+  slug   String @unique
+  name   String
+  order  Int    @default(0)
+
+  area      Area       @relation(fields: [areaId], references: [id], onDelete: Cascade)
+  topics    Topic[]
+  questions Question[]
+
+  @@index([areaId])
+}
+
+model Topic {
+  id          String @id @default(cuid())
+  specialtyId String
+  slug        String @unique
+  name        String
+  // Peso 1–5 de relevância para provas de residência. Alimenta o motor adaptativo
+  // e o cálculo de "alta importância + baixo desempenho".
+  yieldWeight Int    @default(3)
+  order       Int    @default(0)
+
+  specialty Specialty  @relation(fields: [specialtyId], references: [id], onDelete: Cascade)
+  subtopics Subtopic[]
+  questions Question[]
+
+  @@index([specialtyId])
+}
+
+model Subtopic {
+  id      String @id @default(cuid())
+  topicId String
+  slug    String @unique
+  name    String
+
+  topic     Topic      @relation(fields: [topicId], references: [id], onDelete: Cascade)
+  questions Question[]
+
+  @@index([topicId])
+}
+
+model Tag {
+  id   String @id @default(cuid())
+  slug String @unique
+  name String
+  kind String @default("THEME") // THEME | GUIDELINE | SKILL | SETTING
+
+  questions QuestionTag[]
+}
+
+model QuestionTag {
+  questionId String
+  tagId      String
+
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  tag      Tag      @relation(fields: [tagId], references: [id], onDelete: Cascade)
+
+  @@id([questionId, tagId])
+  @@index([tagId])
+}
+
+// ─────────────────────────────────────────────────────────────
+// Instituições, bancas e perfis de prova
+// ─────────────────────────────────────────────────────────────
+
+model Institution {
+  id    String  @id @default(cuid())
+  slug  String  @unique
+  name  String
+  state String?
+  kind  String  @default("UNIVERSITY") // UNIVERSITY | HOSPITAL | CONSORTIUM | INTERNAL
+
+  examProfiles ExamProfile[]
+}
+
+model ExamBoard {
+  id   String @id @default(cuid())
+  slug String @unique
+  name String
+
+  examProfiles ExamProfile[]
+}
+
+/// Perfil estatístico de uma prova/banca. Alimenta o gerador de questões
+/// ("gere no estilo de X") e a feature Raio-X de Prova.
+model ExamProfile {
+  id            String  @id @default(cuid())
+  slug          String  @unique
+  name          String
+  institutionId String?
+  examBoardId   String?
+  year          Int?
+  description   String?
+
+  // Forma
+  alternativesCount Int @default(4)
+  avgStemWords      Int @default(180)
+  objectiveCount    Int @default(20)
+  discursiveCount   Int @default(0)
+  durationMinutes   Int @default(120)
+
+  // Frequências observadas (0..1)
+  labDataFrequency           Float @default(0.5)
+  ecgFrequency               Float @default(0.1)
+  imagingFrequency           Float @default(0.2)
+  calculationFrequency       Float @default(0.1)
+  managementFrequency        Float @default(0.5)
+  clinicalReasoningIntensity Float @default(0.7)
+
+  // Distribuição de dificuldade — soma 1.0
+  easyShare     Float @default(0.15)
+  mediumShare   Float @default(0.4)
+  hardShare     Float @default(0.3)
+  veryHardShare Float @default(0.15)
+
+  /// JSON: { specialtySlug: peso } — mix de especialidades alvo.
+  specialtyMix         String @default("{}")
+  /// JSON: string[] — padrões de distratores característicos.
+  distractorPatterns   String @default("[]")
+  /// JSON: string[] — terminologia preferida da banca.
+  preferredTerminology String @default("[]")
+  /// JSON: string[] — temas recorrentes.
+  recurringThemes      String @default("[]")
+
+  /// Origem dos números: DERIVED (calculado do banco) | REFERENCE (calibrado
+  /// a partir de material de referência) | MANUAL.
+  statsSource String   @default("MANUAL")
+  sampleSize  Int      @default(0)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  institution    Institution?    @relation(fields: [institutionId], references: [id], onDelete: SetNull)
+  examBoard      ExamBoard?      @relation(fields: [examBoardId], references: [id], onDelete: SetNull)
+  questions      Question[]
+  users          User[]
+  exams          Exam[]
+  generationJobs GenerationJob[]
+
+  @@index([institutionId])
+  @@index([examBoardId])
+}
+
+// ─────────────────────────────────────────────────────────────
+// Questões
+// ─────────────────────────────────────────────────────────────
+
+model Question {
+  id   String @id @default(cuid())
+  code String @unique // ex.: CM-CARD-0007
+
+  type       String @default("OBJECTIVE") // OBJECTIVE | DISCURSIVE
+  status     String @default("PUBLISHED") // DRAFT | IN_REVIEW | PUBLISHED | RETIRED
+  sourceType String @default("ORIGINAL") // ORIGINAL | AI_GENERATED | USER_UPLOADED | PUBLIC_DOMAIN
+
+  /// Vinheta clínica completa (markdown leve).
+  stem   String
+  /// Pergunta focada, separada da vinheta.
+  prompt String
+
+  difficulty            String // EASY | MEDIUM | HARD | VERY_HARD
+  clinicalReasoningType String // DIAGNOSIS | NEXT_STEP | INITIAL_MANAGEMENT | TREATMENT_SELECTION |
+  // DATA_INTERPRETATION | PATHOPHYSIOLOGY | CONTRAINDICATION |
+  // DIFFERENTIAL | CLASSIFICATION | ETHICS_COMMUNICATION
+
+  specialtyId String
+  topicId     String?
+  subtopicId  String?
+
+  examProfileId String?
+  examYear      Int?
+
+  /// JSON: [{ exam, result, reference }] — tabela de exames complementares.
+  labData String?
+  /// JSON: [{ kind, caption, alt, url? }] — ECG, RX, TC. `url` opcional.
+  media   String?
+
+  /// JSON: [{ society, title, year, note? }]. Nunca inventar: só preencher com
+  /// diretriz efetivamente conhecida; vazio é preferível a citação fabricada.
+  guidelineReference String @default("[]")
+  /// JSON: string[]
+  keywords           String @default("[]")
+
+  /// Explicação estruturada (JSON conforme ExplanationSchema).
+  explanation String
+
+  /// Discursiva: rubrica JSON { keyPoints, maxScore, modelAnswer, subQuestions }.
+  rubric String?
+
+  reviewedAt DateTime?
+  reviewNote String?
+  createdAt  DateTime  @default(now())
+  updatedAt  DateTime  @updatedAt
+
+  specialty   Specialty    @relation(fields: [specialtyId], references: [id])
+  topic       Topic?       @relation(fields: [topicId], references: [id], onDelete: SetNull)
+  subtopic    Subtopic?    @relation(fields: [subtopicId], references: [id], onDelete: SetNull)
+  examProfile ExamProfile? @relation(fields: [examProfileId], references: [id], onDelete: SetNull)
+
+  alternatives Alternative[]
+  tags         QuestionTag[]
+  attempts     Attempt[]
+  stats        QuestionStat?
+  userStats    UserQuestionStat[]
+  errorEntries ErrorNotebookEntry[]
+  flashcards   Flashcard[]
+  examItems    ExamItem[]
+  favorites    Favorite[]
+
+  @@index([specialtyId])
+  @@index([topicId])
+  @@index([difficulty])
+  @@index([examProfileId])
+  @@index([status])
+}
+
+model Alternative {
+  id         String  @id @default(cuid())
+  questionId String
+  label      String // A | B | C | D | E
+  text       String
+  isCorrect  Boolean @default(false)
+  /// Por que esta alternativa está certa/errada.
+  rationale  String
+  order      Int
+
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([questionId, label])
+  @@index([questionId])
+}
+
+/// Estatística agregada e anônima da questão (todos os usuários).
+model QuestionStat {
+  questionId      String   @id
+  timesAnswered   Int      @default(0)
+  correctCount    Int      @default(0)
+  incorrectCount  Int      @default(0)
+  blankCount      Int      @default(0)
+  totalTimeMs     Int      @default(0)
+  /// JSON: { A: n, B: n, ... } — para detectar distrator dominante.
+  answerHistogram String   @default("{}")
+  updatedAt       DateTime @updatedAt
+
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+}
+
+// ─────────────────────────────────────────────────────────────
+// Desempenho do usuário e repetição espaçada
+// ─────────────────────────────────────────────────────────────
+
+model Attempt {
+  id         String @id @default(cuid())
+  userId     String
+  questionId String
+
+  selectedLabel  String? // null = em branco
+  discursiveText String?
+  isCorrect      Boolean?
+  /// GUESS | UNSURE | CONFIDENT
+  confidence     String   @default("UNSURE")
+  responseTimeMs Int      @default(0)
+  changedAnswer  Boolean  @default(false)
+
+  /// PRACTICE | REVIEW | SIMULATION | DAILY | SPACED
+  mode           String  @default("PRACTICE")
+  studySessionId String?
+  examAttemptId  String?
+
+  createdAt DateTime @default(now())
+
+  user         User          @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question     Question      @relation(fields: [questionId], references: [id], onDelete: Cascade)
+  studySession StudySession? @relation(fields: [studySessionId], references: [id], onDelete: SetNull)
+  examAttempt  ExamAttempt?  @relation(fields: [examAttemptId], references: [id], onDelete: Cascade)
+
+  @@index([userId, createdAt])
+  @@index([userId, questionId])
+  @@index([questionId])
+  @@index([examAttemptId])
+}
+
+/// Estado por (usuário, questão): desempenho pessoal + agendamento SM-2 adaptado.
+model UserQuestionStat {
+  id         String @id @default(cuid())
+  userId     String
+  questionId String
+
+  timesAnswered     Int       @default(0)
+  correctCount      Int       @default(0)
+  incorrectCount    Int       @default(0)
+  personalAccuracy  Float     @default(0)
+  totalTimeMs       Int       @default(0)
+  avgResponseTimeMs Int       @default(0)
+  lastAnsweredAt    DateTime?
+  lastConfidence    String?
+  lastCorrect       Boolean?
+
+  // Repetição espaçada (SM-2 modificado por confiança)
+  easeFactor   Float     @default(2.5)
+  intervalDays Float     @default(0)
+  repetitions  Int       @default(0)
+  nextReviewAt DateTime?
+  suspended    Boolean   @default(false)
+
+  updatedAt DateTime @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questionId])
+  @@index([userId, nextReviewAt])
+}
+
+model ErrorNotebookEntry {
+  id         String @id @default(cuid())
+  userId     String
+  questionId String
+
+  selectedLabel String?
+  correctLabel  String
+  /// KNOWLEDGE_GAP | MISINTERPRETATION | DIAGNOSTIC_REASONING | THERAPEUTIC_REASONING |
+  /// MISREAD_QUESTION | DISTRACTOR_CONFUSION | CALCULATION_ERROR | GUIDELINE_ERROR
+  errorType     String
+  /// AUTO | USER — quem classificou o erro.
+  classifiedBy  String    @default("AUTO")
+  note          String?
+  resolved      Boolean   @default(false)
+  resolvedAt    DateTime?
+  occurrences   Int       @default(1)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([userId, questionId])
+  @@index([userId, resolved])
+}
+
+model Favorite {
+  userId     String
+  questionId String
+  createdAt  DateTime @default(now())
+
+  user     User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@id([userId, questionId])
+  @@index([questionId])
+}
+
+model Flashcard {
+  id         String  @id @default(cuid())
+  userId     String
+  questionId String?
+
+  front      String
+  back       String
+  topicLabel String?
+  difficulty String  @default("MEDIUM")
+  /// QUESTION_ERROR | CLINICAL_PEARL | MANUAL | AI
+  source     String  @default("MANUAL")
+
+  easeFactor   Float     @default(2.5)
+  intervalDays Float     @default(0)
+  repetitions  Int       @default(0)
+  nextReviewAt DateTime?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  question Question? @relation(fields: [questionId], references: [id], onDelete: SetNull)
+
+  @@index([userId, nextReviewAt])
+}
+
+// ─────────────────────────────────────────────────────────────
+// Blocos de estudo e simulados
+// ─────────────────────────────────────────────────────────────
+
+model StudySession {
+  id     String @id @default(cuid())
+  userId String
+
+  /// PRACTICE | DAILY | REVIEW | SPACED
+  mode           String
+  plannedMinutes Int?
+  plannedCount   Int    @default(0)
+  /// JSON: { newQuestions, errorReview, spacedReview, weakTopics } — composição do bloco.
+  composition    String @default("{}")
+  /// JSON: string[] — ids das questões na ordem planejada.
+  questionOrder  String @default("[]")
+  /// JSON: filtros aplicados.
+  filters        String @default("{}")
+
+  startedAt  DateTime  @default(now())
+  finishedAt DateTime?
+
+  user     User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  attempts Attempt[]
+
+  @@index([userId, startedAt])
+}
+
+model Exam {
+  id            String   @id @default(cuid())
+  slug          String   @unique
+  title         String
+  description   String?
+  examProfileId String?
+  questionCount Int
+  timeLimitMin  Int
+  /// JSON: filtros/blueprint usado para montar.
+  blueprint     String   @default("{}")
+  isPublic      Boolean  @default(true)
+  createdAt     DateTime @default(now())
+
+  examProfile ExamProfile?  @relation(fields: [examProfileId], references: [id], onDelete: SetNull)
+  items       ExamItem[]
+  attempts    ExamAttempt[]
+}
+
+model ExamItem {
+  id         String @id @default(cuid())
+  examId     String
+  questionId String
+  order      Int
+
+  exam     Exam     @relation(fields: [examId], references: [id], onDelete: Cascade)
+  question Question @relation(fields: [questionId], references: [id], onDelete: Cascade)
+
+  @@unique([examId, questionId])
+  @@index([examId])
+}
+
+model ExamAttempt {
+  id     String @id @default(cuid())
+  examId String
+  userId String
+
+  startedAt    DateTime  @default(now())
+  finishedAt   DateTime?
+  scoreRaw     Int       @default(0)
+  scorePct     Float     @default(0)
+  blankCount   Int       @default(0)
+  changedCount Int       @default(0)
+  totalTimeMs  Int       @default(0)
+  /// JSON: relatório consolidado (por especialidade, tópico, dificuldade).
+  report       String    @default("{}")
+
+  exam     Exam      @relation(fields: [examId], references: [id], onDelete: Cascade)
+  attempts Attempt[]
+
+  @@index([userId, startedAt])
+  @@index([examId])
+}
+
+// ─────────────────────────────────────────────────────────────
+// Camada de IA
+// ─────────────────────────────────────────────────────────────
+
+model GenerationJob {
+  id     String @id @default(cuid())
+  userId String
+
+  /// QUESTION_GENERATION | TUTOR | FLASHCARD | DISCURSIVE_GRADING
+  kind   String
+  status String @default("PENDING") // PENDING | RUNNING | SUCCEEDED | FAILED
+
+  examProfileId String?
+  /// JSON: parâmetros de entrada.
+  params        String  @default("{}")
+  /// JSON: resultado bruto.
+  result        String?
+  error         String?
+
+  provider     String?
+  model        String?
+  inputTokens  Int     @default(0)
+  outputTokens Int     @default(0)
+
+  createdAt  DateTime  @default(now())
+  finishedAt DateTime?
+
+  user        User         @relation(fields: [userId], references: [id], onDelete: Cascade)
+  examProfile ExamProfile? @relation(fields: [examProfileId], references: [id], onDelete: SetNull)
+
+  @@index([userId, createdAt])
+}
