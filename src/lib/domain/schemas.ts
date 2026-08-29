@@ -193,6 +193,10 @@ export const errorTypeUpdateSchema = z.object({
   note: z.string().max(2000).optional(),
 });
 
+export const reviewActionSchema = z.object({
+  action: z.enum(["APPROVE", "REJECT"]),
+});
+
 export const generateQuestionsSchema = z.object({
   count: z.number().int().min(1).max(20).default(5),
   specialtySlug: z.string().optional(),

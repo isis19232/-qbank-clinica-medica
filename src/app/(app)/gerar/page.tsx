@@ -1,4 +1,5 @@
 import type { Metadata } from "next";
+import Link from "next/link";
 import { requireUser } from "@/lib/auth/session";
 import { prisma } from "@/lib/db";
 import { getTaxonomy } from "@/lib/services/questions";
@@ -13,8 +14,9 @@ export default async function GeneratePage({
 }: {
   searchParams: Promise<Record<string, string | string[] | undefined>>;
 }) {
-  await requireUser();
+  const user = await requireUser();
   const sp = await searchParams;
+  const canReview = user.role === "AUTHOR" || user.role === "ADMIN";
 
   const [taxonomy, profiles, pending] = await Promise.all([
     getTaxonomy(),
@@ -88,6 +90,11 @@ export default async function GeneratePage({
               publicado até serem aprovadas. Numa plataforma de educação médica, conteúdo não
               revisado não pode ficar indistinguível do revisado.
             </p>
+            {canReview && pending > 0 && (
+              <Link href="/revisar" className="btn mt-3 px-2.5 py-1 text-xs">
+                Revisar agora
+              </Link>
+            )}
           </Card>
         </div>
       </div>

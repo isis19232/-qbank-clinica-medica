@@ -9,7 +9,7 @@ export default async function AppLayout({ children }: { children: React.ReactNod
 
   return (
     <>
-      <Nav userName={user.name} />
+      <Nav userName={user.name} role={user.role} />
       <main className="mx-auto max-w-7xl px-4 py-6">{children}</main>
     </>
   );
