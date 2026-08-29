@@ -6,7 +6,7 @@
 |---|---|---|
 | Frontend | Next.js 15 (App Router), React 19, TypeScript estrito | Server Components mantêm gabarito e explicação fora do bundle do cliente até a resposta ser registrada |
 | Estilo | Tailwind CSS v4 com tokens em CSS custom properties | Tema claro/escuro é troca de valores, não segunda folha de estilo |
-| Banco | Prisma ORM · SQLite em dev, PostgreSQL em produção | Schema idêntico nos dois; enums modelados como String + constantes TS |
+| Banco | Prisma ORM · PostgreSQL | Enums modelados como String + constantes TS — schema já era compatível com SQLite e Postgres sem alteração de tipo |
 | Autenticação | Sessão opaca própria (scrypt + cookie HttpOnly) | Sem dependência nativa; o banco guarda só o SHA-256 do token |
 | Validação | Zod v4 | Mesmos schemas validam entrada de API, colunas JSON e saída do gerador de IA |
 | IA | `@anthropic-ai/sdk` atrás de uma interface `AiProvider` | Trocável, testável, e com fallback offline explícito |
@@ -119,11 +119,24 @@ Colunas JSON foram escolhidas onde a forma é estável mas rica (tabela de exame
 estruturada, rubrica). O Zod garante a forma; o banco garante só que é texto. `parseJson`
 tem fallback silencioso — dado legado malformado nunca derruba a tela.
 
-## Migrar para PostgreSQL
+## Deploy em produção (Vercel + PostgreSQL)
 
-1. `datasource db { provider = "postgresql" }` em `prisma/schema.prisma`
-2. `DATABASE_URL` apontando para o Postgres
-3. `npx prisma migrate dev`
+O projeto roda em PostgreSQL (`prisma/schema.prisma`, provider `postgresql`) — necessário
+porque o filesystem das funções serverless da Vercel é efêmero e não serve para SQLite.
+A migration inicial está versionada em `prisma/migrations/`.
 
-Nenhuma mudança de código: os enums já são `String` com constantes em TypeScript, e as
-colunas JSON já são texto validado na aplicação.
+1. Crie um banco Postgres (Vercel Postgres/Neon, Supabase, Railway etc.) e configure
+   `DATABASE_URL` nas variáveis de ambiente do projeto na Vercel (Production e Preview).
+2. `npm run build` já roda `prisma generate && prisma migrate deploy && next build` — a
+   Vercel aplica as migrations pendentes a cada deploy, antes do build do Next.
+3. Rode `npm run db:seed` uma vez (localmente, apontando `DATABASE_URL` para o banco de
+   produção, ou via `vercel env pull` + script) para popular taxonomia, perfis e o banco de
+   questões inicial.
+
+Para evoluir o schema depois: edite `prisma/schema.prisma` e rode `npm run db:migrate`
+(`prisma migrate dev`) localmente para gerar a nova migration, commit e push — o próximo
+deploy aplica automaticamente via `migrate deploy`.
+
+Nenhuma mudança de código de aplicação foi necessária: os enums já eram `String` com
+constantes em TypeScript, e as colunas JSON já eram texto validado na aplicação — só o
+`datasource provider`, a migration inicial e os scripts de build mudaram.
