@@ -16,10 +16,13 @@ const LINKS = [
   { href: "/gerar", label: "Gerar", full: "Gerar questões" },
 ];
 
-export function Nav({ userName }: { userName: string }) {
+const REVIEW_LINK = { href: "/revisar", label: "Revisar", full: "Revisão editorial" };
+
+export function Nav({ userName, role }: { userName: string; role: string }) {
   const pathname = usePathname();
   const router = useRouter();
   const [open, setOpen] = useState(false);
+  const links = role === "AUTHOR" || role === "ADMIN" ? [...LINKS, REVIEW_LINK] : LINKS;
 
   async function logout() {
     await fetch("/api/auth/logout", { method: "POST" });
@@ -41,7 +44,7 @@ export function Nav({ userName }: { userName: string }) {
         </Link>
 
         <nav className="ml-auto hidden items-center gap-0.5 lg:flex">
-          {LINKS.map((l) => {
+          {links.map((l) => {
             const active = pathname === l.href || pathname.startsWith(`${l.href}/`);
             return (
               <Link
@@ -80,7 +83,7 @@ export function Nav({ userName }: { userName: string }) {
 
       {open && (
         <nav className="grid gap-0.5 border-t px-4 py-2 lg:hidden">
-          {LINKS.map((l) => (
+          {links.map((l) => (
             <Link
               key={l.href}
               href={l.href}
